@@ -4,13 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0b0b19">
-<meta name="description" content="КАВЕРЗА — игра для компании: неожиданные вопросы, весёлые вызовы, интеллектуальные загадки и весёлые задания. Играйте бесплатно в браузере.">
+<meta name="description" content="КАВЕРЗА — игра для компании: неожиданные вопросы, весёлые действия, каверзы и интеллектуальные задачи.">
 <title>КАВЕРЗА — игра для компании</title>
-<!-- Yandex.RTB: загрузчик для всех рекламных блоков -->
-<script>window.yaContextCb=window.yaContextCb||[]</script>
+
+<script>
+window.yaContextCb = window.yaContextCb || [];
+</script>
 <script src="https://yandex.ru/ads/system/context.js" async></script>
+
 <style>
-:root {
+:root{
   color-scheme:dark;
   --bg:#0b0b19;
   --panel:#19172b;
@@ -24,139 +27,570 @@
   --shadow:0 18px 48px #0005;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:auto}
 body{
-  margin:0;min-height:100dvh;
-  background:radial-gradient(ellipse 85% 35% at 50% -5%,#68265e88,transparent),
-    radial-gradient(ellipse 60% 42% at 100% 60%,#26246788,transparent),var(--bg);
-  color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  margin:0;
+  min-height:100vh;
+  min-height:100dvh;
+  color:var(--ink);
+  background:
+    radial-gradient(ellipse 85% 35% at 50% -5%,#68265e88,transparent),
+    radial-gradient(ellipse 60% 42% at 100% 60%,#26246788,transparent),
+    var(--bg);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
 }
 button,input,select{font:inherit}
-button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
-button:disabled{opacity:.43;cursor:not-allowed}
-button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #c9adff;outline-offset:3px}
-a{color:#cdbbff}
-.app{width:min(calc(100% - 26px),900px);margin:auto;padding:20px 0 max(36px,env(safe-area-inset-bottom))}
+button{
+  cursor:pointer;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
+button:disabled{opacity:.45;cursor:not-allowed}
+button:focus-visible,input:focus-visible,select:focus-visible{
+  outline:3px solid #d0afff;
+  outline-offset:3px;
+}
+.app{
+  width:min(calc(100% - 26px),900px);
+  margin:auto;
+  padding:20px 0 max(36px,env(safe-area-inset-bottom));
+}
 header{text-align:center;margin:9px 0 22px}
-.eyebrow{color:#e6a3cf;font-size:11px;letter-spacing:.27em;font-weight:900;text-transform:uppercase}
-.logo{font-size:clamp(49px,11vw,86px);line-height:1.09;font-weight:1000;letter-spacing:-.06em;background:linear-gradient(110deg,#fff 8%,#ff75b6 55%,#a58bff);color:transparent;background-clip:text;filter:drop-shadow(0 8px 28px #fd51a12b)}
+.eyebrow{
+  color:#e6a3cf;
+  font-size:11px;
+  letter-spacing:.27em;
+  font-weight:900;
+  text-transform:uppercase;
+}
+.logo{
+  font-size:clamp(49px,11vw,86px);
+  line-height:1.09;
+  font-weight:1000;
+  letter-spacing:-.06em;
+  background:linear-gradient(110deg,#fff 8%,#ff75b6 55%,#a58bff);
+  color:transparent;
+  -webkit-background-clip:text;
+  background-clip:text;
+  filter:drop-shadow(0 8px 28px #fd51a12b);
+}
 .subtitle{color:var(--muted);font-size:14px;margin-top:6px}
-.panel{background:linear-gradient(145deg,#23203bfa,#171527f7);border:1px solid var(--edge);border-radius:24px;padding:20px;margin-bottom:14px;box-shadow:var(--shadow)}
-h2{margin:0 0 10px;font-size:clamp(20px,4vw,24px);letter-spacing:-.035em}
+.toolbar{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:8px;
+  margin:12px auto 0;
+}
+.icon-btn{
+  border:1px solid #ffffff26;
+  border-radius:50px;
+  padding:9px 12px;
+  color:var(--ink);
+  background:#ffffff0e;
+  font-size:12px;
+  font-weight:800;
+  min-height:40px;
+}
+.statline{margin:10px 0 0;color:#d6c8e7;font-size:12px}
+.panel{
+  background:linear-gradient(145deg,#23203bfa,#171527f7);
+  border:1px solid var(--edge);
+  border-radius:24px;
+  padding:20px;
+  margin-bottom:14px;
+  box-shadow:var(--shadow);
+}
+h2{
+  margin:0 0 10px;
+  font-size:clamp(20px,4vw,24px);
+  letter-spacing:-.035em;
+}
 h3{margin:0 0 8px;font-size:17px}
 .muted{color:var(--muted);font-size:14px;line-height:1.55}
 .field{margin:19px 0}
-.field-title{font-size:13px;font-weight:850;margin-bottom:9px;display:block}
+.field-title{
+  font-size:13px;
+  font-weight:850;
+  margin-bottom:9px;
+  display:block;
+}
 .row{display:flex;gap:10px;align-items:center}
-.row>*{min-width:0}.grow{flex:1}
-input[type=text],select{width:100%;background:#0f1020;border:1px solid #ffffff30;border-radius:13px;padding:12px;color:white;outline:none;min-height:45px}
-.btn{border:1px solid #ffffff1a;border-radius:15px;padding:14px 15px;background:#322b4c;color:#fff;font-weight:850;position:relative;overflow:hidden;transition:transform .16s,filter .16s,box-shadow .16s;min-height:48px;isolation:isolate}
+.row>*{min-width:0}
+.grow{flex:1}
+input[type=text],select{
+  width:100%;
+  background:#0f1020;
+  border:1px solid #ffffff30;
+  border-radius:13px;
+  padding:12px;
+  color:white;
+  min-height:45px;
+}
+.btn{
+  border:1px solid #ffffff1a;
+  border-radius:15px;
+  padding:14px 15px;
+  background:#322b4c;
+  color:#fff;
+  font-weight:850;
+  position:relative;
+  overflow:hidden;
+  min-height:48px;
+  transition:transform .16s,filter .16s;
+}
 .btn:active{transform:scale(.97)}
-.btn:hover:not(:disabled){filter:brightness(1.15);box-shadow:0 5px 25px #ff63b022}
-.primary{color:#190d26;border:0;background:linear-gradient(105deg,#ff63b0,#aa88ff)}
-.success{color:#10241f;border:0;background:linear-gradient(105deg,#5ce4b9,#b6ffe0)}
+.btn:hover:not(:disabled){filter:brightness(1.12)}
+.primary{
+  color:#190d26;
+  border:0;
+  background:linear-gradient(105deg,#ff63b0,#aa88ff);
+}
+.success{
+  color:#10241f;
+  border:0;
+  background:linear-gradient(105deg,#5ce4b9,#b6ffe0);
+}
 .danger{background:#5a2944;border-color:#e8779560}
 .block{width:100%;margin-top:10px}
-.small{background:none;border:0;color:#a9e4ff;padding:9px;font-weight:800}
+.small{
+  background:none;
+  border:0;
+  color:#a9e4ff;
+  padding:9px;
+  font-weight:800;
+}
 .player-list{display:grid;gap:9px}
 .player-row{display:flex;align-items:center;gap:8px}
 .player-row input{flex:1;min-width:0}
-.num{display:grid;place-items:center;width:33px;height:35px;background:#ffffff11;border-radius:10px;color:var(--muted);flex-shrink:0}
-.remove{border:0;background:#ffffff0b;color:#ffc3d9;border-radius:9px;padding:9px 12px;min-width:42px;min-height:42px}
-.categories{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
-.category{display:flex;gap:8px;align-items:center;border:1px solid #ffffff1b;background:#ffffff08;border-radius:14px;padding:12px 10px;font-size:12px;font-weight:850;cursor:pointer;min-height:53px}
-.category:has(input:checked){border-color:#f88dd477;background:#ff66b116}
-.category input{accent-color:var(--pink);width:17px;height:17px;flex-shrink:0}
+.num{
+  display:grid;
+  place-items:center;
+  width:33px;
+  height:35px;
+  background:#ffffff11;
+  border-radius:10px;
+  color:var(--muted);
+  flex-shrink:0;
+}
+.remove{
+  border:0;
+  background:#ffffff0b;
+  color:#ffc3d9;
+  border-radius:9px;
+  padding:9px 12px;
+  min-width:42px;
+  min-height:42px;
+}
+.categories{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;
+}
+.category{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  border:1px solid #ffffff1b;
+  background:#ffffff08;
+  border-radius:14px;
+  padding:12px 10px;
+  font-size:12px;
+  font-weight:850;
+  cursor:pointer;
+  min-height:53px;
+}
+.category:has(input:checked){
+  border-color:#f88dd477;
+  background:#ff66b116;
+}
+.category input{
+  accent-color:var(--pink);
+  width:17px;
+  height:17px;
+  flex-shrink:0;
+}
 .category b{font-size:19px}
-.levels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.level{position:relative;cursor:pointer}.level input{position:absolute;opacity:0}
-.level span{display:flex;align-items:center;justify-content:center;min-height:49px;text-align:center;padding:13px 5px;border:1px solid #ffffff20;border-radius:13px;font-size:clamp(10px,2.7vw,12px);font-weight:850;background:#ffffff08}
-.level input:checked+span{background:#ff5aab22;border-color:#ff75ba;color:#ffd2e7}
+.levels{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px;
+}
+.level{position:relative;cursor:pointer}
+.level input{position:absolute;opacity:0}
+.level span{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:49px;
+  text-align:center;
+  padding:13px 5px;
+  border:1px solid #ffffff20;
+  border-radius:13px;
+  font-size:12px;
+  font-weight:850;
+  background:#ffffff08;
+}
+.level input:checked+span{
+  background:#ff5aab22;
+  border-color:#ff75ba;
+  color:#ffd2e7;
+}
 .level input:focus-visible+span{outline:3px solid #c8aaff}
-.topbar{display:flex;justify-content:space-between;gap:8px;margin-bottom:13px;flex-wrap:wrap}
-.pill{padding:9px 12px;background:#ffffff13;border:1px solid #ffffff14;border-radius:999px;font-size:12px;font-weight:800}
-.player-card{text-align:center;padding:19px}.avatar{font-size:47px}
-.player-name{font-size:29px;font-weight:950;overflow-wrap:anywhere}
-.wheel-wrap{width:min(78vw,340px);margin:25px auto;position:relative}
-.pointer{position:absolute;z-index:5;top:-8px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:15px solid transparent;border-right:15px solid transparent;border-top:29px solid #fff;filter:drop-shadow(0 3px 5px #0009)}
-.wheel{width:100%;aspect-ratio:1;border:8px solid #f7e8ff;border-radius:50%;position:relative;box-shadow:0 0 0 6px #ffffff15,0 18px 50px #0007;transition:transform 3.2s cubic-bezier(.11,.78,.12,1);background:conic-gradient(from -30deg,#ff5e9d 0 60deg,#ac79ff 60deg 120deg,#53baf0 120deg 180deg,#49d4b0 180deg 240deg,#ffc061 240deg 300deg,#e774dd 300deg 360deg)}
-.wheel-label{position:absolute;left:50%;top:50%;width:82px;margin-left:-41px;margin-top:-13px;color:#180d29;font-weight:1000;font-size:10px;line-height:1.2;text-align:center;transform:rotate(var(--a)) translateY(calc(-1 * min(25vw,108px))) rotate(calc(-1 * var(--a)));text-shadow:0 1px #fff5}
-.wheel-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:65px;height:65px;display:grid;place-items:center;border-radius:50%;background:#161326;border:4px solid white;font-size:26px}
-.challenge{text-align:center;animation:slidein .4s both}
-.badge{display:inline-block;border-radius:999px;padding:9px 14px;background:#ffffff15;font-size:13px;font-weight:850}
-.task{font-size:clamp(22px,5.5vw,34px);font-weight:900;line-height:1.32;margin:25px 0;overflow-wrap:anywhere;letter-spacing:-.025em}
+.note{
+  border-left:3px solid var(--pink);
+  padding:8px 12px;
+  background:#ffffff09;
+  border-radius:5px;
+  color:#c6bfd9;
+  font-size:13px;
+  line-height:1.5;
+}
+.hidden{display:none!important}
+.center{text-align:center}
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  margin-bottom:12px;
+  flex-wrap:wrap;
+}
+.pill{
+  padding:9px 12px;
+  background:#ffffff13;
+  border:1px solid #ffffff14;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:800;
+}
+.turn-dock{
+  position:sticky;
+  top:max(8px,env(safe-area-inset-top));
+  z-index:10;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:14px 18px;
+  background:#211c35;
+  border-color:#cf9bff66;
+  box-shadow:0 10px 32px #0008;
+}
+.turn-person{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:0;
+  flex:1;
+}
+.turn-copy{min-width:0}
+.avatar{font-size:36px;flex-shrink:0}
+.player-name{
+  font-size:clamp(20px,3vw,30px);
+  line-height:1.15;
+  font-weight:950;
+  overflow-wrap:anywhere;
+}
+.turn-dock .muted{font-size:12px;line-height:1.4}
+#spin{
+  flex:0 0 auto;
+  min-height:54px;
+  padding:14px 24px;
+  max-width:52%;
+}
+body.playing header{margin:0 0 8px}
+body.playing .eyebrow,
+body.playing .logo,
+body.playing .subtitle,
+body.playing .statline{display:none}
+body.playing .toolbar{margin:0}
+body.playing .app{padding-top:max(8px,env(safe-area-inset-top))}
+.wheel-wrap{
+  width:min(62vw,300px);
+  width:min(62vw,42svh,300px);
+  margin:20px auto 12px;
+  position:relative;
+}
+.pointer{
+  position:absolute;
+  z-index:5;
+  top:-8px;
+  left:50%;
+  transform:translateX(-50%);
+  width:0;
+  height:0;
+  border-left:15px solid transparent;
+  border-right:15px solid transparent;
+  border-top:29px solid #fff;
+  filter:drop-shadow(0 3px 5px #0009);
+}
+.wheel{
+  width:100%;
+  aspect-ratio:1;
+  border:8px solid #f7e8ff;
+  border-radius:50%;
+  position:relative;
+  box-shadow:0 0 0 6px #ffffff15,0 18px 50px #0007;
+  background:conic-gradient(
+    from -30deg,
+    #ff5e9d 0 60deg,
+    #ac79ff 60deg 120deg,
+    #53baf0 120deg 180deg,
+    #49d4b0 180deg 240deg,
+    #ffc061 240deg 300deg,
+    #e774dd 300deg 360deg
+  );
+}
+.wheel-label{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:82px;
+  margin-left:-41px;
+  margin-top:-13px;
+  color:#180d29;
+  font-weight:1000;
+  font-size:10px;
+  line-height:1.2;
+  text-align:center;
+  transform:
+    rotate(var(--a))
+    translateY(calc(-1 * min(20vw,98px)))
+    rotate(calc(-1 * var(--a)));
+  transform:
+    rotate(var(--a))
+    translateY(calc(-1 * min(20vw,13.8svh,98px)))
+    rotate(calc(-1 * var(--a)));
+}
+.wheel-center{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:55px;
+  height:55px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:#161326;
+  border:4px solid white;
+  font-size:24px;
+}
+.challenge{text-align:center;animation:slidein .3s both}
+.badge{
+  display:inline-block;
+  border-radius:999px;
+  padding:9px 14px;
+  background:#ffffff15;
+  font-size:13px;
+  font-weight:850;
+}
+.task{
+  font-size:clamp(22px,5.5vw,34px);
+  font-weight:900;
+  line-height:1.32;
+  margin:18px 0;
+  overflow-wrap:anywhere;
+  letter-spacing:-.025em;
+}
 .task-meta{color:#e7c8ef;font-size:13px;font-weight:750}
-.timer{font-size:45px;font-weight:1000;font-variant-numeric:tabular-nums;color:var(--mint)}
-.timer.warning{color:var(--red);animation:heartbeat .55s infinite alternate}
-.track{height:8px;background:#ffffff15;border-radius:9px;overflow:hidden;margin:10px 0 19px}
-.fill{height:100%;width:100%;background:var(--mint);transition:width .2s linear}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.answer-box{
+  margin:14px auto;
+  max-width:620px;
+  padding:13px;
+  background:#ffffff0b;
+  border:1px solid #ffffff17;
+  border-radius:12px;
+  font-size:14px;
+  color:#d5ffe9;
+}
+#answerBtn{margin:10px auto}
+#partnerSelect{margin:14px 0;text-align:left}
+#partnerSelect label{
+  display:block;
+  color:#d8cdea;
+  font-weight:800;
+  font-size:13px;
+  margin-bottom:7px;
+}
+.timer{
+  font-size:38px;
+  font-weight:1000;
+  font-variant-numeric:tabular-nums;
+  color:var(--mint);
+}
+.timer.warning{color:var(--red)}
+.track{
+  height:8px;
+  background:#ffffff15;
+  border-radius:9px;
+  overflow:hidden;
+  margin:10px 0 16px;
+}
+.fill{
+  height:100%;
+  width:100%;
+  background:var(--mint);
+  transition:width .2s linear;
+}
+.actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  position:sticky;
+  bottom:max(8px,env(safe-area-inset-bottom));
+  z-index:8;
+  padding:8px;
+  background:#211c35;
+  border-radius:18px;
+  box-shadow:0 3px 20px #0008;
+}
 .actions .btn{padding:14px 5px}
 .score-list{display:grid;gap:8px;margin-top:13px}
-.score-row{display:flex;align-items:center;gap:10px;background:#ffffff0a;border:1px solid #ffffff0c;padding:11px;border-radius:13px;animation:slidein .2s both}
+.score-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:#ffffff0a;
+  border:1px solid #ffffff0c;
+  padding:11px;
+  border-radius:13px;
+}
 .score-name{flex:1;font-weight:800;overflow-wrap:anywhere}
-.score-value{color:var(--mint);font-size:20px;font-weight:950;white-space:nowrap}
-.center{text-align:center}.hidden{display:none!important}
-.footer{text-align:center;color:#9289ad;font-size:12px;line-height:1.7;margin-top:20px}
-.toast{position:fixed;bottom:max(18px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:20;background:#423155;border:1px solid #ffffff44;border-radius:14px;padding:13px 18px;box-shadow:0 15px 30px #0009;text-align:center;max-width:92%;width:max-content;font-size:14px}
-.note{border-left:3px solid var(--pink);padding:8px 12px;background:#ffffff09;border-radius:5px;color:#c6bfd9;font-size:13px;line-height:1.5}
-.confetti{font-size:32px;letter-spacing:6px}
-#confettiCanvas{position:fixed;inset:0;z-index:11;pointer-events:none;width:100%;height:100%}
-.toolbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;margin:12px auto 0}
-.icon-btn{border:1px solid #ffffff26;border-radius:50px;padding:9px 12px;color:var(--ink);background:#ffffff0e;font-size:12px;font-weight:800;min-height:40px}
-.statline{margin:10px 0 0;color:#d6c8e7;font-size:12px}
-.tag{display:inline-block;font-size:11px;font-weight:800;color:#dcb9fd;background:#ab79ff24;border:1px solid #ab79ff44;border-radius:99px;padding:5px 10px}
-.answer-box{margin:14px auto 0;max-width:620px;padding:13px;background:#ffffff0b;border:1px solid #ffffff17;border-radius:12px;font-size:14px;color:#d5ffe9}
-#answerBtn{margin:13px auto 0}
-#partnerSelect{margin-top:14px;text-align:left}
-#partnerSelect label{display:block;color:#d8cdea;font-weight:800;font-size:13px;margin-bottom:7px}
-#partnerSelect select{width:100%}
-.ripple{position:absolute;border-radius:50%;pointer-events:none;transform:scale(0);background:#ffffff55;animation:ripple .55s ease-out forwards;z-index:-1}
-@keyframes ripple{to{transform:scale(4);opacity:0}}
-@keyframes slidein{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-@keyframes heartbeat{to{transform:scale(1.08)}}
-@keyframes glow{50%{box-shadow:0 0 35px #ff61b966}}
-.highlight{animation:glow .7s ease-in-out 2}
-@media(min-width:560px){.panel{padding:25px}.categories{grid-template-columns:repeat(3,minmax(0,1fr))}.app{padding-top:27px}}
-@media(min-width:780px){.app{width:min(calc(100% - 64px),900px)}#game>.panel{max-width:900px}.wheel-wrap{width:330px}}
-@media(max-width:360px){.panel{padding:15px}.wheel-label{font-size:9px;width:68px;margin-left:-34px}.topbar{justify-content:center}.logo{font-size:48px}.btn{font-size:13px}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.score-value{
+  color:var(--mint);
+  font-size:20px;
+  font-weight:950;
+  white-space:nowrap;
+}
+.footer{
+  text-align:center;
+  color:#9289ad;
+  font-size:12px;
+  line-height:1.7;
+  margin-top:20px;
+}
+.toast{
+  position:fixed;
+  bottom:max(84px,calc(env(safe-area-inset-bottom) + 76px));
+  left:50%;
+  transform:translateX(-50%);
+  z-index:20;
+  background:#423155;
+  border:1px solid #ffffff44;
+  border-radius:14px;
+  padding:13px 18px;
+  box-shadow:0 15px 30px #0009;
+  text-align:center;
+  max-width:92%;
+  width:max-content;
+  font-size:14px;
+  pointer-events:none;
+}
+#confettiCanvas{
+  position:fixed;
+  inset:0;
+  z-index:11;
+  pointer-events:none;
+  width:100%;
+  height:100%;
+}
+@keyframes slidein{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@media(min-width:560px){
+  .panel{padding:25px}
+  .turn-dock{padding:14px 18px}
+  .categories{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(min-width:780px){
+  .app{width:min(calc(100% - 64px),900px)}
+}
+@media(max-width:480px){
+  .turn-dock{gap:10px;padding:12px}
+  .turn-dock .avatar{display:none}
+  #spin{font-size:13px;padding:12px;min-height:52px}
+  .player-name{font-size:22px}
+  .turn-dock .muted{font-size:11px}
+}
+@media(max-height:520px) and (min-width:600px){
+  .wheel-wrap{width:210px}
+  .wheel-label{
+    transform:rotate(var(--a)) translateY(-66px) rotate(calc(-1 * var(--a)));
+  }
+  #wheelPanel>p{display:none}
+  .turn-dock{padding:8px 14px}
+  #spin{min-height:46px}
+  .task{font-size:24px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation:none!important;
+    transition:none!important;
+    scroll-behavior:auto!important;
+  }
+}
 </style>
 </head>
+
 <body>
 <canvas id="confettiCanvas" aria-hidden="true"></canvas>
+
 <div class="app">
 <header>
   <div class="eyebrow">Игра для смелой компании</div>
   <div class="logo">КАВЕРЗА</div>
   <div class="subtitle">Неловко. Смешно. Ещё один раунд.</div>
   <div class="toolbar">
-    <button class="icon-btn" type="button" id="soundToggle" aria-pressed="true">🔊 Звук: вкл.</button>
-    <button class="icon-btn" type="button" id="motionToggle" aria-pressed="true">✨ Эффекты: вкл.</button>
+    <button class="icon-btn" id="soundToggle" type="button" aria-pressed="true">🔊 Звук: вкл.</button>
+    <button class="icon-btn" id="motionToggle" type="button" aria-pressed="true">✨ Эффекты: вкл.</button>
   </div>
   <p class="statline" id="bankInfo"></p>
 </header>
+
 <main>
 <section id="setup">
   <div class="panel">
     <h2>😈 Кто сегодня рискует?</h2>
-    <p class="muted">Соберите компанию, выберите градус неловкости и вращайте рулетку. Отказаться от задания можно без объяснений.</p>
+    <p class="muted">Соберите компанию, выберите градус неловкости и вращайте рулетку. Отказаться можно без объяснений.</p>
+
     <div class="field">
-      <div class="row"><span class="field-title grow">Игроки (2–10)</span><button class="small" id="addPlayer" type="button">+ Добавить</button></div>
+      <div class="row">
+        <span class="field-title grow">Игроки (2–10)</span>
+        <button class="small" id="addPlayer" type="button">+ Добавить</button>
+      </div>
       <div class="player-list" id="playerInputs"></div>
     </div>
-    <div class="field"><label class="field-title" for="rounds">Раундов на игрока</label>
-      <select id="rounds"><option value="5">5 — быстрый разогрев</option><option value="7">7 — короткая вечеринка</option><option value="10" selected>10 — классика</option><option value="15">15 — марафон</option><option value="25">25 — ночь без сна</option></select>
+
+    <div class="field">
+      <label class="field-title" for="rounds">Раундов на игрока</label>
+      <select id="rounds">
+        <option value="5">5 — быстрый разогрев</option>
+        <option value="7">7 — короткая вечеринка</option>
+        <option value="10" selected>10 — классика</option>
+        <option value="15">15 — марафон</option>
+        <option value="25">25 — ночь без сна</option>
+      </select>
     </div>
+
     <div class="field">
       <span class="field-title">Градус неловкости</span>
       <div class="levels">
-        <label class="level"><input type="radio" name="level" value="soft"><span>🙂 Лайт</span></label>
-        <label class="level"><input type="radio" name="level" value="bold" checked><span>😏 Смело</span></label>
+        <label class="level">
+          <input type="radio" name="level" value="soft">
+          <span>🙂 Лайт</span>
+        </label>
+        <label class="level">
+          <input type="radio" name="level" value="bold" checked>
+          <span>😏 Смело</span>
+        </label>
       </div>
-      <p class="muted" style="margin:7px 0 0">В режиме «Смело» доступны все каверзные, романтические и неожиданные задания.</p>
+      <p class="muted">В режиме «Смело» доступны все каверзные, романтические и неожиданные задания.</p>
     </div>
-    <div class="field"><span class="field-title">Категории</span>
+
+    <div class="field">
+      <span class="field-title">Категории</span>
       <div class="categories" id="categoryChoices">
         <label class="category"><input type="checkbox" value="question" checked><b>💬</b> Вопрос</label>
         <label class="category"><input type="checkbox" value="action" checked><b>⚡</b> Действие</label>
@@ -166,1050 +600,2082 @@ input[type=text],select{width:100%;background:#0f1020;border:1px solid #ffffff30
         <label class="category"><input type="checkbox" value="bonus" checked><b>⭐</b> Бонус</label>
       </div>
     </div>
+
     <button class="btn primary block" id="start" type="button">НАЧАТЬ ВЕЧЕРИНКУ →</button>
   </div>
+
   <div class="panel">
     <h3>📜 Правила без занудства</h3>
-    <p class="muted">Каждый ход — случайная выбранная категория. За выполненное задание начисляются очки. На задание — 60 секунд, можно пропустить без штрафа. Побеждает участник с наибольшим количеством очков.</p>
-    <div class="note">Любые прикосновения, объятия и поцелуи — только после явного согласия обоих участников. Можно выбрать альтернативу или пропустить задание. Не публикуйте чужие секреты, не показывайте личные переписки.</div>
+    <p class="muted">Ходите по очереди. Рулетка выбирает категорию, за выполненное задание начисляются очки. На задание — 60 секунд. Пас — без штрафа.</p>
+    <div class="note">Прикосновения, объятия и поцелуи — только по взаимному согласию. Можно выбрать альтернативу или пропустить задание. Не показывайте чужие переписки и не раскрывайте чужие секреты.</div>
   </div>
 </section>
+
 <section id="game" class="hidden">
-  <div class="topbar"><span class="pill" id="progress">Ход 1</span><span class="pill" id="currentScore">Очки: 0</span><span class="pill" id="remainingBank">Без повторов</span></div>
-  <div class="panel player-card"><div class="avatar" id="avatar">😎</div><div class="muted">В центре внимания</div><div class="player-name" id="playerName"></div><div class="muted" id="turnInfo"></div></div>
-  <div class="panel center" id="wheelPanel"><h2>🎯 Рулетка решает</h2><p class="muted">Каждый ход — новая каверза!</p><div class="wheel-wrap"><div class="pointer"></div><div class="wheel" id="wheel"><div class="wheel-center">😈</div></div></div><button class="btn primary block" id="spin" type="button">КРУТИТЬ РУЛЕТКУ</button></div>
-  <div class="panel challenge hidden" id="challenge">
-    <div class="badge" id="badge"></div><div class="task" id="task"></div><div class="task-meta" id="taskMeta"></div>
-    <button class="small hidden" id="answerBtn" type="button" aria-expanded="false">🧠 Показать ответ</button><div class="answer-box hidden" id="answerBox"></div>
-    <div class="hidden" id="partnerSelect"><label for="bonusRecipient">Кому достаются бонусные очки?</label><select id="bonusRecipient"></select></div>
-    <div id="timerArea"><div class="timer" id="timer">60</div><div class="muted">секунд осталось</div><div class="track"><div class="fill" id="fill"></div></div></div>
-    <div class="actions"><button class="btn success" id="done" type="button">✓ Выполнено</button><button class="btn danger" id="skip" type="button">✕ Пропустить</button></div>
-    <p class="muted">Можно сказать «пас» — без штрафа и объяснений. В заданиях с другим игроком требуется взаимное согласие.</p>
+  <div class="panel turn-dock" id="turnDock" aria-label="Текущий ход">
+    <div class="turn-person">
+      <div class="avatar" id="avatar">😎</div>
+      <div class="turn-copy">
+        <div class="muted">Сейчас ходит</div>
+        <div class="player-name" id="playerName" aria-live="polite"></div>
+        <div class="muted" id="turnInfo"></div>
+      </div>
+    </div>
+    <button class="btn primary" id="spin" type="button">КРУТИТЬ РУЛЕТКУ</button>
   </div>
-  <div class="panel"><h3>🏆 Турнирная таблица</h3><div class="score-list" id="scores"></div></div>
+
+  <div class="topbar">
+    <span class="pill" id="progress"></span>
+    <span class="pill" id="currentScore"></span>
+    <span class="pill" id="remainingBank"></span>
+  </div>
+
+  <div class="panel center" id="wheelPanel">
+    <h2>🎯 Рулетка решает</h2>
+    <p class="muted">Каждый ход — новая каверза!</p>
+    <div class="wheel-wrap">
+      <div class="pointer"></div>
+      <div class="wheel" id="wheel">
+        <div class="wheel-center">😈</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel challenge hidden" id="challenge">
+    <div class="badge" id="badge"></div>
+    <div class="task" id="task"></div>
+    <div class="task-meta" id="taskMeta"></div>
+
+    <button class="small hidden" id="answerBtn" type="button" aria-expanded="false">🧠 Показать ответ</button>
+    <div class="answer-box hidden" id="answerBox"></div>
+
+    <div class="hidden" id="partnerSelect">
+      <label for="bonusRecipient">Кому достаются бонусные очки?</label>
+      <select id="bonusRecipient"></select>
+    </div>
+
+    <div id="timerArea">
+      <div class="timer" id="timer">60</div>
+      <div class="muted">секунд осталось</div>
+      <div class="track"><div class="fill" id="fill"></div></div>
+    </div>
+
+    <div class="actions">
+      <button class="btn success" id="done" type="button">✓ Выполнено</button>
+      <button class="btn danger" id="skip" type="button">✕ Пропустить</button>
+    </div>
+
+    <p class="muted">Можно сказать «пас» — без штрафа и объяснений. Для совместных действий нужно взаимное согласие.</p>
+  </div>
+
+  <div class="panel">
+    <h3>🏆 Турнирная таблица</h3>
+    <div class="score-list" id="scores"></div>
+  </div>
+
   <button class="btn block" id="endGame" type="button">Завершить игру</button>
 </section>
+
 <section id="results" class="hidden">
-  <div class="panel center"><div class="confetti">✨🎉✨</div><h2>Вот это была вечеринка!</h2><p class="muted">Финальные результаты</p><div class="task" id="winner"></div><div class="score-list" id="finalScores"></div><button class="btn primary block" id="again" type="button">РЕВАНШ 🔥</button><button class="btn block" id="changeSettings" type="button">Изменить настройки</button></div>
+  <div class="panel center">
+    <div style="font-size:32px">✨🎉✨</div>
+    <h2>Вот это была вечеринка!</h2>
+    <p class="muted">Финальные результаты</p>
+    <div class="task" id="winner"></div>
+    <div class="score-list" id="finalScores"></div>
+    <button class="btn primary block" id="again" type="button">РЕВАНШ 🔥</button>
+    <button class="btn block" id="changeSettings" type="button">Изменить настройки</button>
+  </div>
 </section>
-<!-- РСЯ: блок под текущим игровым экраном. Он не закрывает кнопки и рулетку. -->
+
 <div id="yandex_rtb_R-A-20268433-2"></div>
 <script>
-window.yaContextCb.push(() => {
+window.yaContextCb.push(function(){
+  if(window.Ya && Ya.Context && Ya.Context.AdvManager){
     Ya.Context.AdvManager.render({
-        "blockId": "R-A-20268433-2",
-        "renderTo": "yandex_rtb_R-A-20268433-2"
-    })
-})
+      blockId:"R-A-20268433-2",
+      renderTo:"yandex_rtb_R-A-20268433-2"
+    });
+  }
+});
 </script>
 </main>
-<div class="footer">КАВЕРЗА · Играйте смело, уважайте границы 💜<br>Без регистрации. Прямо в браузере. Звуки можно отключить.</div>
+
+<div class="footer">
+  КАВЕРЗА · Играйте смело, уважайте границы 💜<br>
+  Без регистрации. Прямо в браузере.
 </div>
+</div>
+
 <div class="toast hidden" id="toast" role="status" aria-live="polite"></div>
+
 <script>
 "use strict";
-const $ = s => document.querySelector(s);
-const $$ = s => [...document.querySelectorAll(s)];
+
+const $ = selector => document.querySelector(selector);
+const $$ = selector => Array.from(document.querySelectorAll(selector));
 const order = ["question","action","dare","reveal","twist","bonus"];
 const avatars = ["😎","🦊","🐼","🐸","🐯","🐙","🐺","🦄","🐲","👽"];
-// Все задания сохранены. Режим «Смело» объединяет расширенный набор вопросов и действий.
-// Каждая формулировка написана отдельно, без механической подстановки слов.
-const data = {
-  question: {
-    name: "ВОПРОС",
-    emoji: "💬",
-    points: 1,
-    soft: [
-      "Какой звук мгновенно возвращает тебя в детство?",
-      "Что бы ты купил, если бы на пять минут стал миллионером, но деньги нельзя откладывать?",
-      "Какой странный факт о себе ты рассказываешь при знакомстве?",
-      "За какую безобидную мелочь тебя чаще всего подшучивают?",
-      "Если бы у твоего настроения был прогноз погоды, что бы сообщили сегодня?",
-      "Какое блюдо ты ешь способом, который другие считают неправильным?",
-      "Какую песню ты знаешь целиком вопреки собственной воле?",
-      "Какую вещь ты сохраняешь без всякой практической пользы?",
-      "За какое изобретение ты лично вручил бы Нобелевскую премию?",
-      "Какое слово ты постоянно произносишь неправильно?",
-      "Какая покупка за небольшие деньги изменила твою жизнь?",
-      "Если бы ты мог добавить в сутки двадцать минут, куда бы их потратил?",
-      "Какой мультфильм до сих пор способен тебя растрогать?",
-      "Какая фраза из семьи прочно поселилась у тебя в голове?",
-      "Какое занятие ты бы преподавал совершенно бесплатно?",
-      "Какая твоя худшая попытка приготовить что-то простое?",
-      "Если бы твои тапочки могли жаловаться, что бы они сказали?",
-      "Какое самое необычное прозвище ты встречал?",
-      "Какой вид транспорта лучше всего соответствует твоему характеру?",
-      "Какую суперспособность ты бы использовал исключительно для бытовых дел?",
-      "В чём ты неожиданно хорош, хотя никогда специально не учился?",
-      "Какой подарок оказался полезнее, чем ты ожидал?",
-      "Какое правило этикета кажется тебе слишком смешным?",
-      "Кого из вымышленных персонажей ты позвал бы на пикник?",
-      "Какой мем достоин места в школьном учебнике истории?",
-      "Какое самое бессмысленное соревнование ты хотел бы выиграть?",
-      "Если бы холодильник вёл дневник, какую тайну он записал бы о тебе?",
-      "Что может испортить тебе настроение за три секунды?",
-      "Какая привычка окружающих вызывает у тебя необъяснимое умиление?",
-      "Какое одно слово ты бы выбрал названием своей автобиографии?",
-      "Что приятнее: найти деньги в кармане или отменённые планы?",
-      "Какая вещь выглядит роскошно, но на самом деле раздражает?",
-      "Что бы ты сделал первым делом в городе без интернета?",
-      "Какую необычную профессию ты хотел бы попробовать один день?",
-      "Какой совет от взрослого ты понял только спустя годы?",
-      "Что бы ты спросил у себя из будущего, если бы разрешили лишь один вопрос?",
-      "Какая безобидная ложь делает обычный день приятнее?",
-      "Какую игру из детства ты бы вернул в моду?",
-      "Если бы твой телефон мог поставить тебе оценку, за что снял бы баллы?",
-      "Какая еда объективно вкуснее на следующий день?",
-      "Какой мем точнее всего описывает твой понедельник?",
-      "Кто ты на вечеринке: диджей, психолог или человек у холодильника?",
-      "Какую фразу из интернета ты говоришь даже при родителях?",
-      "Что бы ты сделал, если бы твой кот получил доступ к семейному чату?",
-      "Какая покупка заставила тебя сказать «ну я и бизнесмен»?",
-      "Что хуже: сесть на мокрую лавку или случайно включить фронтальную камеру?",
-      "Как выглядело бы твоё резюме, если бы его писал твой будильник?",
-      "Какую бытовую проблему ты решил бы волшебной кнопкой?",
-      "Если бы твоё утро было мемом, как бы он назывался?",
-      "Какой предмет дома заслуживает памятник за верную службу?",
-      "Чья жизненная философия тебе ближе: Шрека или кота Гарфилда?",
-      "Какой звук ты терпеть не можешь, хотя другие его не замечают?",
-      "На какой вопрос ты всегда отвечаешь слишком подробно?",
-      "Какой момент в жизни был чистым «это фиаско, братан»?",
-      "Какой фильм ты бы хотел посмотреть заново, забыв сюжет?",
-      "Если бы на твой день рождения пришёл один персонаж из игры, кого бы позвал?",
-      "Что ты умеешь готовить настолько хорошо, что готов хвастаться?",
-      "Какая песня заставляет тебя подпевать против собственной воли?",
-      "Из-за какой мелочи у тебя включается режим «душнила»?",
-      "Какую вещь ты купил по акции, хотя она тебе не была нужна?",
-      "Какой звук должен сопровождать твоё появление на работе?",
-      "Если бы отпуск выдавали за усталость, сколько дней тебе полагалось бы?",
-      "В каком нелепом соревновании ты мог бы стать чемпионом мира?",
-      "Когда ты впервые понял, что взрослые тоже не знают, что делают?",
-      "Какой обычный предмет ты бы запретил брать в отпуск?",
-      "Какую фразу ты бы написал на табличке у своей входной двери?",
-      "Если бы твою неделю снимали как сериал, как называлась бы серия про среду?",
-      "Что бы сказал холодильник, увидев тебя в третий раз за час?",
-      "Какой комплимент ты хотел бы услышать от своего домашнего питомца?",
-      "Какая традиция в твоей семье самая смешная?",
-    ],
-    bold: [
-      "Кто в этой комнате мог бы убедить тебя купить совершенно ненужную вещь?",
-      "Какое обещание самому себе ты нарушал чаще всего?",
-      "Кто здесь, по-твоему, пережил бы неделю без телефона легче всех?",
-      "За что тебя однажды несправедливо хвалили?",
-      "Когда ты в последний раз говорил «уже выхожу», ещё находясь дома?",
-      "Какой свой поступок ты хотел бы увидеть глазами другого человека?",
-      "Какую черту характера ты скрываешь в первые десять минут знакомства?",
-      "Кому из компании ты доверил бы организовать свой день рождения вслепую?",
-      "Какой совет ты даёшь друзьям, но сам игнорируешь?",
-      "Какой разговор тебе хотелось бы переиграть с самого начала?",
-      "Ты когда-нибудь поддакивал в споре, не разобравшись в теме?",
-      "Что ты первым делом замечаешь в человеке, но не признаёшься?",
-      "Какой комплимент оказался неожиданно точным и потому неловким?",
-      "Кому из присутствующих ты доверил бы выбрать тебе новый стиль?",
-      "Когда ты последний раз пообещал ответить «позже» и забыл?",
-      "Кому здесь лучше всего подошла бы роль адвоката дьявола?",
-      "С кем из компании ты бы открывал бизнес и почему?",
-      "Что ты делаешь, когда хочешь казаться увереннее, чем есть?",
-      "Каким своим качеством ты тайно гордишься?",
-      "Какая социальная условность кажется тебе абсурдной?",
-      "В какой ситуации ты ведёшь себя не как обычно?",
-      "Когда ты последним понял шутку, но смеялся первым?",
-      "Какой поступок друзей изменил твоё представление о дружбе?",
-      "Что бы ты не стал рассказывать о себе на первом собеседовании?",
-      "Если бы прямо сейчас пришлось поменяться телефоном с кем-то на минуту, кого бы выбрал?",
-      "Когда ты в последний раз менял мнение о человеке в лучшую сторону?",
-      "Какая невинная провокация сработала на тебе слишком хорошо?",
-      "Кому из друзей ты мог бы доверить свой самый провальный рецепт?",
-      "Какое твоё решение выглядело глупым, но оказалось правильным?",
-      "Если бы компания снимала реалити-шоу, кто отвечал бы за драму?",
-      "Кто здесь чаще всего говорит «я на пять минут» и пропадает на час?",
-      "Когда ты в последний раз гуглил слово, значение которого должен был знать?",
-      "Кого из компании ты бы назначил министром странных решений?",
-      "Кто здесь скорее всего станет героем мема без своего согласия?",
-      "Какую историю о себе ты обычно рассказываешь с большими преувеличениями?",
-      "За что ты заслуживаешь звание «главный кринж года»?",
-      "Кому из присутствующих ты доверил бы выбрать музыку для своей свадьбы?",
-      "Когда ты делал вид, что занят, хотя просто лежал и смотрел в потолок?",
-      "С кем из компании ты бы пошёл на переговоры, если ставки очень высоки?",
-      "Какая твоя привычка выглядит как красный флаг, но на самом деле безобидна?",
-      "Кому здесь ты доверил бы пароль от Wi-Fi, но не свою банковскую карту?",
-      "Если бы все услышали твои мысли за последние десять секунд, насколько стало бы неловко?",
-      "Кто из компании скорее всего случайно станет знаменитым?",
-      "За какой поступок тебе до сих пор хочется сказать себе «зачем»?",
-      "Когда ты в последний раз делал вид, что разбираешься в технике?",
-      "Кто из компании мог бы выиграть спор даже с холодильником?",
-      "Какой поступок с твоей стороны был настоящим «ожидание — реальность»?",
-      "Что ты обещаешь себе по воскресеньям и нарушаешь уже в понедельник?",
-      "Чьё сообщение из этой компании ты бы открыл первым, проснувшись ночью?",
-      "Когда ты в последний раз удалял сообщение сразу после отправки?",
-      "Какая шутка над тобой оказалась смешной только спустя время?",
-      "Кому здесь нужно запретить выбирать фильм на вечер и почему?",
-      "Какой вопрос о деньгах ты считаешь самым неловким?",
-      "Ты чаще краснеешь от комплиментов или от собственных шуток?",
-      "Если бы друзья составили на тебя инструкцию, что написали бы в разделе «Внимание»?",
-      // Дополнительные задания для уровня «Смело».
-      "Какую деталь во внешности человека ты считаешь особенно притягательной?",
-      "Что для тебя сексуальнее: уверенный взгляд или тихий голос?",
-      "Ты когда-нибудь хотел поцеловать человека в неожиданном месте?",
-      "Какой самый дерзкий комплимент ты получал?",
-      "Что делает поцелуй по-настоящему запоминающимся?",
-      "У тебя бывало свидание, на котором химия ощущалась с первой минуты?",
-      "Какой намёк на желание близости ты не сразу понял?",
-      "Что для тебя важнее в интимной атмосфере: разговор или прикосновения?",
-      "Ты предпочитаешь делать первый шаг или ждать инициативы другого?",
-      "Какая фраза может моментально разрушить романтическое настроение?",
-      "Ты когда-нибудь представлял романтическую сцену с человеком из знакомой компании?",
-      "Какая обстановка кажется тебе самой соблазнительной?",
-      "Что ты считаешь границей между невинным флиртом и откровенным заигрыванием?",
-      "Какой романтический риск ты однажды решился принять?",
-      "Как ты даёшь понять, что хочешь поцелуя?",
-      "Какая необычная деталь может заставить тебя влюбиться?",
-      "Ты когда-нибудь хотел продолжения свидания, но не знал, как об этом сказать?",
-      "Какая мелочь в поведении человека кажется тебе невероятно сексуальной?",
-      "Какой твой самый неожиданный повод для романтических фантазий?",
-      "Что для тебя идеальное начало вечера вдвоём?",
-      "Когда ты в последний раз ловил себя на слишком долгом взгляде?",
-      "Какой самый смелый вопрос ты задавал на свидании?",
-      "Что для тебя важнее: страсть с первой встречи или медленное сближение?",
-      "Был ли момент, когда одно прикосновение сказало больше слов?",
-      "Какое приглашение на свидание показалось бы тебе дерзким, но приятным?",
-      "Какую романтическую тайну ты готов озвучить за этим столом?",
-      "Ты любишь неожиданные объятия или предпочитаешь, чтобы тебя спросили?",
-      "Какой поцелуй ты считаешь самым романтичным — короткий или долгий?",
-      "Какой знак внимания кажется тебе слегка непристойным, но милым?",
-      "Смущают ли тебя откровенные комплименты от симпатичного человека?",
-      "Как ты относишься к флирту через сообщения поздно ночью?",
-      "Что тебе нравится больше: интрига перед свиданием или спонтанность?",
-      "Какая фраза заставила бы тебя покраснеть при всей компании?",
-      "Бывало ли, что ты завидовал человеку, которого кто-то красиво поцеловал?",
-      "Какую черту партнёра ты считаешь по-настоящему соблазнительной?",
-      "Какой момент на свидании чаще всего вызывает у тебя бабочек в животе?",
-      "Есть ли у тебя любимый способ начать романтический разговор?",
-      "Какую роль играет чувство юмора в твоём сексуальном влечении?",
-      "Что делает флирт приятным, а не навязчивым?",
-      "Ты когда-нибудь ошибался, приняв дружелюбие за флирт?",
-      "Что для тебя горячее: красивый голос или уверенный взгляд?",
-      "Ты когда-нибудь отправлял сообщение с флиртом не тому человеку?",
-      "Какая фраза в переписке мгновенно убивает всю романтику?",
-      "Что смущает сильнее: случайное касание рук или долгий взгляд в глаза?",
-      "Ты когда-нибудь репетировал перед зеркалом признание в симпатии?",
-      "Какой комплимент звучит неприлично, хотя в нём нет ни одного грубого слова?",
-      "Тебя легче соблазнить хорошим ужином или смешной перепиской?",
-      "Тебе нравится, когда первый шаг делает другой человек?",
-      "Какая самая нелепая ситуация случалась у тебя перед поцелуем?",
-      "Что для тебя более интимно: разговор до рассвета или объятие после тяжёлого дня?",
-      "Приходилось ли тебе путать дружелюбие с флиртом?",
-      "Какая сцена в романтическом кино кажется тебе смешнее, чем задумал режиссёр?",
-      "Что бы ты выбрал: страстное свидание с ужасным ужином или скучное свидание с идеальной едой?",
-      "Ты когда-нибудь придумывал повод, чтобы остаться наедине с симпатичным человеком?",
-      "Какая нелепая опечатка способна испортить признание в любви?",
-      "Что ты считаешь самой приятной формой флирта без прикосновений?",
-      "Если бы твоё последнее свидание было мемом, какой подписью ты бы его снабдил?",
-      "Какая обычная одежда кажется тебе неожиданно привлекательной?",
-      "Что тебе сложнее: признаться в симпатии или сказать «нет» на свидании?",
-      "Бывает ли, что чувство юмора притягивает тебя сильнее внешности?",
-      "Что для тебя означает настоящий романтический «красный флаг»?",
-      "Какой самый смешной совет о сексе ты слышал от человека, который явно не эксперт?",
-      "Что интимнее для тебя: доверить человеку тайну или позволить увидеть себя без привычного образа?",
-      "Ты предпочёл бы поцелуй на первом свидании или идеальную интригу до второго?",
-      "Какую тему об отношениях взрослые обсуждают слишком серьёзно?",
-      "Ты когда-нибудь ревновал к человеку, с которым даже не встречался?",
-      "Что должно случиться, чтобы ты сам предложил медленный танец?",
-      "Какое двусмысленное сообщение ты сначала понял совершенно невинно?",
-      "Какая невинная фраза при правильной интонации звучит как приглашение на свидание?",
-      "Что ты скорее скроешь от друзей: провальный поцелуй или слишком милое прозвище партнёра?",
-      {"text":"Как называется ситуация, когда человек внезапно перестал отвечать и исчез из общения?","answer":"Гостинг."},
-      {"text":"Что такое «ред флаг» на свидании?","answer":"Тревожный признак возможной проблемы в поведении или отношениях."},
-      {"text":"Какой вопрос лучше прояснит симпатию: «Ты меня любишь?» или «Хочешь сходить со мной на свидание?»","answer":"Для первого шага второй вопрос конкретнее и мягче."},
-      {"text":"В отношениях что надёжнее: читать мысли партнёра или задавать прямые вопросы?","answer":"Задавать прямые вопросы."},
-      {"text":"Что важнее для доверия: идеальные комплименты или соблюдение обещаний?","answer":"Соблюдение обещаний."},
-      {"text":"Что стоит сделать, если комплимент собеседнику оказался неприятен?","answer":"Извиниться и не повторять то, что нарушает его границы."},
-      {"text":"Кто из вас чаще говорит «выбирай фильм ты», но потом спорит с выбором?"},
-      {"text":"На каком самом нелепом свидании вы могли бы отлично провести время вдвоём?"},
-      {"text":"Какой ваш общий момент достоин сцены после титров романтической комедии?"},
-      {"text":"Что вы впервые поняли друг о друге только спустя время?"},
-      {"text":"Если бы отношениям выдали обновление, какую одну ошибку вы исправили бы?"},
-      {"text":"Кто здесь лучше всех сумел бы уйти со свидания, не обидев человека?"},
-      {"text":"Кто из компании мог бы вести подкаст о провальных свиданиях?"},
-      {"text":"С кем из присутствующих ты бы сыграл в романтической комедии? Только по желанию называй имя."},
-      {"text":"Если бы этот вечер стал сериалом, кто произнёс бы финальную драматичную реплику?"},
-      {"text":"Кого из компании ты бы попросил придумать тебе приличную, но дерзкую фразу для знакомства?"},
-    ],
-  },
-  action: {
-    name: "ДЕЙСТВИЕ",
-    emoji: "⚡",
-    points: 2,
-    soft: [
-      "Изобрази будильник, который очень хочет выходной.",
-      "Произнеси слово «кабачок» как величайшую трагедию.",
-      "Сыграй ведущего прогноза погоды в мире, где всегда идут пельмени.",
-      "Покажи, как кот просит открыть дверь, а потом передумывает.",
-      "Прочитай воображаемую инструкцию к чашке максимально серьёзно.",
-      "Придумай слоган для носка, потерявшего пару.",
-      "Изобрази робота, который впервые увидел радугу.",
-      "Сделай комплимент комнатному растению так, будто это знаменитость.",
-      "Изобрази три вида смеха без единого слова.",
-      "Проведи пресс-конференцию от лица исчезнувшего пульта.",
-      "Придумай название группы из всех игроков.",
-      "Сыграй в замедленной съёмке поиск ключей в кармане.",
-      "Изобрази человека, который попробовал лимон, но должен сохранять лицо.",
-      "Объясни слово «облако» только жестами.",
-      "Продай воображаемую невидимую шапку.",
-      "Спой один куплет о вчерашнем ужине на любой мелодии собственного сочинения.",
-      "Назови каждого игрока новым смешным супергеройским именем.",
-      "Покажи пантомимой поход в магазин за одной мелочью.",
-      "Сыграй телефон, которому не нравится его хозяин.",
-      "Объяви результаты выборов президента диванных подушек.",
-      "Покажи мем «ожидание — реальность» без единого слова.",
-      "Продай компании обычную ложку так, словно это последний айфон.",
-      "Сыграй кота, который впервые услышал слово «ветеринар».",
-      "Изобрази человека, у которого интернет завис на самом интересном месте.",
-      "Объяви, что ты стал министром выходных, и назови первый указ.",
-      "Произнеси «ну бывает» в пяти совершенно разных настроениях.",
-      "Покажи, как выглядит «понедельник» в виде танца.",
-      "Изобрази, как бабушка впервые пробует голосового помощника.",
-      "Сыграй будильник, который просит хозяина не вставать.",
-      "Прочитай прогноз погоды для планеты ленивцев.",
-      "Сделай вид, что попал на собеседование на должность кота.",
-      "Придумай слоган для доставки потерянных носков.",
-      "Покажи пантомимой «зарядка телефона осталась на одном проценте».",
-      "Изобрази супергероя, чья сила — находить пульт между подушками.",
-      "Произнеси «я всё контролирую» так, чтобы никто не поверил.",
-    ],
-    bold: [
-      "Придумай рекламу себя как идеального собеседника на вечеринке.",
-      "Сыграй неловкий разговор с человеком, которого забыл поздравить.",
-      "Скажи трём игрокам по театральному, но искреннему комплименту.",
-      "Изобрази свой худший способ произвести первое впечатление.",
-      "Зачитай драматичное извинение за украденный последний кусок пиццы.",
-      "Расскажи обычное событие так, словно это громкий скандал.",
-      "Сыграй сцену, где тебя поймали на попытке выглядеть загадочно.",
-      "Изобрази свой внутренний голос перед важным звонком.",
-      "Покажи, как ты кокетничаешь с автоматом по продаже кофе.",
-      "Представься новым участником шоу знакомств с совершенно нелепым талантом.",
-      "Проведи мини-интервью с игроком справа без единого серьёзного вопроса.",
-      "Сыграй ревность к любимому креслу, которое занял гость.",
-      "Прочитай воображаемый любовный роман голосом спортивного комментатора.",
-      "Покажи четыре разных реакции на фразу «нам надо поговорить».",
-      "Произнеси речь, убеждающую всех, что опоздание — это талант.",
-      "Изобрази, как ты улыбаешься человеку, чьё имя забыл.",
-      "Устрой кастинг на роль идеального соседа среди предметов комнаты.",
-      "Придумай свой персональный танец победы и исполни его.",
-      "Сыграй звонок в службу поддержки собственной самооценки.",
-      "Зачитай извинения от лица человека, случайно отправившего стикер начальнику.",
-      "Изобрази свой голосовой поиск в интернете после бессонной ночи.",
-      "Сделай рекламу себя как человека, который умеет красиво отменять планы.",
-      "Сыграй сцену, в которой твой внутренний голос пытается тебя уволить.",
-      "Скажи игроку слева комплимент в стиле диктора экстренных новостей.",
-      "Изобрази реакцию на сообщение «мы всё знаем» от неизвестного номера.",
-      "Придумай мем про эту компанию и озвучь подпись к нему.",
-      "За двадцать секунд защити в суде свою самую бесполезную покупку.",
-      "Изобрази человека, который сказал «я не ревнивый», но уже изучил все лайки.",
-      "Сыграй тревожный звонок с просьбой вернуть взятый в долг контейнер.",
-      "Покажи, как ты рассказываешь о провале так, будто получил международную награду.",
-      "Сыграй ведущего ток-шоу, куда пригласили тебя и твой будильник.",
-      "Придумай уважительное, но смешное прозвище каждому из двух игроков.",
-      "Сделай драматичный трейлер фильма «Я опять забыл пароль».",
-      "Покажи три типа людей, когда официант принёс неправильный заказ.",
-      "Произнеси оправдание за опоздание языком официального пресс-релиза.",
-      // Дополнительные задания для уровня «Смело».
-      "С разрешения выбранного игрока обними его на пять секунд; иначе сделай комплимент.",
-      "Предложи соседу справа поцелуй в щёку — только если оба согласны; иначе воздушный поцелуй.",
-      "С разрешения игрока напротив поцелуй его в руку; иначе поклонись как в романтическом фильме.",
-      "Скажи выбранному взрослому игроку дерзкий, но уважительный комплимент.",
-      "Посмотри в глаза согласному партнёру десять секунд, не смеясь.",
-      "С разрешения партнёра устрой медленный танец на пятнадцать секунд.",
-      "Попробуй соблазнительным голосом заказать обычную пиццу.",
-      "Придумай кокетливое приглашение на свидание для согласного игрока.",
-      "С согласия партнёра возьми его за руку до конца отсчёта десяти секунд.",
-      "Покажи свою самую обаятельную улыбку выбранному игроку, если ему комфортно.",
-      "Скажи три фразы с двусмысленным оттенком, избегая грубости.",
-      "Сыграй страстное признание воображаемой чашке кофе.",
-      "Изобрази, как ты пытаешься незаметно привлечь внимание симпатичного человека.",
-      "Согласному партнёру прошепчи на ухо красивый комплимент без непристойностей.",
-      "Предложи партнёру по взаимному согласию поцелуй в лоб; иначе отправь воздушный поцелуй.",
-      "Покажи, как пригласил бы понравившегося человека на медленный танец.",
-      "Придумай идеальный сценарий романтической встречи на три предложения.",
-      "Сделай самый кинематографичный воздушный поцелуй в истории.",
-      "Согласному партнёру предложи танец, где можно стоять на расстоянии вытянутой руки.",
-      "Произнеси невинную фразу «принеси мне чай» с максимально интригующей интонацией.",
-      "Придумай для выбранного игрока романтическое прозвище, если он согласен.",
-      "Согласному человеку подари комплимент, глядя в глаза; если неудобно — скажи всем сразу.",
-      "Если оба согласны, обними соседа слева; иначе покажи сердечко руками.",
-      "Сыграй очень смешное первое свидание с воображаемым миллионером.",
-      "Устрой воображаемую фотосессию для обложки журнала «Неловкий флирт».",
-      "С разрешения соседа справа подарите друг другу объятие; если нет — обменяйтесь улыбками.",
-      "Предложи игроку напротив поцелуй в щёку. При согласии — поцелуй, иначе воздушный.",
-      "Если вы оба согласны, подержитесь за руки десять секунд; иначе сделайте сердечки пальцами.",
-      "Выбери взрослого игрока и скажи ему комплимент, от которого приятно смутиться.",
-      "Прочитай сообщение «ты ещё не спишь?» голосом героя романтического триллера.",
-      "Сыграй флирт с воображаемым бариста, который не понимает намёков.",
-      "При согласии партнёра устройте мини-медляк на десять секунд; иначе танцуй один.",
-      "Произнеси «тут очень жарко» так, чтобы всем стало неловко и смешно.",
-      "Придумай партнёру ласковое прозвище, если он хочет его услышать.",
-      "С согласия выбранного игрока устрой пятнадцатисекундный конкурс взглядов.",
-      "Покажи три способа пригласить на свидание: мило, нелепо и очень уверенно.",
-      "Изобрази, что случайно встретил человека, которому вчера отправил сердечко.",
-      "Сыграй сцену, где свидание испортил неожиданный звонок мамы.",
-      "Спроси у партнёра разрешения на объятие самым галантным способом.",
-      "Расскажи о пирожке так, будто это твоя первая любовь.",
-      {"text":"С согласия партнёра поцелуй его в щёку; вместо этого можно сказать нежный комплимент."},
-      {"text":"Обнимите друг друга на десять секунд, если обоим комфортно; иначе улыбнитесь друг другу."},
-      {"text":"С разрешения партнёра поцелуй его в руку; если нет — сделай галантный поклон."},
-      {"text":"Если оба хотят, потанцуйте вдвоём под воображаемую медленную песню; иначе исполните танец по отдельности."},
-      {"text":"Спроси партнёра, какое свидание он хотел бы повторить, и поделись своим вариантом."},
-      {"text":"С разрешения партнёра возьми его за руку и назови три приятных воспоминания."},
-      {"text":"Скажи партнёру, за что благодарен ему, не используя слова «красивый» и «милая»."},
-      {"text":"Изобразите вместе неловкое первое свидание: каждый говорит по одной смешной реплике."},
-      {"text":"Если оба не против, обменяйтесь поцелуем в лоб; альтернатива — воздушный поцелуй."},
-      {"text":"Придумайте вместе название романтической комедии про вас двоих."},
-      {"text":"Если сосед слева согласен, обними его на пять секунд; если нет — сделай комплимент."},
-      {"text":"Предложи любому согласному игроку поцелуй в щёку; альтернатива — эффектный воздушный поцелуй."},
-      {"text":"Попроси разрешения обменяться с игроком напротив дружеским рукопожатием в стиле кино."},
-      {"text":"Назови игрока, у которого сегодня самый загадочный взгляд, не ставя никого в неловкое положение."},
-      {"text":"Устрой конкурс самого нелепого флирта с добровольным соперником; можно сыграть обе роли самому."},
-      {"text":"Предложи любому игроку медленный танец — только если оба хотят; иначе танцуй один."},
-      {"text":"По добровольному согласию обменяйтесь с соседом комплиментами в стиле плохой мелодрамы."},
-      {"text":"Придумай смешную фразу для знакомства, которую никто в компании не решился бы использовать."},
-      {"text":"Попроси согласного игрока сыграть вместе сцену свидания, на котором официант — инопланетянин."},
-      {"text":"Сыграй сцену прощания с воображаемым бывшим так, чтобы все рассмеялись."},
-    ],
-  },
-  dare: {
-    name: "ВЫЗОВ",
-    emoji: "🔥",
-    points: 3,
-    soft: [
-      "Назови пять фруктов за восемь секунд.",
-      "Произнеси скороговорку «Шла Саша по шоссе» три раза подряд.",
-      "Придумай рифму к слову «вечеринка» за десять секунд.",
-      "Покажи пять разных эмоций за десять секунд.",
-      "Назови семь животных на одну выбранную букву.",
-      "Постой на одной ноге двадцать секунд, если тебе это удобно.",
-      "Изобрази без слов любую профессию, пока компания угадывает.",
-      "Расскажи страшилку длиной в три предложения.",
-      "Сочини тост из слов «звезда», «чай» и «тапок».",
-      "Не используй слово «да» в ответах на три вопроса компании.",
-      "Скажи алфавит до буквы «П» как оперный певец.",
-      "Придумай пять применений пустой коробке за десять секунд.",
-      "Назови четыре города на букву «К».",
-      "Скажи слово «невероятно» с тремя разными эмоциями.",
-      "Попробуй рассмешить компанию одной фразой.",
-      "Назови три фильма, в названии которых есть число.",
-      "За десять секунд вспомни пять вещей, которые берут в поход.",
-      "Сочини двустишие со словами «кот» и «самолёт».",
-      "Попробуй говорить как робот до конца этого задания.",
-      "Назови пять предметов вокруг себя, не используя букву «А» в их названиях.",
-      "Придумай три профессии для ленивого дракона.",
-      "Изобрази без слов слово «отпуск» — пусть другие угадают.",
-      "За двадцать секунд расскажи историю с неожиданным концом.",
-      "Назови четыре города, начинающихся на разные буквы.",
-      "Скажи три фразы так, будто ты злодей из детского мультфильма.",
-      {"text":"🧠 Что тяжелее: килограмм железа или килограмм ваты?","answer":"Одинаково: и то и другое весит килограмм."},
-      {"text":"🧠 Какую вещь сначала разбивают, а потом используют для завтрака?","answer":"Яйцо."},
-      {"text":"🧠 В электричке нет дымовой трубы. Куда полетит её дым?","answer":"Никуда: у электрички нет дыма от двигателя."},
-      {"text":"🧠 Какая планета ближе всего к Солнцу?","answer":"Меркурий."},
-      {"text":"🧠 Если в полночь в Москве идёт дождь, будет ли через 72 часа полдень?","answer":"Нет, через 72 часа снова будет полночь."},
-      {"text":"🧠 Если 5 машин производят 5 деталей за 5 минут, сколько нужно минут 100 машинам на 100 деталей?","answer":"5 минут, если все машины работают с одинаковой скоростью."},
-      {"text":"🧠 На часах 3:00. Какой меньший угол между стрелками?","answer":"90 градусов."},
-      {"text":"🧠 Что больше: 0,7 или 0,65?","answer":"0,7."},
-      {"text":"🧠 Можно ли делить пять на ноль?","answer":"Нет, деление на ноль не определено."},
-      {"text":"🧠 Два отца и два сына съели три яблока, каждому досталось по одному. Как так?","answer":"Это дедушка, отец и сын: всего три человека."},
-      {"text":"🧠 Сколько раз можно вычесть 10 из 100, если каждый раз вычитать из получившегося результата?","answer":"Десять раз, пока не получится ноль."},
-      {"text":"🧠 На столе лежат три яблока. Ты забрал два. Сколько яблок у тебя?","answer":"Два."},
-      {"text":"🧠 Сколько нулей в числе один миллион?","answer":"Шесть."},
-      {"text":"🧠 Как назвать многоугольник с восемью сторонами?","answer":"Восьмиугольник."},
-      {"text":"🧠 Сколько градусов в прямом угле?","answer":"90 градусов."},
-      {"text":"🧠 В каком году начался XXI век: в 2000-м или в 2001-м?","answer":"В 2001 году."},
-      {"text":"🧠 Два поезда едут навстречу друг другу. Скорость каждого — 60 км/ч. С какой скоростью они сближаются?","answer":"120 км/ч."},
-      {"text":"🧠 Какой океан самый большой по площади?","answer":"Тихий."},
-      {"text":"🧠 Из чего состоит вода по химической формуле H₂O?","answer":"Из водорода и кислорода."},
-      {"text":"🧠 Что делает больше шума в вакууме: аплодисменты или крик?","answer":"Ни то ни другое: обычный звук не распространяется в вакууме."},
-      {"text":"🧠 Если все коты — животные, означает ли это, что все животные — коты?","answer":"Нет, это логическая ошибка."},
-      {"text":"🧠 Можно ли точно определить характер человека по знаку зодиака?","answer":"Нет, научных доказательств такой зависимости нет."},
-    ],
-    bold: [
-      "За тридцать секунд придумай самую глупую легенду о своём имени.",
-      "Придумай четыре безобидных причины, по которым тебя не взяли бы в разведку.",
-      "Не говори «я» и «мне», пока отвечаешь на три вопроса компании.",
-      "Объясни, почему тебе обязаны дать премию за неловкость.",
-      "Проведи короткий мастер-класс по искусству опаздывать.",
-      "Сыграй три варианта отказа от странного приглашения.",
-      "За пятнадцать секунд назови пять способов испортить первое впечатление.",
-      "Представь себя кандидатом на роль ведущего этой вечеринки.",
-      "В течение двадцати секунд комментируй всё происходящее как спортивный комментатор.",
-      "Изобрази трейлер фильма о самом неудобном дне своей жизни.",
-      "Придумай четыре нелепых оправдания за пропущенный звонок.",
-      "Убедительно защити позицию, что носки — главный элемент стиля.",
-      "Проведи теледебаты со стулом о праве занять диван.",
-      "Назови три качества, которые мешают тебе стать идеальным суперзлодеем.",
-      "В течение минуты отвечай на вопросы, начиная каждую фразу со слова «разумеется».",
-      "Расскажи про свой вчерашний день как про расследование века.",
-      "За двадцать секунд назови пять причин, почему тебя нельзя оставлять одного в магазине.",
-      "Устрой словесный баттл со своим отражением: скажи два аргумента за себя и два против.",
-      "Назови три нелепых правила для свиданий в мире, где все люди — коты.",
-      "Сыграй поздравление с днём рождения человеку, которому исполнилось 300 лет.",
-      "За тридцать секунд придумай два мемных заголовка про эту вечеринку.",
-      "Скажи вслух то, что написал бы в описании своего самого неудачного фото.",
-      "Придумай пять безобидных «красных флагов» для идеального соседа.",
-      "Убедительно объясни, почему опоздать на пять минут иногда опаснее, чем на час.",
-      "Назови три нелепые причины, по которым тебя могли бы исключить из клуба идеальных людей.",
-      {"text":"📜 Закончи пословицу: «Без труда не вытащишь и рыбку из…»","answer":"пруда."},
-      {"text":"📜 Закончи пословицу: «Не имей сто рублей, а имей сто…»","answer":"друзей."},
-      {"text":"📜 Закончи пословицу: «Любишь кататься — люби и саночки…»","answer":"возить."},
-      {"text":"📜 Закончи пословицу: «Под лежачий камень вода не…»","answer":"течёт."},
-      {"text":"📜 Закончи пословицу: «Что посеешь, то и…»","answer":"пожнёшь."},
-      {"text":"📜 Закончи пословицу: «За двумя зайцами погонишься — ни одного не…»","answer":"поймаешь."},
-      {"text":"📜 Закончи пословицу: «Яблоко от яблони недалеко…»","answer":"падает."},
-      {"text":"📜 Закончи пословицу: «Один в поле не…»","answer":"воин."},
-      {"text":"📜 Закончи пословицу: «У семи нянек дитя без…»","answer":"глазу."},
-      {"text":"📜 Закончи пословицу: «С кем поведёшься, от того и…»","answer":"наберёшься."},
-      // Дополнительные задания для уровня «Смело».
-      "Назови пять признаков взаимного флирта за пятнадцать секунд.",
-      "Придумай три дерзких, но уважительных приглашения на свидание.",
-      "Сыграй сцену признания, которое началось с абсолютно нелепой фразы.",
-      "За двадцать секунд назови четыре способа создать романтическую атмосферу.",
-      "Составь мини-рейтинг самых неудачных фраз для первого поцелуя.",
-      "Скажи три комплимента, от которых можно покраснеть, не переходя границ.",
-      "Предложи согласному партнёру повторить сцену романтического рукопожатия из фильма.",
-      "С согласия игрока справа устрой ему пятнадцатисекундную церемонию ухаживания без прикосновений.",
-      "Объясни, почему мягкий плед — главный соперник любых свиданий.",
-      "Сыграй сцену, где после романтического признания случайно звучит рингтон.",
-      "За десять секунд назови три способа убить романтическую атмосферу одной фразой.",
-      "Придумай три фразы для знакомства, которые звучат как плохой мем.",
-      "Составь двусмысленный комплимент, в котором нет ни одного неприличного слова.",
-      "Сыграй признание в любви так, будто читаешь условия кредитного договора.",
-      "Придумай название приложения знакомств для людей, которые всегда опаздывают.",
-      "Назови три причины, почему хороший поцелуй лучше плохой переписки.",
-      "Придумай лозунг клуба «Мне просто нравится с тобой разговаривать, честно».",
-      "Сыграй первое свидание, на котором вы оба делаете вид, что не нервничаете.",
-      "За пятнадцать секунд придумай два уважительных способа отказать в поцелуе.",
-      "Придумай пять слов, которые в романтической переписке лучше не писать подряд.",
-    ],
-  },
-  reveal: {
-    name: "ОТКРОВЕНИЕ",
-    emoji: "🤫",
-    points: 2,
-    soft: [
-      "Какую странную привычку ты приобрёл незаметно для себя?",
-      "Чего ты боялся в детстве, а теперь вспоминаешь со смехом?",
-      "Какое маленькое достижение до сих пор тебя радует?",
-      "Какую свою фотографию ты бы назвал максимально нелепой?",
-      "Когда ты в последний раз изображал уверенность, не понимая происходящего?",
-      "Какое школьное правило ты нарушал чаще всего?",
-      "Какой навык у тебя развился совершенно случайно?",
-      "Что тебе нравится, хотя ты редко говоришь об этом вслух?",
-      "Какой фильм заставил тебя неожиданно расплакаться?",
-      "В чём ты слишком придирчив к самому себе?",
-      "Какой подарок ты однажды не оценил, а потом пожалел?",
-      "Какую детскую мечту ты всё ещё хочешь осуществить?",
-      "Когда ты в последний раз радовался чему-то очень простому?",
-      "Что помогает тебе успокоиться после трудного дня?",
-      "Какую привычку ты унаследовал от семьи?",
-      "Какую фразу учителя ты помнишь до сих пор?",
-      "Какой нелепый страх из детства ты давно перерос?",
-      "Когда ты в последний раз искренне радовался отменённой встрече?",
-      "Какую песню ты слушал по сто раз и скрывал это?",
-      "Какое самое странное имя ты давал неодушевлённому предмету?",
-      "Что ты недавно узнал и удивился, что все вокруг уже это знали?",
-      "Когда ты в последний раз посмеялся над самим собой?",
-      "Какую еду ты сначала ненавидел, а теперь любишь?",
-      "С какой фразой из мемов у тебя связано конкретное воспоминание?",
-      "Был ли у тебя день, когда всё шло настолько плохо, что стало смешно?",
-    ],
-    bold: [
-      "Когда ты в последний раз завидовал чужой смелости?",
-      "Какую черту характера ты хотел бы поменять местами с другом?",
-      "Бывало ли, что ты специально преуменьшал свои успехи?",
-      "Ты когда-нибудь избегал разговора, боясь услышать ответ?",
-      "Какую ошибку ты уже можешь вспоминать без стыда?",
-      "Какое мнение о тебе хотелось бы изменить?",
-      "Что тебя расстраивает сильнее, чем ты показываешь?",
-      "Ты когда-нибудь сохранял дружбу скорее по привычке?",
-      "Когда ты в последний раз честно признал, что был неправ?",
-      "Что о тебе часто понимают неверно при первой встрече?",
-      "Какой свой выбор ты стал бы защищать даже перед близкими?",
-      "Какая невысказанная благодарность у тебя есть к кому-то?",
-      "Ты когда-нибудь отказывался от мечты из страха выглядеть смешно?",
-      "Когда ты в последний раз молчал, хотя стоило вступиться за человека?",
-      "Какой вопрос о себе ты сам себе задаёшь чаще всего?",
-      "Кому ты в последний раз ответил «ахах», даже не улыбнувшись?",
-      "На какую фотографию в телефоне тебе до сих пор немного стыдно смотреть?",
-      "Когда ты в последний раз назвал чужую шутку своей?",
-      "Какую невинную тайну о себе ты давно хотел рассказать?",
-      "Чей совет ты проигнорировал, а потом пожалел?",
-      "Какое своё старое сообщение ты не хотел бы услышать вслух?",
-      "Бывало ли, что ты переодевался, чтобы случайно понравиться кому-то?",
-      "Какое неловкое знакомство закончилось неожиданной дружбой?",
-      "Когда ты в последний раз преувеличивал свою занятость?",
-      "Какое старое прозвище ты попросил бы друзей никогда не вспоминать?",
-      // Дополнительные задания для уровня «Смело».
-      "Какой самый неожиданный человек когда-то вызывал у тебя сильное влечение?",
-      "Ты когда-нибудь мечтал о поцелуе после случайной встречи?",
-      "Есть ли у тебя невинная романтическая фантазия, о которой никто не знает?",
-      "Какой комплимент пробудил в тебе желание продолжить знакомство?",
-      "Случалось ли тебе чувствовать искру между вами, хотя вы почти не разговаривали?",
-      "Ты предпочитаешь долгий флирт или честное признание в симпатии?",
-      "Какой эпизод свидания до сих пор заставляет тебя краснеть?",
-      "Что для тебя важнее в близости: нежность или страсть?",
-      "Когда ты в последний раз сознательно пытался выглядеть соблазнительно?",
-      "Есть ли у тебя любимая романтическая сцена, которую хочется повторить?",
-      "Что ты никогда не сделал бы ради внимания симпатичного человека?",
-      "Какую границу в отношениях ты считаешь особенно важной?",
-      "Ты когда-нибудь ловил на себе взгляд, который показался очень многообещающим?",
-      "Бывало ли, что прикосновение к руке запомнилось надолго?",
-      "Какой разговор лучше всего помогает тебе почувствовать близость?",
-      "Был ли человек, которому ты долго не решался написать первым?",
-      "Какой нелепый повод ты использовал, чтобы начать разговор с симпатичным человеком?",
-      "Ты когда-нибудь писал сообщение «случайно», хотя очень надеялся на ответ?",
-      "Какой самый смешной комплимент ты получал на свидании?",
-      "Приходилось ли тебе делать вид, что не замечаешь чей-то флирт?",
-      "Было ли свидание, с которого ты сбежал мысленно уже через пять минут?",
-      "Когда тебя в последний раз застали за мечтательной улыбкой во время переписки?",
-      "Что для тебя неловче: сказать о симпатии или получить неожиданный комплимент?",
-      "Какой романтический поступок ты когда-то считал крутым, а сейчас — кринжовым?",
-      "Какой вопрос о близости тебе проще написать, чем произнести вслух?",
-      "Если бы твои бывшие написали общий отзыв о тебе, какая фраза там могла бы быть?",
-      "Что ты узнал о себе благодаря самому неудачному свиданию?",
-      "В какой момент ты понял, что между вами точно есть химия?",
-      "Какая маленькая романтическая просьба смущает тебя больше откровенного разговора?",
-      "Что ты однажды принял за намёк, а потом понял, что ошибся?",
-    ],
-  },
-  twist: {
-    name: "КАВЕРЗА",
-    emoji: "🌀",
-    points: 3,
-    soft: [
-      "Докажи за двадцать секунд, что чайник должен быть министром культуры.",
-      "Придумай самый бесполезный закон для этой компании.",
-      "Опиши своё утро как трейлер фантастического блокбастера.",
-      "Защити права пельменей в воображаемом суде.",
-      "Объясни, почему луна должна платить за парковку.",
-      "Придумай смешное объяснение, куда исчезают вторые носки.",
-      "Назови три причины избрать диван почётным гостем вечеринки.",
-      "Придумай пароль из трёх слов, который никто не забудет.",
-      "Расскажи историю о том, как холодильник спас город.",
-      "Изобрази рекламную кампанию для дождя по расписанию.",
-      "Придумай продолжение пословицы «Без труда не вытащишь и…», будто её придумал программист.",
-      "Объясни пословицу «Семь раз отмерь — один раз отрежь» человеку, который всё делает наугад.",
-      "Какая народная мудрость идеально описывает ситуацию «забыл зарядку дома»?",
-      "Придумай пословицу для людей, которые пять раз откладывают будильник.",
-      "Скажи известную пословицу голосом злодея из мультфильма.",
-      "Продолжи фразу «Делу время, а потехе…» и придумай смешную современную версию.",
-      "Как звучала бы пословица «Тише едешь — дальше будешь» для курьера на электросамокате?",
-      "Придумай поговорку, которую могли бы говорить ленивые коты.",
-      "Продолжи «Любишь кататься — люби и…» самым абсурдным, но логичным способом.",
-      "Расскажи анекдот про телефон, используя слова «Wi-Fi», «бабушка» и «оливье».",
-      {"text":"💡 Сколько месяцев в году имеют хотя бы 28 дней?","answer":"Все двенадцать."},
-      {"text":"💡 У трёх братьев по две общие сестры. Сколько всего детей?","answer":"Пятеро: три брата и две сестры."},
-      {"text":"💡 Что становится больше, если из него что-то убрать?","answer":"Яма."},
-      {"text":"💡 Две монеты дают 15 рублей. Одна из них не пятирублёвая. Какие это монеты?","answer":"10 и 5 рублей: десятирублёвая монета не пятирублёвая."},
-      {"text":"💡 Сколько минут в двух с половиной часах?","answer":"150 минут."},
-      {"text":"💡 Человек купил вещь за 100 рублей и продал за 120. Какова прибыль без учёта расходов?","answer":"20 рублей."},
-      {"text":"💡 Что общего у всех простых чётных чисел?","answer":"Такое число только одно: 2."},
-      {"text":"💡 Какое число нужно прибавить к 17, чтобы получить 42?","answer":"25."},
-      {"text":"💡 Можно ли делить ноль на пять?","answer":"Да, получится ноль."},
-      {"text":"💡 У квадрата срезали один угол прямым разрезом. Сколько стало углов?","answer":"Пять, если срез действительно пересёк две стороны квадрата."},
-      {"text":"💡 Чему равна половина от четверти числа 80?","answer":"10."},
-      {"text":"💡 Половина людей на вечеринке — в очках. Всего 10 человек. Сколько человек без очков?","answer":"Пять."},
-      {"text":"💡 Что измеряют в децибелах?","answer":"Уровень звука и других величин, выраженных логарифмически."},
-      {"text":"💡 Петя старше Вани на пять лет. Через десять лет на сколько лет он будет старше?","answer":"На те же пять лет."},
-      {"text":"💡 Какая страна считается родиной бумаги?","answer":"Китай."},
-      {"text":"💡 Что получится, если разделить 144 на 12?","answer":"12."},
-      {"text":"💡 Сколько дней в обычном невисокосном феврале?","answer":"28 дней."},
-      {"text":"💡 Что раньше: вторник на этой неделе или понедельник на следующей?","answer":"Вторник на этой неделе."},
-      {"text":"💡 Если у тебя 12 конфет и ты отдал треть, сколько осталось?","answer":"Восемь."},
-      {"text":"💡 Какое число является квадратом девяти?","answer":"81."},
-      {"text":"💡 Сколько сторон у шестигранного игрального кубика?","answer":"Шесть граней."},
-    ],
-    bold: [
-      "Представь, что каждый здесь — герой детектива. Кто сыщик, а кто главный подозреваемый?",
-      "Объясни, почему твою переписку с доставкой еды нужно экранизировать.",
-      "Придумай нелепый светский скандал, в который попала вся компания.",
-      "Кому здесь доверили бы переговоры с инопланетянами и почему?",
-      "Назови троих игроков для экспедиции на необитаемый остров и распредели роли.",
-      "Объясни от лица адвоката, почему ты опоздал даже в собственный сон.",
-      "Проведи конкурс на худшее оправдание перед соседями.",
-      "Представь, что компания — музыкальная группа. Кто будет солистом и кто устроит скандал?",
-      "Придумай настолько странную новую моду, чтобы все захотели её попробовать.",
-      "Сочини название сериала о вашей компании и синопсис первой серии.",
-      "Кто здесь скорее попадёт в мем «всё идёт по плану» в самый неподходящий момент? Почему?",
-      "Переведи «не в своей тарелке» на язык официального медицинского заключения.",
-      "Защити пословицу «Молчание — золото» перед компанией, где никто не замолкает.",
-      "Придумай шуточную пословицу про жизнь после зарплаты.",
-      "Как изменилась бы поговорка «Не имей сто рублей, а имей сто друзей», если бы её писал банкир?",
-      "Составь инструкцию «Как не облажаться на собеседовании», используя только три пункта.",
-      "Объясни «На воре и шапка горит» на примере человека, который съел последний кусок пиццы.",
-      "Сыграй спор между поговорками «Поспешишь — людей насмешишь» и «Кто рано встаёт, тому Бог подаёт».",
-      "Сочини мем о том, что «семь пятниц на неделе» — это на самом деле счастье.",
-      "Кому в этой компании подошла бы пословица «Язык мой — враг мой»? Объясни без обид.",
-      {"text":"📜 Закончи пословицу: «Делу время, а потехе…»","answer":"час."},
-      {"text":"📜 Закончи пословицу: «Семь раз отмерь — один раз…»","answer":"отрежь."},
-      {"text":"📜 Закончи пословицу: «Слово не воробей: вылетит — не…»","answer":"поймаешь."},
-      {"text":"📜 Закончи пословицу: «Тише едешь — дальше…»","answer":"будешь."},
-      {"text":"📜 Закончи пословицу: «Друг познаётся в…»","answer":"беде."},
-      {"text":"📜 Закончи пословицу: «На безрыбье и рак…»","answer":"рыба."},
-      {"text":"📜 Закончи пословицу: «Поспешишь — людей…»","answer":"насмешишь."},
-      {"text":"📜 Закончи пословицу: «Не всё то золото, что…»","answer":"блестит."},
-      {"text":"📜 Закончи пословицу: «В гостях хорошо, а дома…»","answer":"лучше."},
-      {"text":"📜 Закончи пословицу: «Язык мой — враг…»","answer":"мой."},
-      // Дополнительные задания для уровня «Смело».
-      "Защити в суде свидание, на котором оба забыли имена друг друга.",
-      "Придумай три абсурдных правила для секретного клуба романтиков.",
-      "Опиши идеальный флирт как инструкцию по сборке мебели.",
-      "Представь, что твою любовную жизнь экранизировали. Как называется фильм?",
-      "Придумай афишу для комедии о первом неловком поцелуе.",
-      "Сочини рекламу парфюма с названием «Слишком много намёков».",
-      "Придумай название подкаста о провальных свиданиях.",
-      "Проведи пресс-конференцию после самого неловкого романтического признания.",
-      "Опиши свой способ очаровывать людей как научную гипотезу.",
-      "Объясни, почему романтическая переписка должна получать возрастной рейтинг.",
-      "Придумай поговорку для человека, который поставил лайк бывшему в три часа ночи.",
-      "Переосмысли пословицу «Любовь зла — полюбишь и козла» так, чтобы никого не обидеть.",
-      "Как звучало бы «Тише едешь — дальше будешь», если бы речь шла о первом свидании?",
-      "Придумай девиз клуба людей, которые всегда неправильно понимают флирт.",
-      "Объясни фразу «любовь слепа» глазами человека, который увидел анкету бывшего.",
-      "Продолжи «С милым рай и в шалаше», если в шалаше нет Wi-Fi.",
-      "Перескажи неудачное свидание как древнегреческую трагедию за двадцать секунд.",
-      "Придумай название сериала о человеке, который перепутал два романтических чата.",
-      "Какая пословица лучше всего описывает отношения, в которых никто не отвечает первым?",
-      "Представь, что Купидон устроился менеджером по продажам. Как он предлагает свидания?",
-      {"text":"Что такое «газлайтинг» в отношениях: сорт освещения или психологическая манипуляция?","answer":"Психологическая манипуляция, при которой человека заставляют сомневаться в своём восприятии реальности."},
-      {"text":"Как называется желание видеть партнёра чаще, чем требует расписание?","answer":"Это не научный диагноз; в обычной речи — влюблённость или сильная привязанность."},
-      {"text":"Чем согласие на объятие отличается от согласия на поцелуй?","answer":"Это разные действия: согласие на одно не означает согласия на другое."},
-      {"text":"Что означает фраза «Мы просто общаемся», если один человек уже выбрал имена детям?","answer":"Комический ответ: ожидания явно не совпадают, об этом стоит поговорить."},
-      {"text":"Что чаще портит свидание: отсутствие идеального плана или неуважение к собеседнику?","answer":"Неуважение к собеседнику."},
-      {"text":"Какое «нет» означает «да» после долгих уговоров?","answer":"Никакое: отказ нужно уважать."},
-    ],
-  },
-  bonus: {
-    name: "БОНУС",
-    emoji: "⭐",
-    points: 0,
-    soft: [
-      {"text":"Удачный ход: получи 2 ★ просто за красивую улыбку.","effect":"self","points":2},
-      {"text":"Расскажи короткую шутку: за смелость получи 3 ★.","effect":"self","points":3},
-      {"text":"Скажи всем «спасибо за компанию»: каждый получает 1 ★.","effect":"all","points":1},
-      {"text":"Выбери другого игрока — он получит 2 ★ от тебя в подарок.","effect":"choose","points":2},
-      {"text":"Ты и выбранный тобой игрок получаете по 1 ★ за командный дух.","effect":"partner","points":1},
-      {"text":"Назови три причины любить выходные — получи 2 ★.","effect":"self","points":2},
-      {"text":"Скажи комплимент соседу — каждый игрок получает 1 ★.","effect":"all","points":1},
-      {"text":"Выбери самого весёлого игрока: подаришь ему 3 ★.","effect":"choose","points":3},
-      {"text":"Объединитесь с выбранным игроком и получите по 2 ★.","effect":"partner","points":2},
-      {"text":"Придумай девиз вечеринки: получи 3 ★.","effect":"self","points":3},
-    ],
-    bold: [
-      {"text":"Скажи «я легенда» так, чтобы все засмеялись, — получи 2 ★.","effect":"self","points":2},
-      {"text":"Устрой бурные аплодисменты всей компании: каждому по 1 ★.","effect":"all","points":1},
-      {"text":"Скажи тост без слова «счастье» — получи 3 ★.","effect":"self","points":3},
-      {"text":"Выбери игрока, которому сегодня улыбнулась удача: +2 ★ ему.","effect":"choose","points":2},
-      {"text":"Придумай общее название команды: все получают 1 ★.","effect":"all","points":1},
-      {"text":"Расскажи про свой маленький успех: получи 2 ★.","effect":"self","points":2},
-      {"text":"Скажи одну приятную вещь об этом вечере — получи 2 ★.","effect":"self","points":2},
-      {"text":"Назови человека, с которым приятно быть в одной команде: вам обоим по 2 ★.","effect":"partner","points":2},
-      {"text":"Пожелай соперникам удачи — получи 1 ★.","effect":"self","points":1},
-      {"text":"Выбери игрока, который получит 1 ★ за просто так.","effect":"choose","points":1},
-      // Дополнительные задания для уровня «Смело».
-      {"text":"💞 Придумай дерзкий, но уважительный комплимент и получи 2 ★.","effect":"self","points":2},
-      {"text":"💞 Расскажи о нелепом флирте из кино и получи 3 ★.","effect":"self","points":3},
-      {"text":"💞 Назови главную романтическую ошибку комедий и получи 2 ★.","effect":"self","points":2},
-      {"text":"💞 Покажи свой самый галантный поклон и получи 2 ★.","effect":"self","points":2},
-      {"text":"💞 Придумай смешное приглашение на свидание и получи 3 ★.","effect":"self","points":3},
-      {"text":"💞 Назови два качества идеального партнёра и получи 2 ★.","effect":"self","points":2},
-    ],
-  },
+
+function cards(text){
+  return text.trim().split("\n").map(line=>line.trim()).filter(Boolean).map(line=>{
+    const separator=line.indexOf(" | ");
+    if(separator<0)return line;
+    return {
+      text:line.slice(0,separator),
+      answer:line.slice(separator+3)
+    };
+  });
+}
+
+function bonusCards(text){
+  return text.trim().split("\n").map(line=>line.trim()).filter(Boolean).map(line=>{
+    const parts=line.split(" | ");
+    return {
+      text:parts[0],
+      effect:parts[1],
+      points:Number(parts[2])
+    };
+  });
+}
+
+const data={
+question:{
+  name:"ВОПРОС",emoji:"💬",points:1,
+  soft:cards(`
+Какой звук мгновенно возвращает тебя в детство?
+Что бы ты купил, став миллионером на пять минут, если деньги нельзя откладывать?
+Какой странный факт о себе ты рассказываешь при знакомстве?
+За какую безобидную мелочь над тобой подшучивают?
+Как выглядел бы прогноз погоды твоего настроения?
+Какое блюдо ты ешь способом, который считают неправильным?
+Какую песню ты знаешь целиком вопреки собственной воле?
+Какую бесполезную вещь ты упорно сохраняешь?
+За какое изобретение ты лично вручил бы премию?
+Какое слово ты постоянно произносишь неправильно?
+Какая недорогая покупка изменила твою жизнь?
+Куда потратил бы дополнительные двадцать минут в сутках?
+Какой мультфильм до сих пор тебя трогает?
+Какая семейная фраза поселилась у тебя в голове?
+Какое занятие ты преподавал бы бесплатно?
+Какова твоя худшая попытка приготовить простое блюдо?
+На что пожаловались бы твои тапочки?
+Какое необычное прозвище ты встречал?
+Какой транспорт соответствует твоему характеру?
+Какую суперспособность ты использовал бы для бытовых дел?
+В чём ты хорош без специального обучения?
+Какой подарок оказался неожиданно полезным?
+Какое правило этикета кажется смешным?
+Кого из вымышленных героев позвал бы на пикник?
+Какой мем достоин школьного учебника?
+Какое бессмысленное соревнование ты хотел бы выиграть?
+Какую тайну записал бы о тебе холодильник?
+Что портит тебе настроение за три секунды?
+Какая чужая привычка тебя умиляет?
+Как назвал бы свою автобиографию одним словом?
+Что приятнее: деньги в старом кармане или отменённые планы?
+Что выглядит роскошно, но раздражает?
+Что сделаешь первым в городе без интернета?
+Какую профессию попробовал бы один день?
+Какой совет взрослых ты понял спустя годы?
+Что спросил бы у себя из будущего?
+Какая безобидная ложь делает день приятнее?
+Какую детскую игру вернул бы в моду?
+За что телефон снял бы тебе баллы?
+Какая еда вкуснее на следующий день?
+Какой мем описывает твой понедельник?
+Кто ты на вечеринке: диджей, психолог или человек у холодильника?
+Какую интернет-фразу произносишь даже при родителях?
+Что сделал бы твой кот в семейном чате?
+Какая покупка заставила сказать «ну я и бизнесмен»?
+Что хуже: мокрая лавка или внезапная фронтальная камера?
+Какое резюме написал бы тебе будильник?
+Какую бытовую проблему решил бы волшебной кнопкой?
+Как назывался бы мем про твоё утро?
+Какой предмет дома заслуживает памятника?
+Чья философия ближе: Шрека или Гарфилда?
+Какой звук раздражает только тебя?
+На какой вопрос ты отвечаешь слишком подробно?
+Когда в твоей жизни случилось «это фиаско, братан»?
+Какой фильм посмотрел бы заново, забыв сюжет?
+Какого игрового персонажа позвал бы на день рождения?
+Какое блюдо ты готовишь настолько хорошо, что хвастаешься?
+Какой песне подпеваешь против воли?
+Какая мелочь включает в тебе душнилу?
+Что купил по акции без всякой необходимости?
+Какой звук должен сопровождать твоё появление на работе?
+Сколько отпуска тебе полагается за усталость?
+В каком нелепом соревновании стал бы чемпионом?
+Когда понял, что взрослые тоже не знают, что делают?
+Какую обычную вещь запретил бы брать в отпуск?
+Что написал бы на своей входной двери?
+Как называлась бы серия твоей жизни про среду?
+Что скажет холодильник, увидев тебя третий раз за час?
+Какого комплимента ждёшь от питомца?
+Какая семейная традиция самая смешная?
+`),
+  bold:cards(`
+Кто здесь убедил бы тебя купить ненужную вещь?
+Какое обещание себе нарушал чаще всего?
+Кто легче всех проживёт неделю без телефона?
+За что тебя несправедливо хвалили?
+Когда говорил «выхожу», ещё находясь дома?
+Какой свой поступок увидел бы чужими глазами?
+Какую черту скрываешь в начале знакомства?
+Кому доверил бы организовать свой праздник вслепую?
+Какой свой совет друзьям ты игнорируешь?
+Какой разговор переиграл бы сначала?
+Ты поддакивал в споре, не понимая тему?
+Что замечаешь в человеке первым, но скрываешь?
+Какой комплимент оказался неловко точным?
+Кому доверил бы выбрать тебе новый стиль?
+Кому обещал ответить позже и забыл?
+Кому здесь подходит роль адвоката дьявола?
+С кем открыл бы бизнес?
+Как изображаешь уверенность?
+Каким качеством тайно гордишься?
+Какая социальная условность абсурдна?
+В какой ситуации ты ведёшь себя иначе?
+Когда понял шутку последним, а смеялся первым?
+Какой поступок изменил твоё мнение о дружбе?
+О чём не расскажешь на первом собеседовании?
+С кем согласился бы поменяться телефонами на минуту, не открывая личные данные?
+Когда мнение о человеке улучшилось?
+Какая невинная провокация на тебе сработала?
+Кому доверил бы свой провальный рецепт?
+Какое глупое решение оказалось правильным?
+Кто отвечал бы за драму в вашем реалити-шоу?
+Кто говорит «на пять минут» и исчезает на час?
+Какое знакомое слово тебе пришлось гуглить?
+Кого назначил бы министром странных решений?
+Кто скорее всего случайно станет героем мема?
+Какую свою историю ты преувеличиваешь?
+За что заслужил звание «кринж года»?
+Кому доверил бы музыку на своей свадьбе?
+Когда изображал занятость, глядя в потолок?
+С кем пошёл бы на важные переговоры?
+Какая твоя привычка похожа на безобидный красный флаг?
+Кому доверил бы Wi-Fi, но не банковскую карту?
+Насколько неловко станет, если озвучить твои последние десять секунд мыслей?
+Кто случайно станет знаменитым?
+За какой поступок до сих пор спрашиваешь себя «зачем»?
+Когда изображал знатока техники?
+Кто выиграет спор с холодильником?
+Когда ты стал примером «ожидание — реальность»?
+Что обещаешь в воскресенье и нарушаешь в понедельник?
+Чьё ночное сообщение откроешь первым?
+Когда удалял только что отправленное сообщение?
+Какая шутка над тобой стала смешной спустя время?
+Кому запретил бы выбирать фильм?
+Какой вопрос о деньгах самый неловкий?
+От чего краснеешь чаще: комплиментов или своих шуток?
+Что напишут друзья в разделе «Внимание» инструкции к тебе?
+Какая деталь внешности тебя особенно притягивает?
+От чего быстрее теряешь нить разговора: взгляда или тихого голоса?
+Ты хотел поцеловать человека в неожиданном месте?
+Какой дерзкий комплимент ты получал?
+Что делает поцелуй запоминающимся?
+Была ли химия с первой минуты свидания?
+Какой намёк на сближение ты не понял?
+Что важнее вечером без спешки: разговор или возможность сесть ближе?
+Ты делаешь первый шаг или ждёшь?
+Какая фраза разрушает романтическое настроение?
+Представлял ли романтическую сцену со знакомым человеком?
+Какая обстановка кажется соблазнительной?
+Где для тебя заканчивается невинный флирт?
+Какой романтический риск ты принял?
+Как даёшь понять, что хочешь поцелуя?
+Какая необычная деталь способна тебя влюбить?
+Ты хотел продолжить свидание, но не знал, как сказать?
+Какая мелочь заставляет забыть, зачем пришёл?
+Каков самый неожиданный повод для романтических фантазий?
+Как выглядит идеальное начало вечера вдвоём?
+Когда ловил себя на слишком долгом взгляде?
+Какой смелый вопрос задавал на свидании?
+Что выбираешь: искру сразу или постепенное сближение?
+Когда одно прикосновение сказало больше слов?
+Какое дерзкое приглашение было бы приятным?
+Какую романтическую тайну готов рассказать?
+Тебе приятны неожиданные объятия или лучше сначала спросить?
+Какой поцелуй романтичнее: короткий или долгий?
+Какой знак внимания кажется двусмысленным, но милым?
+Смущают ли прямые комплименты симпатичного человека?
+Как относишься к ночному флирту в сообщениях?
+Что нравится больше: интрига или спонтанность?
+Какая фраза заставит покраснеть при компании?
+Завидовал ли человеку, которого красиво поцеловали?
+Какая черта партнёра особенно притягивает?
+В какой момент свидания появляются бабочки?
+Как начинаешь романтический разговор?
+Способна ли удачная шутка отменить твой план уехать пораньше?
+Что делает флирт приятным?
+Ты путал дружелюбие с флиртом?
+Что горячее: голос или взгляд?
+Ты отправлял флирт не тому адресату?
+Какая фраза в переписке убивает романтику?
+Что смущает сильнее: касание рук или взгляд?
+Репетировал ли признание перед зеркалом?
+Какой приличный комплимент звучит двусмысленно?
+Тебя легче очаровать ужином или смешной перепиской?
+Нравится ли инициатива другого человека?
+Какая нелепость случалась перед поцелуем?
+Что сближает сильнее: разговор до утра или объятия после тяжёлого дня?
+Когда вежливость показалась тебе намёком?
+Какая романтическая сцена смешнее замысла режиссёра?
+Выберешь интересное свидание с плохой едой или скучное с идеальной?
+Придумывал ли повод остаться вдвоём?
+Какая опечатка испортит признание?
+Какой флирт без прикосновений тебе нравится?
+Какой мем описывает твоё последнее свидание?
+Какая обычная одежда неожиданно привлекательна?
+Что сложнее: признаться в симпатии или отказать?
+Юмор притягивает тебя сильнее внешности?
+Как выглядит твой главный красный флаг в отношениях?
+Какой нелепый совет о вечере без свидетелей давал самоуверенный «эксперт»?
+Что сближает сильнее: доверить тайну или показать себя без привычного образа?
+Выберешь поцелуй на первом свидании или интригу до второго?
+Какую тему отношений обсуждают слишком серьёзно?
+Ты ревновал к человеку, с которым не встречался?
+Что заставит тебя пригласить на медленный танец?
+Какое двусмысленное сообщение понял невинно?
+Какая бытовая фраза нужной интонацией превращается в приглашение?
+Что скорее скроешь: провальный поцелуй или милое прозвище партнёра?
+Как называется внезапное исчезновение человека из общения? | Гостинг.
+Что означает «ред флаг» на свидании? | Тревожный признак возможной проблемы в поведении или отношениях.
+Что конкретнее для первого шага: «Ты меня любишь?» или «Пойдём на свидание?» | Второй вопрос конкретнее и мягче.
+Что надёжнее: читать мысли партнёра или задавать вопросы? | Задавать вопросы.
+Что укрепляет доверие: красивые слова или соблюдение обещаний? | Соблюдение обещаний.
+Что сделать, если комплимент человеку неприятен? | Извиниться и не повторять неприятную формулировку.
+Кто говорит «выбирай фильм», а потом спорит?
+На каком нелепом свидании вы отлично проведёте время?
+Какой общий момент достоин сцены после титров?
+Что вы поняли друг о друге не сразу?
+Какую ошибку исправило бы обновление ваших отношений?
+Кто здесь сумеет уйти со свидания, не обидев?
+Кто мог бы вести подкаст о провальных свиданиях?
+С кем сыграл бы романтическую комедию?
+Кто произнесёт финальную драматичную реплику этого вечера?
+Кому доверил бы придумать дерзкую фразу знакомства?
+`)
+},
+action:{
+  name:"ДЕЙСТВИЕ",emoji:"⚡",points:2,
+  soft:cards(`
+Изобрази будильник, который хочет выходной.
+Произнеси «кабачок» как величайшую трагедию.
+Сыграй прогноз погоды в мире пельменных дождей.
+Покажи кота, который просит открыть дверь и передумывает.
+Прочитай воображаемую инструкцию к чашке максимально серьёзно.
+Придумай слоган одинокому носку и произнеси его.
+Изобрази робота, впервые увидевшего радугу.
+Сделай растению комплимент как знаменитости; если растения нет — воображаемому.
+Изобрази три вида смеха без слов.
+Проведи пресс-конференцию исчезнувшего пульта.
+Представь компанию как музыкальную группу с новым названием.
+Покажи поиск ключей в замедленной съёмке.
+Изобрази человека, съевшего лимон и сохраняющего лицо.
+Объясни «облако» только жестами.
+Продай воображаемую невидимую шапку.
+Спой куплет о вчерашнем ужине на придуманную мелодию.
+Представь игроков под смешными супергеройскими именами.
+Покажи пантомимой поход за одной мелочью.
+Сыграй недовольный своим хозяином телефон.
+Объяви выборы президента диванных подушек.
+Покажи «ожидание — реальность» без слов.
+Продай воображаемую ложку как последний айфон.
+Сыграй кота, услышавшего «ветеринар».
+Изобрази человека с зависшим интернетом.
+Объяви свой первый указ министра выходных.
+Произнеси «ну бывает» с пятью настроениями.
+Покажи понедельник в виде танца.
+Изобрази бабушку, знакомящуюся с голосовым помощником.
+Сыграй будильник, уговаривающий не вставать.
+Прочитай прогноз погоды планеты ленивцев.
+Сыграй собеседование на должность кота.
+Прорекламируй доставку потерянных носков.
+Покажи панику из-за одного процента зарядки.
+Изобрази супергероя, находящего пульт.
+Скажи «я всё контролирую» так, чтобы никто не поверил.
+`),
+  bold:cards(`
+Прорекламируй себя как собеседника на вечеринке.
+Сыграй разговор с тем, кого забыл поздравить.
+Скажи до трёх театральных комплиментов разным игрокам; вдвоём достаточно одного.
+Изобрази худший способ первого впечатления.
+Драматично извинись за последний кусок пиццы.
+Расскажи обычное событие как большой скандал.
+Сыграй человека, которого застали за попыткой выглядеть загадочно.
+Изобрази внутренний голос перед важным звонком.
+Покажи флирт с кофейным автоматом.
+Представься участником шоу знакомств с нелепым талантом.
+Сыграй обе роли в интервью звезды и журналиста о носках.
+Сыграй ревность к занятому гостем креслу.
+Прочитай воображаемый роман голосом спортивного комментатора.
+Покажи четыре реакции на «нам надо поговорить».
+Произнеси речь в защиту опоздания как таланта.
+Изобрази улыбку человеку, чьё имя забыл.
+Проведи кастинг идеального соседа среди предметов.
+Придумай и исполни свой танец победы.
+Сыграй звонок в поддержку самооценки.
+Озвучь извинения за случайный стикер начальнику.
+Изобрази голосовой поиск после бессонной ночи.
+Прорекламируй своё умение отменять планы.
+Сыграй увольнение себя собственным внутренним голосом.
+Скажи соседу комплимент голосом экстренных новостей.
+Покажи реакцию на сообщение «мы всё знаем».
+Придумай и озвучь мем про компанию.
+Защити в суде свою бесполезную покупку.
+Изобрази человека «я не ревную», изучившего все лайки.
+Сыграй тревожный звонок о возврате контейнера.
+Представь свой провал как международную награду.
+Сыграй ток-шоу с собой и будильником.
+Торжественно представь двух игроков под уважительными смешными прозвищами; вдвоём включи себя.
+Покажи трейлер «Я опять забыл пароль».
+Покажи три реакции на неправильный заказ.
+Оправдай опоздание официальным пресс-релизом.
+Предложи игроку объятие на пять секунд; при согласии обними, иначе сделай комплимент.
+Предложи соседу поцелуй в щёку; только при взаимном согласии, иначе воздушный.
+С разрешения игрока поцелуй его в руку; иначе галантно поклонись.
+Скажи выбранному игроку дерзкий уважительный комплимент.
+С согласным игроком смотрите друг другу в глаза десять секунд.
+Предложи пятнадцатисекундный медленный танец; можно танцевать отдельно.
+Закажи воображаемую пиццу соблазнительным голосом.
+Озвучь кокетливое приглашение для согласного игрока.
+С разрешения игрока возьми его за руку на десять секунд; иначе покажи сердечко.
+Покажи свою самую обаятельную улыбку.
+Произнеси три двусмысленные фразы без грубости.
+Признайся в любви чашке кофе.
+Изобрази незаметную попытку привлечь внимание симпатичного человека.
+С согласия игрока прошепчи комплимент; иначе произнеси вслух.
+Предложи поцелуй в лоб; только по взаимному согласию, иначе воздушный.
+Покажи приглашение на медленный танец.
+Сыграй три сцены свидания: начало, неловкую паузу и прощание.
+Отправь самый кинематографичный воздушный поцелуй.
+Предложи согласному игроку танец на расстоянии вытянутой руки.
+Произнеси «принеси мне чай» с интригующей интонацией.
+С разрешения игрока представь его под романтическим прозвищем.
+Скажи комплимент согласному игроку, глядя в глаза; иначе всей компании.
+С взаимного согласия обними соседа; иначе покажи сердечко.
+Сыграй смешное свидание с воображаемым миллионером.
+Покажи фотосессию для журнала «Неловкий флирт».
+Предложи соседу дружеское объятие; можно обменяться улыбками.
+Галантно предложи поцелуй в щёку; при отказе отправь воздушный.
+Предложи подержаться за руки десять секунд; можно показать сердечки пальцами.
+Скажи выбранному игроку комплимент, от которого приятно смутиться.
+Прочитай «ты ещё не спишь?» голосом героя триллера.
+Сыграй флирт с бариста, не понимающим намёков.
+Предложи согласному игроку мини-медляк; иначе танцуй один.
+Скажи «тут очень жарко» неловко и смешно.
+С разрешения игрока торжественно представь его под ласковым прозвищем.
+С согласным игроком устрой конкурс взглядов на пятнадцать секунд.
+Покажи приглашение на свидание мило, нелепо и уверенно.
+Изобрази встречу с человеком, которому вчера отправил сердечко.
+Сыграй свидание, испорченное звонком мамы.
+Попроси разрешение на объятие самым галантным способом.
+Расскажи о пирожке как о первой любви.
+С согласия партнёра поцелуй его в щёку; альтернатива — нежный комплимент.
+Предложи десятисекундное объятие; при взаимном согласии обнимитесь, иначе улыбнитесь.
+С разрешения партнёра поцелуй его в руку; иначе поклонись.
+Предложи танец под воображаемую песню; можно танцевать по отдельности.
+Сыграй трейлер идеального свидания с неожиданным финалом.
+С разрешения партнёра возьми его за руку и назови три приятных воспоминания; можно без прикосновений.
+Поблагодари партнёра, не используя слова «красивый» и «милая».
+С добровольцем сыграй неловкое первое свидание; можно сыграть обе роли.
+Предложи взаимный поцелуй в лоб; альтернатива — воздушный.
+Объяви название романтической комедии о себе и покажи пятисекундный трейлер.
+С разрешения соседа обними его; иначе сделай комплимент.
+Предложи согласному игроку поцелуй в щёку; альтернатива — воздушный.
+С разрешения игрока обменяйтесь кинематографичным рукопожатием.
+Изобрази загадочный взгляд детектива, романтика и кота.
+Устрой конкурс нелепого флирта с добровольцем; можно сыграть самому.
+Предложи медленный танец по взаимному желанию; иначе танцуй один.
+С согласным игроком обменяйтесь комплиментами в стиле плохой мелодрамы.
+Придумай и произнеси нелепую фразу знакомства.
+С добровольцем сыграй свидание, где официант — инопланетянин; можно сыграть все роли.
+Сыграй смешное прощание с воображаемым бывшим.
+`)
+},
+dare:{
+  name:"ВЫЗОВ",emoji:"🔥",points:3,
+  soft:cards(`
+Назови пять фруктов за восемь секунд.
+Трижды произнеси «Шла Саша по шоссе».
+За десять секунд придумай рифму к «вечеринке».
+Покажи пять эмоций за десять секунд.
+Назови семь животных на одну букву.
+Постой на одной ноге двадцать секунд, если удобно; иначе удерживай ладонь неподвижно.
+Изобрази профессию без слов, пока другие угадывают.
+Расскажи страшилку из трёх предложений.
+Сочини тост со словами «звезда», «чай», «тапок».
+Ответь на три вопроса компании без слова «да».
+Скажи алфавит до «П» как оперный певец.
+Придумай пять применений коробке за десять секунд.
+Назови четыре города на «К».
+Скажи «невероятно» с тремя эмоциями.
+Рассмеши компанию одной фразой.
+Назови три фильма с числом в названии.
+Вспомни пять вещей для похода за десять секунд.
+Сочини двустишие про кота и самолёт.
+Говори как робот до конца задания.
+Назови пять предметов без буквы «А» в названиях.
+Придумай три профессии ленивому дракону.
+Изобрази отпуск без слов.
+Расскажи историю с неожиданным концом за двадцать секунд.
+Назови четыре города на разные буквы.
+Скажи три фразы голосом мультяшного злодея.
+Что тяжелее: килограмм железа или ваты? | Одинаково: по килограмму.
+Что разбивают перед использованием для завтрака? | Яйцо.
+Куда полетит дым электрички? | Никуда: у электрического двигателя нет такого дыма.
+Какая планета ближе всего к Солнцу? | Меркурий.
+В полночь идёт дождь. Будет ли через 72 часа полдень? | Нет, снова будет полночь.
+Пять машин делают пять деталей за пять минут. За сколько сто таких машин сделают сто деталей? | За пять минут при одинаковой производительности.
+Какой меньший угол между стрелками в 3:00? | 90 градусов.
+Что больше: 0,7 или 0,65? | 0,7.
+Можно ли делить пять на ноль? | Нет, деление на ноль не определено.
+Два отца и два сына съели три яблока, каждый по одному. Как? | Это дедушка, отец и сын.
+Сколько раз можно последовательно вычитать 10 из 100 до нуля? | Десять.
+На столе три яблока. Ты забрал два. Сколько у тебя? | Два.
+Сколько нулей в миллионе? | Шесть.
+Как называется многоугольник с восемью сторонами? | Восьмиугольник.
+Сколько градусов в прямом угле? | 90.
+Когда начался XXI век? | В 2001 году.
+Два поезда едут навстречу по 60 км/ч. Какова скорость сближения? | 120 км/ч.
+Какой океан самый большой? | Тихий.
+Какие элементы входят в H₂O? | Водород и кислород.
+Что громче в вакууме: крик или аплодисменты? | Обычный звук в вакууме не распространяется.
+Все коты — животные. Все ли животные — коты? | Нет.
+Можно ли надёжно определить характер по знаку зодиака? | Научных доказательств такой возможности нет.
+`),
+  bold:cards(`
+За тридцать секунд придумай глупую легенду своего имени.
+Назови четыре причины, почему тебя не возьмут в разведку.
+Ответь на три вопроса без «я» и «мне».
+Объясни, почему заслуживаешь премию за неловкость.
+Проведи мастер-класс по опозданиям.
+Покажи три отказа от странного приглашения.
+За пятнадцать секунд назови пять способов испортить первое впечатление.
+Представь себя кандидатом в ведущие вечеринки.
+Двадцать секунд комментируй происходящее как спорт.
+Покажи трейлер своего самого неудобного дня.
+Придумай четыре нелепых оправдания пропущенного звонка.
+Защити позицию «носки — главный элемент стиля».
+Проведи дебаты со стулом за право занять диван.
+Назови три качества, мешающие стать суперзлодеем.
+На три вопроса ответь фразами, начинающимися с «разумеется».
+Расскажи вчерашний день как расследование века.
+За двадцать секунд назови пять причин не оставлять тебя одного в магазине.
+Скажи два аргумента за себя и два против.
+Придумай три правила свиданий для людей-котов.
+Поздравь воображаемого человека с трёхсотлетием.
+За тридцать секунд придумай два заголовка про вечеринку.
+Озвучь подпись к своему самому неудачному фото.
+Придумай пять безобидных красных флагов соседа.
+Объясни, почему опоздание на пять минут бывает опаснее часа.
+Назови три причины исключить тебя из клуба идеальных людей.
+Закончи: «Без труда не вытащишь и рыбку из…» | Пруда.
+Закончи: «Не имей сто рублей, а имей сто…» | Друзей.
+Закончи: «Любишь кататься — люби и саночки…» | Возить.
+Закончи: «Под лежачий камень вода не…» | Течёт.
+Закончи: «Что посеешь, то и…» | Пожнёшь.
+Закончи: «За двумя зайцами погонишься — ни одного не…» | Поймаешь.
+Закончи: «Яблоко от яблони недалеко…» | Падает.
+Закончи: «Один в поле не…» | Воин.
+Закончи: «У семи нянек дитя без…» | Глазу.
+Закончи: «С кем поведёшься, от того и…» | Наберёшься.
+Назови пять признаков взаимного флирта.
+Придумай три дерзких уважительных приглашения.
+Сыграй признание, начинающееся нелепой фразой.
+За двадцать секунд назови четыре способа создать романтическую атмосферу.
+Составь рейтинг неудачных фраз перед поцелуем.
+Скажи три смущающих, но уважительных комплимента.
+Предложи добровольцу кинематографичное рукопожатие.
+Устрой согласному игроку церемонию ухаживания без касаний.
+Объясни, почему плед — главный конкурент свиданий.
+Сыграй признание, прерванное рингтоном.
+За десять секунд назови три фразы, убивающие романтику.
+Придумай три фразы знакомства в стиле плохого мема.
+Составь двусмысленный комплимент без неприличных слов.
+Признайся в любви как при чтении кредитного договора.
+Придумай приложение знакомств для опаздывающих.
+Назови три причины предпочесть поцелуй плохой переписке.
+Придумай лозунг «Мы просто разговариваем, честно».
+Сыграй свидание двух скрывающих волнение людей.
+За пятнадцать секунд придумай два уважительных отказа в поцелуе.
+Назови пять слов, которые не стоит писать подряд в романтическом чате.
+`)
+},
+reveal:{
+  name:"ОТКРОВЕНИЕ",emoji:"🤫",points:2,
+  soft:cards(`
+Какую привычку ты приобрёл незаметно?
+Какой детский страх теперь смешон?
+Какое маленькое достижение радует до сих пор?
+Какое своё фото назвал бы нелепым?
+Когда изображал уверенность, ничего не понимая?
+Какое школьное правило нарушал чаще?
+Какой навык появился случайно?
+Что тебе нравится, хотя ты об этом молчишь?
+Какой фильм неожиданно заставил плакать?
+В чём ты слишком строг к себе?
+Какой подарок недооценил и пожалел?
+Какую детскую мечту хочешь исполнить?
+Когда радовался совсем простому?
+Как успокаиваешься после трудного дня?
+Какую привычку унаследовал от семьи?
+Какую фразу учителя помнишь?
+Какой нелепый страх давно перерос?
+Когда радовался отменённой встрече?
+Какую песню слушал по сто раз тайком?
+Какое имя давал неодушевлённой вещи?
+Что недавно узнал последним из знакомых?
+Когда посмеялся над собой?
+Какую еду раньше ненавидел, а теперь любишь?
+Какой мем связан с конкретным воспоминанием?
+Был ли настолько провальный день, что стало смешно?
+`),
+  bold:cards(`
+Когда завидовал чужой смелости?
+Какую черту обменял бы с другом?
+Ты преуменьшал свои успехи?
+Избегал ли разговора из страха услышать ответ?
+Какую ошибку вспоминаешь уже без стыда?
+Какое мнение о тебе хотел бы изменить?
+Что расстраивает сильнее, чем показываешь?
+Поддерживал ли дружбу по привычке?
+Когда честно признал неправоту?
+Что о тебе неверно понимают при знакомстве?
+Какой свой выбор защитишь перед близкими?
+Кому не высказал благодарность?
+Отказывался ли от мечты, боясь выглядеть смешно?
+Когда промолчал вместо защиты человека?
+Какой вопрос о себе задаёшь чаще?
+Кому ответил «ахах», не улыбнувшись?
+Какое фото в телефоне смущает до сих пор?
+Когда выдал чужую шутку за свою?
+Какую невинную тайну давно хотел рассказать?
+Чей совет зря проигнорировал?
+Какое старое сообщение не хочешь слышать вслух?
+Переодевался ли ради симпатии?
+Какое неловкое знакомство стало дружбой?
+Когда преувеличивал занятость?
+Какое прозвище попросил бы не вспоминать?
+Какой неожиданный человек когда-то притягивал тебя?
+Мечтал ли о поцелуе после случайной встречи?
+Есть ли безобидная романтическая фантазия, которой хочешь поделиться?
+Какой комплимент захотелось услышать снова?
+Была ли искра почти без разговора?
+Ты предпочитаешь флирт или признание?
+Какой эпизод свидания до сих пор смущает?
+Что важнее: нежность или страсть?
+Когда старался выглядеть особенно притягательно?
+Какую романтическую сцену хочется повторить?
+Чего не сделаешь ради чужого внимания?
+Какую границу отношений считаешь важной?
+Когда заметил многообещающий взгляд?
+Какое касание руки запомнилось надолго?
+Какой разговор даёт чувство близости?
+Кому долго не решался написать первым?
+Какой нелепый повод использовал для знакомства?
+Писал ли «случайно», надеясь на ответ?
+Какой самый смешной комплимент слышал?
+Изображал ли, что не замечаешь флирт?
+С какого свидания мысленно ушёл через пять минут?
+Когда тебя застали за улыбкой над перепиской?
+Что неловче: признание или комплимент?
+Какой романтический жест теперь кажется кринжовым?
+Какую просьбу легче написать, чем сказать?
+Что написали бы бывшие в общем отзыве о тебе?
+Что узнал о себе на плохом свидании?
+Когда понял, что химия взаимна?
+Какая маленькая просьба смущает сильнее откровенного разговора?
+Что ошибочно счёл намёком?
+`)
+},
+twist:{
+  name:"КАВЕРЗА",emoji:"🌀",points:3,
+  soft:cards(`
+Докажи, что чайник должен стать министром культуры.
+Придумай бесполезный закон для компании.
+Опиши утро как трейлер блокбастера.
+Защити права пельменей в суде.
+Объясни, почему луна должна платить за парковку.
+Куда исчезают вторые носки? Придумай версию.
+Назови три причины сделать диван почётным гостем.
+Придумай запоминающийся пароль из трёх слов, но не используй настоящий.
+Расскажи, как холодильник спас город.
+Прорекламируй дождь по расписанию.
+Продолжи «Без труда не вытащишь и…» как программист.
+Объясни «Семь раз отмерь» человеку, живущему наугад.
+Какая мудрость описывает забытую зарядку?
+Придумай пословицу любителю откладывать будильник.
+Скажи пословицу голосом мультяшного злодея.
+Продолжи «Делу время, а потехе…» современной шуткой.
+Переделай «Тише едешь» для курьера.
+Придумай поговорку ленивых котов.
+Абсурдно продолжи «Любишь кататься — люби и…».
+Расскажи анекдот со словами «Wi-Fi», «бабушка», «оливье».
+Сколько месяцев имеют хотя бы 28 дней? | Все двенадцать.
+У трёх братьев две общие сестры. Сколько детей? | Пятеро.
+Что увеличивается, если из него убрать землю? | Яма.
+Две монеты дают 15 рублей. Одна не пятирублёвая. Какие? | 10 и 5 рублей. Десятирублёвая не пятирублёвая.
+Сколько минут в двух с половиной часах? | 150.
+Купил за 100, продал за 120. Какова прибыль без расходов? | 20 рублей.
+Сколько существует простых чётных чисел? | Одно: 2.
+Что прибавить к 17, чтобы получить 42? | 25.
+Можно ли ноль разделить на пять? | Да, получится ноль.
+Квадрату срезали один угол, пересекая две соседние стороны. Сколько углов стало? | Пять.
+Чему равна половина четверти от 80? | 10.
+Из десяти людей половина в очках. Сколько без очков? | Пять.
+Что обычно измеряют в децибелах? | Уровень звука; децибел также применяется к другим логарифмическим отношениям.
+Петя старше Вани на пять лет. Какова разница через десять лет? | Те же пять лет.
+Родина изобретения бумаги? | Китай.
+Сколько будет 144 разделить на 12? | 12.
+Сколько дней в невисокосном феврале? | 28.
+Что раньше: вторник этой недели или понедельник следующей? | Вторник этой недели.
+Отдал треть из 12 конфет. Сколько осталось? | Восемь.
+Чему равен квадрат девяти? | 81.
+Сколько граней у обычного игрального кубика? | Шесть.
+`),
+  bold:cards(`
+Распредели роли сыщика и подозреваемого между игроками.
+Почему переписку с доставкой еды стоит экранизировать?
+Придумай нелепый светский скандал всей компании.
+Кому доверишь переговоры с инопланетянами?
+Выбери до трёх участников, включая себя, для островной экспедиции и распредели роли.
+Оправдай опоздание в собственный сон от лица адвоката.
+Устрой конкурс худшего оправдания перед соседями.
+Кто в вашей музыкальной группе солист, а кто устроит скандал?
+Придумай странную моду, которую захочется попробовать.
+Назови сериал о компании и перескажи первую серию.
+Кто станет героем мема «Всё идёт по плану»?
+Переведи «не в своей тарелке» на язык медицинского заключения.
+Защити «Молчание — золото» перед болтливой компанией.
+Придумай пословицу про жизнь после зарплаты.
+Как банкир переделает «Не имей сто рублей»?
+Дай три пункта инструкции успешного собеседования.
+Объясни «На воре и шапка горит» на примере последней пиццы.
+Сыграй спор «Поспешишь» и «Кто рано встаёт».
+Придумай мем, где семь пятниц — счастье.
+Кому подходит «Язык мой — враг мой»? Объясни без оскорблений.
+Закончи: «Делу время, а потехе…» | Час.
+Закончи: «Семь раз отмерь — один раз…» | Отрежь.
+Закончи: «Слово не воробей: вылетит — не…» | Поймаешь.
+Закончи: «Тише едешь — дальше…» | Будешь.
+Закончи: «Друг познаётся в…» | Беде.
+Закончи: «На безрыбье и рак…» | Рыба.
+Закончи: «Поспешишь — людей…» | Насмешишь.
+Закончи: «Не всё то золото, что…» | Блестит.
+Закончи: «В гостях хорошо, а дома…» | Лучше.
+Закончи: «Язык мой — враг…» | Мой.
+Защити в суде свидание двух людей, забывших имена.
+Придумай три правила секретного клуба романтиков.
+Опиши флирт как сборку мебели.
+Как называется экранизация твоей любовной жизни?
+Придумай афишу комедии о неловком поцелуе.
+Прорекламируй парфюм «Слишком много намёков».
+Назови подкаст о провальных свиданиях.
+Проведи пресс-конференцию после неловкого признания.
+Опиши своё обаяние как научную гипотезу.
+Почему романтической переписке нужен переводчик намёков?
+Придумай поговорку для лайкнувшего бывшего ночью.
+Переделай «Любовь зла» без оскорблений.
+Как звучит «Тише едешь» про первое свидание?
+Придумай девиз клуба непонятого флирта.
+Объясни «любовь слепа» глазами читателя анкеты бывшего.
+Продолжи «С милым рай и в шалаше», если там нет Wi-Fi.
+Перескажи плохое свидание как древнюю трагедию.
+Назови сериал о перепутанных романтических чатах.
+Какая пословица описывает пару, где никто не пишет первым?
+Как Купидон-менеджер продаёт свидания?
+Газлайтинг — освещение или манипуляция? | Манипуляция, заставляющая человека сомневаться в своём восприятии реальности.
+Как назвать желание видеть человека чаще расписания? | В бытовой речи — влюблённость или привязанность; это не диагноз.
+Согласие на объятие означает согласие на поцелуй? | Нет, это разные действия.
+Что значит «просто общаемся», если один уже выбрал имена детям? | Шутливый ответ: ожидания не совпадают, стоит поговорить.
+Что хуже на свидании: отсутствие плана или неуважение? | Неуважение.
+Какое «нет» превращается в «да» после уговоров? | Никакое. Отказ нужно уважать.
+`)
+},
+bonus:{
+  name:"БОНУС",emoji:"⭐",points:0,
+  soft:bonusCards(`
+Улыбнись компании — получи 2 ★. | self | 2
+Расскажи короткую шутку — получи 3 ★. | self | 3
+Поблагодари за компанию — каждому по 1 ★. | all | 1
+Выбери другого игрока — подари ему 2 ★. | choose | 2
+Выбери напарника — обоим по 1 ★ за командный дух. | partner | 1
+Назови три причины любить выходные — получи 2 ★. | self | 2
+Скажи комплимент соседу — каждому по 1 ★. | all | 1
+Выбери весёлого игрока — подари ему 3 ★. | choose | 3
+Назови напарника по удаче — обоим по 2 ★. | partner | 2
+Придумай девиз вечера — получи 3 ★. | self | 3
+`),
+  bold:bonusCards(`
+Скажи «я легенда» смешно — получи 2 ★. | self | 2
+Поаплодируй компании — каждому по 1 ★. | all | 1
+Скажи тост без слова «счастье» — получи 3 ★. | self | 3
+Выбери сегодняшнего счастливчика — ему 2 ★. | choose | 2
+Придумай название команды — каждому по 1 ★. | all | 1
+Расскажи о маленьком успехе — получи 2 ★. | self | 2
+Назови приятную вещь об этом вечере — получи 2 ★. | self | 2
+Выбери приятного напарника — обоим по 2 ★. | partner | 2
+Пожелай соперникам удачи — получи 1 ★. | self | 1
+Подари выбранному игроку 1 ★ просто так. | choose | 1
+Придумай дерзкий уважительный комплимент — получи 2 ★. | self | 2
+Расскажи о нелепом кинофлирте — получи 3 ★. | self | 3
+Назови романтическую ошибку комедий — получи 2 ★. | self | 2
+Покажи галантный поклон — получи 2 ★. | self | 2
+Придумай смешное приглашение на свидание — получи 3 ★. | self | 3
+Назови два качества хорошего партнёра — получи 2 ★. | self | 2
+`)
+}
 };
 
-const state = {
-  players:[],rounds:10,turn:0,taken:0,max:0,enabled:[],level:"bold",
-  used:{},category:null,task:null,angle:0,spinning:false,active:false,started:false,
-  spinToken:0,spinTimeout:null,timerId:null,deadline:0,motion:true,sound:true
-};
-let toastId = null;
-let audioContext = null;
-let confettiFrame = null;
+/* Новые карточки: 500 штук. */
 
-function readFlag(key, fallback) {
-  try { const v = localStorage.getItem(key); return v === null ? fallback : v === "true"; }
-  catch { return fallback; }
+const expansion={
+"question.soft":cards(`
+Какое качество друга ты оценил только после совместной поездки?
+Какой бытовой спор ты готов вести до победного конца?
+Какой фильм ты советуешь всем, но сам пересматривать не хочешь?
+Какую должность в вашей компании ты бы вписал в резюме?
+Какое твоё увлечение удивило бы коллег?
+Какой подарок лучше описывает тебя: термос, билет или подушка?
+Кому из компании доверил бы составить маршрут выходного дня?
+Какое правило установил бы в общем доме на один день?
+Какую привычку простил бы любимому персонажу, но не соседу?
+Какая мелочь заставляет тебя чувствовать себя богатым?
+Какой разговор в очереди ты случайно запомнил надолго?
+Какой свой талант ты обнаружил слишком поздно?
+Какое неудобство в гостях тебе сложнее всего озвучить?
+Какую фразу о тебе друзья повторяют слишком часто?
+Какую вещь берёшь в поездку на всякий случай и ни разу не использовал?
+На какой безобидной хитрости однажды сэкономил целый день?
+Какой твой план был хорош ровно до первого звонка?
+Что выдаёт твоё плохое настроение раньше слов?
+Какую маленькую роскошь устроил бы всей компании?
+Кто справился бы с ролью экскурсовода без подготовки?
+`),
+"question.bold":cards(`
+Что для тебя значит «зайти ненадолго», если чай уже остыл?
+Как понять, что приглашение на фильм к фильму отношения не имеет?
+Какая невинная просьба после полуночи звучит иначе?
+Ты проверяешь, действительно ли работает фильм, на который тебя пригласили?
+Что подозрительнее: второй комплект полотенец или внезапно заправленная кровать?
+Какой предмет выдаёт слишком тщательно подготовленный вечер?
+Что подумаешь о сообщении «плед большой, места хватит»?
+Когда «останешься на завтрак?» перестаёт быть вопросом о еде?
+Какую бытовую фразу не можешь произнести невинно?
+Что быстрее меняет планы: отключённый свет или включённая фантазия?
+Как звучит твой лучший предлог не вызывать такси?
+Что дольше выбираешь: одежду или повод её обсудить?
+Какая песня слишком явно выдаёт намерения хозяина?
+Когда «покажу коллекцию книг» становится подозрительным?
+Какой намёк ты понял только по дороге домой?
+Что смущает больше: скрипучий диван или понимающие соседи?
+Какая фраза про ремонт прозвучит как личное приглашение?
+Что ответишь на «кофе утром у меня вкуснее»?
+Какую спортивную фразу не стоит писать без контекста?
+Какая похвала повару звучит так, будто ужин был не главным?
+Ты скорее поверишь «просто погреемся» или прогнозу погоды?
+Какой невинный вопрос о размере делает разговор неловким?
+Как понять, что человеку действительно нужна помощь с молнией на одежде?
+Какой комплимент рукам особенно многозначителен?
+Какая причина задержаться в гостях выглядит слишком придуманной?
+Что выразительнее: закрытая дверь или выключенные уведомления?
+Какая фраза о выносливости заставит всех переглянуться?
+Ты выбираешь намёк для всех или для одного?
+Какую фразу тренера можно неправильно понять за ужином?
+Что сделаешь, если «посмотреть потолок» окажется экскурсией по ремонту?
+Какое обещание «будет жарко» ты сначала уточнишь?
+Что уберёшь с тумбочки перед гостями, чтобы не было шуток?
+Какая просьба говорить тише вызывает лишние вопросы?
+Что подозрительнее: «соседи уехали» или «будильник можно не ставить»?
+Какое утреннее сообщение заставит улыбнуться и спрятать экран?
+Ты брал зарядку в гости с планом задержаться?
+Какая фраза о мягкости дивана звучит слишком убедительно?
+Как понять, что двое уже посмотрели «очень интересный фильм»?
+Что сложнее сохранить при намёке: серьёзный голос или взгляд?
+Какую фразу о совместной тренировке придётся объяснять друзьям?
+С кем из другой пары сходил бы в кино? Если других пар нет — выбери любого игрока.
+Кого выбрал бы на свидание вслепую, если бы все были свободны?
+Кто здесь способен понравиться твоему партнёру с первого разговора?
+С кем не отправил бы партнёра за подарком тебе: слишком хорошо сговорятся?
+Кому доверил бы придумать алиби для сорванного сюрприза?
+Кто опаснее всех умеет говорить «между нами ничего нет»?
+С кем сыграл бы влюблённых так, что зрители поверят?
+Чья похвала заставила бы тебя стараться сильнее?
+Кого не хотел бы видеть соперником на шоу знакомств?
+Кто понравился бы твоим родителям больше, чем ты сам?
+С кем из другой пары пошёл бы на танцевальный мастер-класс? Если других пар нет — выбери игрока.
+Кто умеет выглядеть невиновным после провокационного вопроса?
+Чьё мнение о твоей привлекательности тебе любопытно?
+Кто убедил бы тебя согласиться на свидание необычным аргументом?
+Кому сложнее отказать в просьбе остаться ещё на час?
+Кто чаще принимает симпатию за вежливость?
+С кем не стал бы играть ревнивую пару: слишком убедительно?
+Кто выглядит скромнее, чем ведёт себя в переписке, по твоей догадке?
+Кому пошло бы меньше говорить и чаще загадочно улыбаться?
+Чьё случайное «скучаю» ты перечитал бы дважды?
+Кто устроит драму из одной реакции на сообщение?
+Какую привычку скроешь до третьего свидания?
+Что простишь скорее: забытый праздник или сравнение с бывшим?
+Что хуже: быть запасным вариантом или держать кого-то про запас?
+Какая правда о совместной жизни грубовата, но полезна?
+Скрытая переписка без встреч — для тебя предательство?
+Можно ли дружить с бывшим и не провоцировать ревность?
+Что обиднее: «слишком хороший» или «не готов к отношениям»?
+Кто меньше всех продержится в шоу, где нельзя флиртовать?
+Какой твой критерий партнёра друзья сочтут поверхностным?
+Как отреагируешь, если партнёр назовёт другого своим идеалом внешности?
+Какой комплимент от чужого партнёра уже лишний?
+Что больше похоже на флирт: личный плейлист или ежедневное «как день»?
+На какую тему не хотел бы отвечать первым?
+Кто очарует тебя без единого комплимента?
+Что неловче: узнать, что ты нравился, или что все это знали?
+Какой жест внимания не примешь от человека в отношениях?
+Кто убедительно сыграет твою идеальную пару в рекламе?
+О чём спросил бы партнёра, если бы он гарантированно не обиделся?
+Чей ответ за столом ждёшь с особым любопытством?
+`),
+"action.soft":cards(`
+Покажи открытие зонтика в переполненном лифте.
+Изобрази кота на невидимой клавиатуре.
+Нарисуй в воздухе свой торжественный портрет.
+Пройди три шага как король в тесных туфлях; можно показать сидя.
+Покажи руками рост подсолнуха от семечка.
+Изобрази противоположные реакции на внезапный выходной.
+Сыграй немой диалог горячей кружки и холодной ложки.
+Покажи перенос торта с сотней свечей.
+Изобрази человека, забывшего, зачем вошёл.
+Покажи распаковку огромного невидимого подарка.
+Сыграй по три секунды восторга, сомнения и принятия.
+Изобрази дирижёра оркестра чайников.
+Покажи, как шарф зацепился за воображаемую дверь.
+Изобрази дракона, которому лень выпускать огонь.
+Покажи поиск очков на собственном носу.
+Сыграй пингвина на пляже.
+Покажи инструкцию «не трогать, горячо» без слов.
+Изобрази поездку на американских горках, оставаясь на месте.
+Сыграй голубя, получившего целый батон.
+Изобрази зеркало, запаздывающее за движениями.
+Покажи ускоренные сборы в отпуск за пятнадцать секунд.
+Покажи три походки пальцами по своей ладони.
+Сыграй встречу двух потерянных носков.
+Покажи борьбу с неоткрывающимся пакетом.
+Изобрази рост уверенности от мышки до льва.
+Покажи причёску, испорченную невидимым ветром.
+Сыграй просыпающийся компьютер без слов.
+Покажи приветствие инопланетянина с лишними локтями.
+Сыграй важного кота на вручении премии за сон.
+Покажи выбор между последними конфетами.
+Сделай зарядку для пальцев и торжественно назови её.
+Сыграй спор правой и левой рук за печенье.
+Покажи человека, у которого всё липнет к рукам.
+Изобрази слишком долго фотографируемого человека.
+Покажи королевское, робкое и космическое приветствия.
+Сыграй рыбу, удивлённую водой.
+Покажи чемодан, который постепенно тяжелеет.
+Изобрази рекламную паузу выражением лица.
+Покажи превращение стула в трон без перемещения мебели.
+Сыграй награждение себя за присутствие.
+Изобрази тень, не желающую идти на работу.
+Покажи снятие невидимой паутины с лица.
+Сыграй восторженного экскурсовода у обычной стены.
+Изобрази погрузчик для крошечной крошки.
+Покажи победу в споре с умным тостером.
+Сыграй облако, стесняющееся начать дождь.
+Покажи, как крадёшься мимо спящего робота.
+Изобрази поклон артиста под аплодисменты одной мухи.
+Покажи идеальный порядок и последующий приход кота.
+Сыграй встречу со внезапно заговорившей обувью.
+`),
+"action.bold":cards(`
+Скажи «зарядка у меня дома» деловито, невинно и подозрительно.
+Сыграй встречу людей, позвавших друг друга на разные фильмы.
+Покажи человека, понявшего намёк через сутки.
+Произнеси «чай остыл» так, будто вечер начинается.
+Сыграй хозяина, слишком подробно описывающего диван.
+Изобрази собравшегося уходить человека после «а десерт?».
+Покажи три реакции на «соседи не дома».
+Сыграй экскурсовода квартиры, постоянно забывающего кухню.
+Скажи «техника требует нежного обращения» как инструкцию и намёк.
+Сыграй обе роли: намекающего и понимающего буквально.
+Покажи флирт двух бесшумных библиотекарей.
+Скажи «можно поближе?» как фотограф, стоматолог и романтик.
+Изобрази человека, выдавшего планы выбором музыки.
+Произнеси «у меня есть свободное место» многозначительно.
+Прорекламируй плед, подозрительно часто остающийся на двоих.
+Покажи попытку скрыть улыбку после сообщения.
+Изобрази флирт, закончившийся на слове «привет».
+Прочитай инструкцию к подушке как признание.
+Сыграй разговор со слишком рано приехавшим такси.
+Покажи спешное, затянувшееся и бесконечное прощания.
+Скажи «только пробный подход» голосом загадочного тренера.
+Сыграй ревнивый допрос чайника, кипятившегося не для тебя.
+Изобрази торжественный возврат чужой кофты без объяснений.
+Скажи «не торопись, инструкция длинная» серьёзно.
+Покажи поправление причёски при виде симпатичного человека.
+Сыграй человека, которому объясняют намёк «полить цветы».
+Прочитай «доставка до двери» как обещание интересного вечера.
+Покажи взгляд человека, нашедшего носок в неожиданном месте.
+Сыграй разговор соседей о музыкальном диване без подробностей.
+Скажи «попробуем без света» как электрик, фотограф и романтик.
+Покажи свидание людей, общающихся только намёками.
+Прими премию «Лучшее случайное касание локтями».
+Прочитай прогноз потепления между выдуманными персонажами.
+Изобрази гостя за зарядкой, забывшего модель телефона.
+Скажи «хорошая звукоизоляция» как слишком довольный риелтор.
+Сыграй кинопробу человека, очарованного чужим голосом.
+Покажи незаметную попытку сесть поближе на воображаемой скамейке.
+Сыграй две чашки, утром оказавшиеся рядом без объяснений.
+Произнеси «проверим устойчивость» как разговор о мебели.
+Исполни танец человека, получившего взаимное сердечко.
+Сыграй человека, смутившегося собственного комплимента.
+Продай очень тонкий намёк как консультант магазина.
+Скажи «можно повторить?» как дегустатор, танцор и зритель.
+Изобрази человека, увидевшего свой флирт на записи.
+Сыграй прощание с будильником перед выходным вдвоём.
+Покажи взгляды «передай соль» и «соль тут ни при чём».
+Защити в суде фразу «мы действительно собирали пазл».
+Произнеси «нужна вторая пара рук» невинно.
+Изобрази загадочного героя, у которого урчит живот.
+Торжественно вручи себе сертификат «Намёк наконец понят».
+`),
+"dare.soft":cards(`
+У прямоугольника стороны 6 и 4. Чему равен периметр? | 20.
+Сколько двузначных чисел в десятичной системе? | 90: от 10 до 99.
+Чему равны 15 процентов от 200? | 30.
+Из 4 красных и 6 синих шаров достают один. Каков шанс красного? | 40 процентов.
+Продолжи ряд с удвоением: 3, 6, 12, 24. | 48.
+180 километров за 3 часа: какова средняя скорость? | 60 км/ч.
+Сколько рёбер у куба? | 12.
+Что больше: две трети или три пятых? | Две трети.
+От восьми яблок отдали половину и съели одно. Сколько осталось? | Три.
+Сколько секунд в четверти часа? | 900.
+Какая фигура имеет три стороны? | Треугольник.
+Сколько сантиметров в 2,5 метра? | 250.
+Что означает римское XL? | 40.
+Как называется результат умножения? | Произведение.
+Что находится под чертой обычной дроби? | Знаменатель.
+Сколько прямых углов у прямоугольника? | Четыре.
+Луна светится сама или отражает солнечный свет? | Отражает солнечный свет.
+Какая звезда в центре Солнечной системы? | Солнце.
+Какой газ растения поглощают при фотосинтезе? | Углекислый газ.
+Что обычно поглощает воду из почвы у растения? | Корни.
+Как называется переход жидкой воды в газ? | Испарение; кипение — отдельный способ парообразования.
+Почему ложка нагревается в горячем чае? | Благодаря теплопроводности.
+Какой орган перекачивает кровь? | Сердце.
+Сколько камер у человеческого сердца? | Четыре.
+Чем измеряют атмосферное давление? | Барометром.
+Чем измеряют температуру? | Термометром.
+Как называется наука о растениях? | Ботаника.
+Как называется наука о животных? | Зоология.
+Какая буква идёт после «Ф»? | «Х».
+Сколько букв в современном русском алфавите? | 33.
+Как называется слово противоположного значения? | Антоним.
+Как обобщённо назвать стол, стул и шкаф? | Мебель.
+Какой падеж отвечает на «кого? чего?»? | Родительный.
+Кто написал «Евгения Онегина»? | Александр Пушкин.
+Кто написал «Ревизора»? | Николай Гоголь.
+Кто написал известную басню «Ворона и Лисица»? | Иван Крылов.
+Кто написал «Девятый вал»? | Иван Айвазовский.
+Как называется ансамбль из четырёх исполнителей? | Квартет.
+Сколько струн у стандартной скрипки? | Четыре.
+Как называется интервал между соседними до в разных октавах? | Октава.
+`),
+"dare.bold":cards(`
+800 рублей повысили на 25 процентов и снизили на 20 процентов. Итог? | 800 рублей.
+После скидки 25 процентов вещь стоит 1500. Сколько стоила? | 2000 рублей.
+Сумма внутренних углов пятиугольника на плоскости? | 540 градусов.
+Среднее трёх чисел — 12. Два числа — 8 и 10. Третье? | 18.
+Шесть человек пожали руки каждому по разу. Сколько рукопожатий? | 15.
+Две честные монеты подбросили. Вероятность двух орлов? | 1/4, или 25 процентов.
+Сколько перестановок трёх разных книг на полке? | Шесть.
+Площадь круга радиуса 3? | 9π.
+Вероятность числа больше четырёх на честном кубике? | 1/3.
+Из 30 человек 18 любят чай, 16 — кофе, 8 — оба. Сколько не любят ни одного? | Четверо.
+Что больше: 2 в десятой степени или 10 в третьей? | 2 в десятой: 1024 больше 1000.
+Сколько трёхзначных чисел из 1, 2, 3 без повторений? | Шесть.
+Сколько диагоналей у пятиугольника? | Пять.
+Чему равно 0,2 в квадрате? | 0,04.
+Реши 3x + 7 = 22. | x = 5.
+Положительное x удовлетворяет x² = 81. Чему равно x? | 9.
+Сумма первых десяти положительных целых чисел? | 55.
+Может ли треугольник на плоскости иметь два прямых угла? | Нет.
+Наименьшее положительное число, делящееся на 4, 6 и 9? | 36.
+Сколько положительных делителей у 12? | Шесть: 1, 2, 3, 4, 6, 12.
+Как называется разложение белого света призмой на спектр? | Дисперсия.
+У кого больше модуль заряда: протона или электрона? | Модули равны, знаки противоположны.
+Почему на орбите невесомость, хотя гравитация действует? | Корабль и космонавты совместно находятся в свободном падении.
+Какой элемент обозначается Fe? | Железо.
+Какой элемент обозначается Au? | Золото.
+Какая частица атома отрицательно заряжена? | Электрон.
+Как называется переход твёрдого вещества сразу в газ? | Сублимация, или возгонка.
+Что выталкивает тело из жидкости? | Сила Архимеда.
+Что пропорционально квадрату скорости при неизменной массе: импульс или кинетическая энергия? | Кинетическая энергия.
+Какой закон связывает напряжение, ток и сопротивление? | Закон Ома: U = IR.
+Как называется единица информации со значениями 0 и 1? | Бит.
+Сколько битов в современном стандартном байте? | Восемь.
+Чему равно двоичное 101 в десятичной системе? | Пяти.
+Как называется поиск с делением отсортированного диапазона пополам? | Бинарный, или двоичный, поиск.
+Для логического «И» достаточно одного истинного условия? | Нет, истинными должны быть оба.
+Кто написал «Преступление и наказание»? | Фёдор Достоевский.
+Кто написал «Мастера и Маргариту»? | Михаил Булгаков.
+Как называется намеренное художественное преувеличение? | Гипербола.
+Как называется созвучие окончаний стихотворных строк? | Рифма.
+«После этого — значит вследствие этого»: доказательство или ошибка? | Логическая ошибка: последовательность не доказывает причинность.
+`),
+"reveal.soft":cards(`
+Какую безобидную привычку проявляешь только без свидетелей?
+Когда радовался, что тебя не узнали?
+Что хранишь исключительно из сентиментальности?
+За что благодарен незнакомцу?
+Какую ошибку повторяешь, зная результат?
+Какой талант близкие недооценивают?
+Когда завидовал чужому свободному времени?
+Какую мечту стесняешься назвать?
+Что делал ради компании без удовольствия?
+Когда признался, что не понял шутку?
+Какую детскую обиду теперь считаешь смешной?
+Какое хорошее качество тебе приписывают ошибочно?
+Когда тебе трудно попросить помощь?
+О какой маленькой победе никому не рассказал?
+Когда изображал восторг от подарка?
+Какой спор выиграл, а потом узнал, что был неправ?
+Какая старая вещь знает тебя с неожиданной стороны?
+Что кроме речи репетировал перед зеркалом?
+Как изменил мнение о себе за последний год?
+Какой совет себе написал бы на холодильнике?
+`),
+"reveal.bold":cards(`
+Когда соглашался ещё на чашку, понимая, что дело не в чае?
+Какой прозрачный намёк специально не понял?
+Какая подготовка к гостю была подозрительно тщательной?
+Было ли, что после вечера не запомнил название выбранного фильма?
+Какой твой комментарий вызвал у всех лишние догадки?
+Когда искал повод задержаться в гостях?
+Освобождал ли заранее утро после вечерней встречи?
+Как объяснял чужую вещь дома без подробностей?
+Какой намёк заставил перечитать сообщение вслух?
+Оставлял ли вещь ради повода вернуться?
+Какая утренняя фраза смутила сильнее вечера?
+Соседи когда-нибудь неправильно поняли твой вечер?
+Когда выдавал флирт за помощь с техникой?
+Какое приглашение понял буквально и удивился атмосфере?
+Менял ли бельё ради гостя «только на чай»?
+Когда понял, что тишина тоже многозначительна?
+Какую песню включал в надежде на понимание?
+Отменял ли утренние дела после удачного вечера?
+Какое сообщение стёр из-за слишком прозрачного намёка?
+Когда специально затягивал прощание?
+Какую просьбу использовал, чтобы стать ближе?
+Обещал ли не задерживать и передумывал?
+Какой комплимент пришлось объяснять?
+Когда скрывал улыбку, поняв настоящий смысл вопроса?
+Выбирал ли одежду с расчётом на долгий вечер?
+Какой предлог «просто встретиться» друзья раскусили?
+Делал ли музыку тише не ради музыки?
+Какая твоя фраза стала двусмысленной местной шуткой?
+Когда ждал не ответа, а приглашения встретиться лично?
+Когда подумал: «Такси пока рано»?
+Ловил ли себя на сравнении партнёра с бывшим?
+Тебе нравился человек в отношениях? Можно без имён.
+Когда ревновал без оснований?
+Продолжал ли общение только ради внимания?
+Какую черту красиво переименовываешь при знакомстве?
+Изображал ли интерес к чужому увлечению ради симпатии?
+Когда понимал чужую симпатию, но не хотел терять внимание?
+Проверял ли просмотры истории ради одного имени?
+Какой комплимент чужого партнёра запомнил слишком хорошо?
+Какую симпатию слишком усердно отрицал?
+Когда попытка вызвать ревность дала обратный эффект?
+Задерживал ли ответ, скрывая заинтересованность?
+Друзья отговаривали тебя от человека, а ты пожалел?
+Какой твой критерий привлекательности нелеп?
+Когда судил о человеке по бывшим?
+Было ли свидание, где разговор с официантом интереснее?
+Какое качество бывшего оценил задним числом?
+Мечтал ли о сообщении и растерялся, получив его?
+Какую правду сообщаешь после хорошего первого впечатления?
+Когда запланированную встречу выдавал за случайную?
+Менял ли маршрут ради встречи?
+Было ли чужое внимание приятнее самого человека?
+Какую переписку перечитывал вопреки обещанию себе?
+Когда выдумывал интересные планы ради востребованного образа?
+Понимал ли, что сам чей-то красный флаг?
+Какое романтическое решение не можешь объяснить?
+Нравился ли одновременно двум друзьям?
+Отказывался ли от знакомства из-за мнения компании?
+Какой фразой об отношениях убеждал прежде всего себя?
+Какое признание заставит тебя сразу потянуться к воде?
+`),
+"twist.soft":cards(`
+У матери Маши три дочери: Лена, Катя и кто? | Маша.
+Ты обогнал бегуна на втором месте. Где теперь? | На втором.
+Шесть человек взяли по яйцу, но одно осталось в корзине. Как? | Последний взял яйцо вместе с корзиной.
+Как снять яблоко без рук и лазания по дереву? | Например, плодосъёмником или стряхнуть. Возможны другие способы.
+Дом стоит на границе. На какой стороне ночует хозяин? | Определить нельзя: местоположение хозяина не указано.
+Как получить пять четырьмя одинаковыми цифрами и арифметическими знаками? | Например, 5 + (5 − 5) / 5 = 5.
+У квадратного стола четырьмя небольшими срезами убрали все углы. Сколько стало углов? | Восемь, если срезы не пересеклись.
+В четырёх углах комнаты по коту. Каждый видит остальных. Сколько котов? | Четыре.
+Что будет с белой футболкой в Чёрном море? | Она намокнет.
+Сколько букв в слове «алфавит»? | Семь.
+Сколько концов у трёх с половиной отдельных палок? | Восемь: четыре отдельных отрезка.
+Три свечи горели, две погасили. Сколько погашенных свечей сразу после этого? | Две.
+Что нельзя обхватить правой рукой на собственной правой руке? | Например, собственный правый локоть.
+Можно ли на обычной плоской карте идти только на юг и вернуться к началу? | Нет.
+Можно ли получить «кот» из «крот», не добавляя букв? | Да, убрать «р».
+Какая цифра при повороте на 180 градусов становится другой? | 6 становится 9 и наоборот в подходящем начертании.
+Из 10 печений четверым дали по два. Сколько осталось? | Два.
+У двух сестёр один общий брат, других детей нет. Сколько детей? | Трое.
+Могут ли сутки быть короче двух часов, если сутки — ровно 24 часа? | Нет.
+Есть спичка, свеча и газовая плита. Что зажжёшь первым? | Спичку.
+`),
+"twist.bold":cards(`
+Если все свободны, с кем из другой пары выбрал бы последний ряд кино? Если других пар нет — любого игрока.
+С кем собрал бы опасную команду, поменявшись партнёрами только в настольной игре?
+Кто вызовет ревность одним случайным комплиментом?
+Чью симпатию тебе труднее скрыть?
+С кем сыграл бы свадьбу без репетиции?
+Кого партнёр назначил бы твоим опасным знакомым в сериале?
+Кого позвал бы парой на обложку романтического романа?
+С кем не остался бы выбирать музыку до утра: легко заболтаетесь?
+Кому дал бы второе свидание после ужасного первого?
+Кому доверил бы написать за тебя признание? Только воображаемая ситуация.
+Чью реакцию проверишь первой, если тебя назовут самым привлекательным?
+Кто испортит твою идеальную репутацию одной историей? Рассказывать её не нужно.
+С кем получился бы убедительный фиктивный роман в кино?
+Кого выбрал бы судьёй в споре о ревности, а кого нет?
+Кому запретил бы давать тебе советы по флирту?
+С кем из другой пары отправился бы в воображаемое путешествие? Если других пар нет — выбери игрока.
+Кто говорит «всё равно», когда это неправда?
+Кто лучше всех задаёт вопросы с известным ответом?
+Кому подходит работа разоблачителя оправданий?
+С кем пошёл бы к выпускникам, чтобы показать удачную жизнь?
+Кто помнит каждый плохой комплимент?
+Кто победит в конкурсе «Я не ревную»?
+С кем поссорился бы из-за ресторана ещё дома?
+Кому доверишь анкету знакомств, а кому только фото?
+Кто понравится человеку, которого все считают сложным?
+За чьим первым свиданием хотел бы невидимо наблюдать?
+Чей флирт интересно увидеть со стороны?
+Кто принимает комплимент за начало отношений?
+С кем не стал бы соревноваться за внимание?
+Кто разобьёт сердце слишком долгими ответами?
+Кто первым отключит публичную оценку умения флиртовать?
+Кто придёт «просто поговорить» с тщательно выбранным парфюмом?
+Кому опаснее говорить «между нами»? Можно назвать себя.
+Чьё «случайно лайкнул» звучит неубедительно?
+Кто превращает разговор в собеседование будущего партнёра?
+С кем выбрал бы молчаливый закат вместо вечеринки?
+Кто первым попадёт в любовный треугольник вымышленного реалити?
+Кто заставляет оправдываться невиновных?
+Кому доверил бы роль своего партнёра на семейном празднике в комедии?
+Кто слишком хорошо узнаёт людей, которые «просто общаются»?
+Выберешь честную оценку флирта или запись неловкого знакомства?
+Что неприятнее: партнёр хвалит бывшего или друг слишком подробно хвалит партнёра?
+О чьих чувствах задал бы один вопрос?
+Хочешь узнать имя игрока, подходящего под типаж партнёра?
+Какую фразу сочтёшь флиртом незнакомца, но простишь другу?
+Узнать о давней симпатии друга сейчас или никогда?
+Что тревожнее: исчезновение ревности или внезапный пароль на телефоне?
+Как объяснишь дружескую встречу, которую оба скрывают от партнёров?
+Кому обозначить границы, если один шутит, а другой надеется?
+Можно ли обижаться на честный ответ, если настоял на вопросе?
+Какой комплимент другому не хочешь слышать от партнёра?
+Что сильнее выдаёт симпатию: детали или неловкость?
+Что ответишь на «просто уснули рядом», если договорённости не нарушались?
+Где грань дружеской заботы и замены отношений?
+Что сложнее: признать ревность или признать свой повод?
+Какой аргумент друга против партнёра выслушаешь?
+Расскажешь другу, что его партнёр с тобой флиртовал?
+Какой вопрос о бывших честный, но бесполезный?
+Что хуже: спорить при друзьях или любой ценой изображать идеал?
+Выберешь неделю без комплиментов или честный разговор о недостатках?
+Какой слоган знакомств подходит игроку справа?
+Придумай игроку слева смешной титул за стиль общения.
+Кому поручишь объяснить твоё опоздание партнёру?
+Кто сыграет главных героев «Всё началось с одного взгляда»?
+Кто мог бы преподавать «Как заставить написать первым»?
+С кем сыграл бы пару в конкурсе взаимопонимания?
+Какие двое станут непредсказуемыми ведущими шоу знакомств? Вдвоём назови вас.
+Кому покажешь сообщение на проверку отчаянности?
+Кто убедительно превратит отказ в предложение дружить?
+Кому вручишь премию за многозначительную паузу?
+Кому, по твоей догадке, слишком часто пишут после полуночи?
+С кем трудно не рассмеяться во время признания в кино?
+Кому стоит общаться голосовыми из-за убедительного голоса?
+Кто расскажет про матрас так, что все переглянутся?
+С кем не сядешь в театре из-за смеха не к месту?
+Кому подходит «намерения серьёзные, слова подозрительные»?
+Кому первым выдали бы лицензию на «ты не спишь?»?
+Кто теряет мысль после удачного подмигивания?
+Кому доверишь приличную подпись к двусмысленному фото?
+Кто выглядит знающим продолжение твоей истории?
+Какова твоя официальная версия после «мы выбирали шторы»?
+Какой предмет сыграет главную роль в комедии о долгом чае?
+Кто разбогатеет на продаже неловких пауз?
+Какой слоган гостиницы, где все «только выспаться»?
+Какой вопрос о ремонте можно задать двусмысленно?
+Как назвать шоу об опоздавших на последний автобус?
+Назови невинно главу мемуаров о вечере до утра.
+Какая мебель потребует выходной после бурной настольной игры?
+Как представить человека «ничего такого» ещё подозрительнее?
+Какую фразу о физической форме запретил бы говорить с подмигиванием?
+`),
+"bonus.soft":bonusCards(`
+Изобрази салют пальцами — получи 2 ★. | self | 2
+Придумай звание компании — каждому по 1 ★. | all | 1
+Назови хорошую черту выбранного игрока — ему 2 ★. | choose | 2
+Покажи победную позу — получи 2 ★. | self | 2
+Сочини пожелание из пяти слов — получи 2 ★. | self | 2
+Выбери космического напарника — обоим по 1 ★. | partner | 1
+Расскажи хорошую новость — получи 3 ★. | self | 3
+Скажи, чем особенна компания, — каждому по 1 ★. | all | 1
+Подари игроку воображаемую медаль — ему 2 ★. | choose | 2
+Изобрази фанфары голосом — получи 2 ★. | self | 2
+Придумай общий праздник — каждому по 1 ★. | all | 1
+Выбери напарника для викторины и назови команду — обоим по 2 ★. | partner | 2
+Покажи жест «нам повезло» — получи 1 ★. | self | 1
+Назови радость сегодняшнего дня — получи 2 ★. | self | 2
+Пожелай выбранному игроку сюрприза — ему 1 ★. | choose | 1
+`),
+"bonus.bold":bonusCards(`
+Скажи «всё прилично, просто интересно» невозмутимо — получи 2 ★. | self | 2
+Вручи игроку премию за намёки — ему 2 ★. | choose | 2
+Покажи лицо человека, которому всё ясно, — получи 2 ★. | self | 2
+Прорекламируй встречу без планов — получи 3 ★. | self | 3
+Объяви клуб загадочных намерений — каждому по 1 ★. | all | 1
+Выбери напарника для романтической комедии — обоим по 1 ★. | partner | 1
+Добавь подзаголовок к «Мы пили чай» — получи 2 ★. | self | 2
+Скажи «соседи ничего не слышали» как отчёт о тихой репетиции — получи 2 ★. | self | 2
+Вручи диплом за загадочную улыбку — выбранному игроку 2 ★. | choose | 2
+Изобрази слишком довольного вчерашней погодой — получи 2 ★. | self | 2
+Придумай девиз последнего ряда кино — получи 3 ★. | self | 3
+Пожелай всем удачных намёков и слуха — каждому по 1 ★. | all | 1
+Выбери напарника искать пропавший плед — обоим по 2 ★. | partner | 2
+Поблагодари за слишком долгий чай — получи 2 ★. | self | 2
+Вручи игроку титул «Мастер интриги» — ему 1 ★. | choose | 1
+`)
+};
+
+for(const [path,list] of Object.entries(expansion)){
+  const [category,level]=path.split(".");
+  data[category][level].push(...list);
 }
-function saveFlag(key, value) {
-  try { localStorage.setItem(key,String(value)); } catch { /* storage can be restricted */ }
+
+const state={
+  players:[],
+  rounds:10,
+  turn:0,
+  taken:0,
+  max:0,
+  enabled:[],
+  level:"bold",
+  used:{},
+  category:null,
+  task:null,
+  angle:0,
+  spinning:false,
+  active:false,
+  started:false,
+  spinToken:0,
+  spinTimeout:null,
+  timerId:null,
+  deadline:0,
+  motion:true,
+  sound:true
+};
+
+let toastId=null;
+let audioContext=null;
+let confettiFrame=null;
+let lastKeyboardActivation=0;
+
+function readFlag(key,fallback){
+  try{
+    const value=localStorage.getItem(key);
+    return value===null?fallback:value==="true";
+  }catch{
+    return fallback;
+  }
 }
-state.sound = readFlag("kaverza-sound",true);
-state.motion = readFlag("kaverza-motion",true);
-const reduceMotion = () => window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
-const canAnimate = () => state.motion && !reduceMotion();
-function refreshSettings() {
-  $("#soundToggle").textContent = state.sound ? "🔊 Звук: вкл." : "🔇 Звук: выкл.";
+
+function saveFlag(key,value){
+  try{localStorage.setItem(key,String(value));}catch{}
+}
+
+state.sound=readFlag("kaverza-sound",true);
+state.motion=readFlag("kaverza-motion",true);
+
+function reduceMotion(){
+  return window.matchMedia?
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches:false;
+}
+
+function canAnimate(){
+  return state.motion&&!reduceMotion();
+}
+
+function refreshSettings(){
+  $("#soundToggle").textContent=state.sound?"🔊 Звук: вкл.":"🔇 Звук: выкл.";
   $("#soundToggle").setAttribute("aria-pressed",String(state.sound));
-  $("#motionToggle").textContent = state.motion ? "✨ Эффекты: вкл." : "✨ Эффекты: выкл.";
+  $("#motionToggle").textContent=state.motion?"✨ Эффекты: вкл.":"✨ Эффекты: выкл.";
   $("#motionToggle").setAttribute("aria-pressed",String(state.motion));
 }
-function note(message) {
-  const el = $("#toast");
-  el.textContent = message;
-  el.classList.remove("hidden");
+
+function note(message){
+  const element=$("#toast");
+  element.textContent=message;
+  element.classList.remove("hidden");
   clearTimeout(toastId);
-  toastId = setTimeout(() => el.classList.add("hidden"),2800);
+  toastId=setTimeout(()=>element.classList.add("hidden"),2600);
 }
-function random(n) {
-  if (n <= 1) return 0;
-  if (globalThis.crypto?.getRandomValues) {
-    const a = new Uint32Array(1);
-    const limit = Math.floor(4294967296/n)*n;
-    do { crypto.getRandomValues(a); } while(a[0]>=limit);
-    return a[0]%n;
+
+function random(count){
+  if(count<=1)return 0;
+  if(globalThis.crypto&&globalThis.crypto.getRandomValues){
+    const buffer=new Uint32Array(1);
+    const limit=Math.floor(4294967296/count)*count;
+    do{globalThis.crypto.getRandomValues(buffer);}while(buffer[0]>=limit);
+    return buffer[0]%count;
   }
-  return Math.floor(Math.random()*n);
+  return Math.floor(Math.random()*count);
 }
-function playTone(freq,duration=0.09,wave="sine",volume=0.05,delay=0) {
-  if (!state.sound) return;
-  try {
-    const Context = window.AudioContext || window.webkitAudioContext;
-    if (!Context) return;
-    if (!audioContext) audioContext = new Context();
-    if(audioContext.state === "suspended") audioContext.resume().catch(()=>{});
-    const now = audioContext.currentTime + delay;
-    const o=audioContext.createOscillator(),g=audioContext.createGain();
-    o.type=wave;o.frequency.setValueAtTime(freq,now);
-    g.gain.setValueAtTime(.0001,now);
-    g.gain.exponentialRampToValueAtTime(Math.max(volume,.001),now+.012);
-    g.gain.exponentialRampToValueAtTime(.0001,now+duration);
-    o.connect(g);g.connect(audioContext.destination);
-    o.start(now);o.stop(now+duration+.01);
-  } catch { /* autoplay or API restrictions: play silently */ }
+
+function playTone(frequency,duration=.09,wave="sine",volume=.04,delay=0){
+  if(!state.sound)return;
+  try{
+    const Context=window.AudioContext||window.webkitAudioContext;
+    if(!Context)return;
+    if(!audioContext)audioContext=new Context();
+    if(audioContext.state==="suspended"){
+      audioContext.resume().catch(()=>{});
+    }
+    const now=audioContext.currentTime+delay;
+    const oscillator=audioContext.createOscillator();
+    const gain=audioContext.createGain();
+    oscillator.type=wave;
+    oscillator.frequency.setValueAtTime(frequency,now);
+    gain.gain.setValueAtTime(.0001,now);
+    gain.gain.exponentialRampToValueAtTime(Math.max(.001,volume),now+.012);
+    gain.gain.exponentialRampToValueAtTime(.0001,now+duration);
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+    oscillator.start(now);
+    oscillator.stop(now+duration+.01);
+  }catch{}
 }
-function sfx(kind) {
-  if(kind==="click") playTone(490,.075,"sine",.025);
-  if(kind==="spin") {playTone(260,.13,"triangle",.045);playTone(360,.15,"triangle",.04,.10);}
-  if(kind==="reveal") {playTone(600,.11,"sine",.05);playTone(860,.18,"sine",.035,.09);}
-  if(kind==="success") {playTone(520,.12,"triangle",.045);playTone(770,.20,"triangle",.045,.10);}
-  if(kind==="skip") playTone(230,.17,"sine",.035);
-  if(kind==="win") [523,659,784,1046,1318].forEach((f,i)=>playTone(f,.24,"triangle",.05,i*.13));
+
+function sfx(kind){
+  if(kind==="click")playTone(490,.075,"sine",.025);
+  if(kind==="spin"){
+    playTone(260,.13,"triangle");
+    playTone(360,.15,"triangle",.04,.10);
+  }
+  if(kind==="reveal"){
+    playTone(600,.11);
+    playTone(860,.18,"sine",.035,.09);
+  }
+  if(kind==="success"){
+    playTone(520,.12,"triangle");
+    playTone(770,.20,"triangle",.04,.10);
+  }
+  if(kind==="skip")playTone(230,.17,"sine",.035);
+  if(kind==="win"){
+    [523,659,784,1046,1318].forEach((frequency,index)=>{
+      playTone(frequency,.24,"triangle",.04,index*.13);
+    });
+  }
 }
-function buzz(ms=15){if(canAnimate()&&navigator.vibrate)navigator.vibrate(ms);}
-function confetti(seconds=2.7) {
-  if (!canAnimate())return;
-  const canvas=$("#confettiCanvas"),ctx=canvas.getContext("2d");
-  if(!ctx)return;
+
+function buzz(milliseconds=15){
+  if(canAnimate()&&navigator.vibrate){
+    try{navigator.vibrate(milliseconds);}catch{}
+  }
+}
+
+function confetti(seconds=2.7){
+  if(!canAnimate())return;
+  const canvas=$("#confettiCanvas");
+  const context=canvas.getContext("2d");
+  if(!context)return;
   if(confettiFrame)cancelAnimationFrame(confettiFrame);
-  const width=window.innerWidth,height=window.innerHeight,dpr=Math.min(devicePixelRatio||1,2);
-  canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);
-  ctx.setTransform(dpr,0,0,dpr,0,0);
-  const colors=["#ff5aab","#a78bfa","#64e8c1","#ffdf83","#ffffff"];
-  const bits=Array.from({length:Math.min(150,Math.max(55,Math.floor(width/7)))},()=>( {
-    x:Math.random()*width,y:-Math.random()*height*.7,
-    w:3+Math.random()*5,h:5+Math.random()*7,v:1.8+Math.random()*4,
-    spin:Math.random()*6,a:Math.random()*6,color:colors[random(colors.length)]
+
+  const width=window.innerWidth;
+  const height=window.innerHeight;
+  const ratio=Math.min(window.devicePixelRatio||1,2);
+
+  canvas.width=Math.round(width*ratio);
+  canvas.height=Math.round(height*ratio);
+  context.setTransform(ratio,0,0,ratio,0,0);
+
+  const colors=["#ff5aab","#a78bfa","#64e8c1","#ffdf83","#fff"];
+  const pieces=Array.from({length:Math.min(150,Math.max(55,Math.floor(width/7)))},()=>({
+    x:Math.random()*width,
+    y:-Math.random()*height*.7,
+    w:3+Math.random()*5,
+    h:5+Math.random()*7,
+    speed:1.8+Math.random()*4,
+    rotation:Math.random()*6,
+    offset:Math.random()*6,
+    color:colors[random(colors.length)]
   }));
+
   const end=performance.now()+seconds*1000;
-  function frame(t){
-    ctx.clearRect(0,0,width,height);
-    bits.forEach(b=>{b.y+=b.v;b.x+=Math.sin(t/350+b.spin)*.6;b.a+=.05;
-      ctx.save();ctx.translate(b.x,b.y);ctx.rotate(b.a);ctx.fillStyle=b.color;ctx.fillRect(-b.w/2,-b.h/2,b.w,b.h);ctx.restore();});
-    if(t<end)confettiFrame=requestAnimationFrame(frame);
-    else{ctx.clearRect(0,0,width,height);confettiFrame=null;}
+  function frame(time){
+    context.clearRect(0,0,width,height);
+    for(const piece of pieces){
+      piece.y+=piece.speed;
+      piece.x+=Math.sin(time/350+piece.offset)*.6;
+      piece.rotation+=.05;
+      context.save();
+      context.translate(piece.x,piece.y);
+      context.rotate(piece.rotation);
+      context.fillStyle=piece.color;
+      context.fillRect(-piece.w/2,-piece.h/2,piece.w,piece.h);
+      context.restore();
+    }
+    if(time<end){
+      confettiFrame=requestAnimationFrame(frame);
+    }else{
+      context.clearRect(0,0,width,height);
+      confettiFrame=null;
+    }
   }
   confettiFrame=requestAnimationFrame(frame);
 }
-function ripple(event) {
-  const button=event.target.closest("button.btn");
-  if(!button||!canAnimate())return;
-  const rect=button.getBoundingClientRect(),el=document.createElement("span");
-  el.className="ripple";
-  const size=Math.max(rect.width,rect.height);
-  Object.assign(el.style,{width:size+"px",height:size+"px",left:(event.clientX-rect.left-size/2)+"px",top:(event.clientY-rect.top-size/2)+"px"});
-  button.append(el);setTimeout(()=>el.remove(),600);
-}
-function renderInputs(names) {
-  const box=$("#playerInputs");box.replaceChildren();
-  names.forEach((name,i)=>{
-    const row=document.createElement("div");row.className="player-row";
-    const num=document.createElement("span");num.className="num";num.textContent=i+1;
-    const input=document.createElement("input");input.type="text";input.maxLength=24;input.autocomplete="off";input.value=name;
-    input.placeholder=`Игрок ${i+1}`;input.setAttribute("aria-label",`Имя игрока ${i+1}`);
-    const rm=document.createElement("button");rm.className="remove";rm.type="button";rm.textContent="×";
-    rm.title="Удалить игрока";rm.setAttribute("aria-label",`Удалить игрока ${i+1}`);rm.disabled=names.length<=2;
-    rm.addEventListener("click",()=>renderInputs($$("#playerInputs input").map(x=>x.value).filter((_,j)=>j!==i)));
-    row.append(num,input,rm);box.append(row);
+
+function renderInputs(names){
+  const container=$("#playerInputs");
+  container.replaceChildren();
+
+  names.forEach((name,index)=>{
+    const row=document.createElement("div");
+    row.className="player-row";
+
+    const number=document.createElement("span");
+    number.className="num";
+    number.textContent=index+1;
+
+    const input=document.createElement("input");
+    input.type="text";
+    input.maxLength=24;
+    input.autocomplete="off";
+    input.value=name;
+    input.placeholder="Игрок "+(index+1);
+    input.setAttribute("aria-label","Имя игрока "+(index+1));
+
+    const remove=document.createElement("button");
+    remove.className="remove";
+    remove.type="button";
+    remove.textContent="×";
+    remove.disabled=names.length<=2;
+    remove.setAttribute("aria-label","Удалить игрока "+(index+1));
+    remove.addEventListener("click",()=>{
+      const current=$$("#playerInputs input").map(element=>element.value);
+      renderInputs(current.filter((_,position)=>position!==index));
+    });
+
+    row.append(number,input,remove);
+    container.append(row);
   });
+
   $("#addPlayer").disabled=names.length>=10;
 }
-function stopAsync() {
-  clearInterval(state.timerId);clearTimeout(state.spinTimeout);
-  state.timerId=null;state.spinTimeout=null;state.spinToken++;
-  state.spinning=false;state.active=false;
+
+function stopAsync(){
+  clearInterval(state.timerId);
+  clearTimeout(state.spinTimeout);
+  state.timerId=null;
+  state.spinTimeout=null;
+  state.spinToken++;
+  state.spinning=false;
+  state.active=false;
 }
-function buildWheel() {
-  const wheel=$("#wheel");wheel.querySelectorAll(".wheel-label").forEach(x=>x.remove());
-  order.forEach((key,i)=>{const label=document.createElement("span");label.className="wheel-label";
-    label.style.setProperty("--a",`${i*60}deg`);label.textContent=`${data[key].emoji} ${data[key].name}`;
-    wheel.append(label);});
+
+function buildWheel(){
+  const wheel=$("#wheel");
+  wheel.querySelectorAll(".wheel-label").forEach(element=>element.remove());
+
+  order.forEach((key,index)=>{
+    const label=document.createElement("span");
+    label.className="wheel-label";
+    label.style.setProperty("--a",(index*60)+"deg");
+    label.textContent=data[key].emoji+" "+data[key].name;
+    wheel.append(label);
+  });
 }
+
 function taskPool(key){
-  return state.level==="soft"
-    ? data[key].soft
-    : [...data[key].soft,...data[key].bold];
+  return state.level==="soft"?
+    data[key].soft:
+    data[key].soft.concat(data[key].bold);
 }
-function signature(task){return typeof task==="string"?task:task.text;}
+
+function signature(task){
+  return typeof task==="string"?task:task.text;
+}
+
 function chooseTask(key){
-  const pool=taskPool(key),used=state.used[key]??new Set();
-  let left=pool.filter(item=>!used.has(signature(item)));
-  if(!left.length){used.clear();left=pool.slice();}
-  if(!left.length)throw new Error("Нет заданий в категории "+key);
-  const task=left[random(left.length)];used.add(signature(task));state.used[key]=used;return task;
+  const pool=taskPool(key);
+  const used=state.used[key]||new Set();
+
+  let available=pool.filter(task=>!used.has(signature(task)));
+  if(!available.length){
+    used.clear();
+    available=pool.slice();
+  }
+  if(!available.length){
+    throw new Error("Пустая категория: "+key);
+  }
+
+  const task=available[random(available.length)];
+  used.add(signature(task));
+  state.used[key]=used;
+  return task;
 }
-function remainingCount(){return state.enabled.reduce((n,key)=>n+taskPool(key).filter(t=>!state.used[key]?.has(signature(t))).length,0);}
-function scoreRows(target,players){const box=$(target);box.replaceChildren();
-  players.forEach((p,i)=>{const row=document.createElement("div");row.className="score-row";
-    const avatar=document.createElement("span");avatar.textContent=p.avatar;avatar.style.fontSize="24px";
-    const name=document.createElement("span");name.className="score-name";name.textContent=`${i+1}. ${p.name}`;
-    const points=document.createElement("span");points.className="score-value";points.textContent=`${p.score} ★`;
-    row.append(avatar,name,points);box.append(row);});
+
+function remainingCount(){
+  return state.enabled.reduce((sum,key)=>{
+    const used=state.used[key];
+    return sum+taskPool(key).filter(task=>!used||!used.has(signature(task))).length;
+  },0);
 }
-function updateGame(){const p=state.players[state.turn];if(!p)return;
-  $("#avatar").textContent=p.avatar;$("#playerName").textContent=p.name;
-  $("#progress").textContent=`Ход ${Math.min(state.taken+1,state.max)} / ${state.max}`;
-  $("#currentScore").textContent=`${p.score} ★`;
-  $("#turnInfo").textContent=`Личный раунд ${Math.min(p.turns+1,state.rounds)} / ${state.rounds}`;
-  $("#remainingBank").textContent=`🎲 В запасе: ${remainingCount()}`;
-  scoreRows("#scores",[...state.players].sort((a,b)=>b.score-a.score));
+
+function scoreRows(selector,players){
+  const container=$(selector);
+  container.replaceChildren();
+
+  players.forEach((player,index)=>{
+    const row=document.createElement("div");
+    row.className="score-row";
+
+    const avatar=document.createElement("span");
+    avatar.textContent=player.avatar;
+    avatar.style.fontSize="24px";
+
+    const name=document.createElement("span");
+    name.className="score-name";
+    name.textContent=(index+1)+". "+player.name;
+
+    const score=document.createElement("span");
+    score.className="score-value";
+    score.textContent=player.score+" ★";
+
+    row.append(avatar,name,score);
+    container.append(row);
+  });
 }
+
+function updateGame(){
+  const player=state.players[state.turn];
+  if(!player)return;
+
+  $("#avatar").textContent=player.avatar;
+  $("#playerName").textContent=player.name;
+  $("#progress").textContent="Ход "+Math.min(state.taken+1,state.max)+" / "+state.max;
+  $("#currentScore").textContent=player.score+" ★";
+  $("#turnInfo").textContent="Личный раунд "+Math.min(player.turns+1,state.rounds)+" / "+state.rounds;
+  $("#remainingBank").textContent="🎲 В запасе: "+remainingCount();
+  scoreRows("#scores",state.players.slice().sort((a,b)=>b.score-a.score));
+}
+
+function scrollTopNow(){
+  try{
+    window.scrollTo({top:0,left:0,behavior:"instant"});
+  }catch{
+    window.scrollTo(0,0);
+  }
+}
+
+function focusWithoutScroll(element){
+  try{element.focus({preventScroll:true});}catch{element.focus();}
+}
+
+function prepareTurn(){
+  $("#challenge").classList.add("hidden");
+  $("#wheelPanel").classList.remove("hidden");
+  $("#spin").classList.remove("hidden");
+  $("#spin").disabled=false;
+  $("#spin").textContent="КРУТИТЬ РУЛЕТКУ";
+
+  updateGame();
+  scrollTopNow();
+  focusWithoutScroll($("#spin"));
+}
+
 function startGame(){
   const inputs=$$("#playerInputs input");
-  if(inputs.length<2||inputs.length>10){note("Нужно от 2 до 10 игроков");return;}
-  if(inputs.some(x=>!x.value.trim())){note("Заполните имена всех игроков");return;}
-  const names=inputs.map(x=>x.value.trim());
-  if(new Set(names.map(n=>n.toLocaleLowerCase("ru"))).size!==names.length){note("Имена игроков должны отличаться");return;}
-  const enabled=$$("#categoryChoices input:checked").map(x=>x.value);
-  if(!enabled.length){note("Выберите хотя бы одну категорию");return;}
-  const level=$('input[name="level"]:checked').value;
+  if(inputs.length<2||inputs.length>10){
+    note("Нужно от 2 до 10 игроков");
+    return;
+  }
+  if(inputs.some(input=>!input.value.trim())){
+    note("Заполните имена всех игроков");
+    return;
+  }
+
+  const names=inputs.map(input=>input.value.trim());
+  if(new Set(names.map(name=>name.toLocaleLowerCase("ru"))).size!==names.length){
+    note("Имена игроков должны отличаться");
+    return;
+  }
+
+  const enabled=$$("#categoryChoices input:checked").map(input=>input.value);
+  if(!enabled.length){
+    note("Выберите хотя бы одну категорию");
+    return;
+  }
+
+  const selectedLevel=$('input[name="level"]:checked');
+  if(!selectedLevel){
+    note("Выберите уровень");
+    return;
+  }
+
   stopAsync();
-  state.players=names.map((name,i)=>({name,avatar:avatars[i],score:0,turns:0}));
-  state.rounds=Number($("#rounds").value);state.turn=0;state.taken=0;state.max=names.length*state.rounds;
-  state.enabled=enabled;state.level=level;
-  state.used={};state.category=null;state.task=null;state.angle=0;state.started=true;
-  const wheel=$("#wheel");wheel.style.transition="none";wheel.style.transform="rotate(0deg)";
-  void wheel.offsetWidth;wheel.style.transition="";
-  $("#setup").classList.add("hidden");$("#results").classList.add("hidden");$("#game").classList.remove("hidden");
-  $("#wheelPanel").classList.remove("hidden");$("#challenge").classList.add("hidden");$("#spin").disabled=false;
-  updateGame();sfx("success");note("Игра началась! 😈");window.scrollTo({top:0,behavior:canAnimate()?"smooth":"instant"});
+  state.players=names.map((name,index)=>({
+    name,
+    avatar:avatars[index],
+    score:0,
+    turns:0
+  }));
+  state.rounds=Number($("#rounds").value);
+  state.turn=0;
+  state.taken=0;
+  state.max=state.players.length*state.rounds;
+  state.enabled=enabled;
+  state.level=selectedLevel.value;
+  state.used={};
+  state.category=null;
+  state.task=null;
+  state.angle=0;
+  state.started=true;
+
+  const wheel=$("#wheel");
+  wheel.style.transition="none";
+  wheel.style.transform="rotate(0deg)";
+  void wheel.offsetWidth;
+
+  $("#setup").classList.add("hidden");
+  $("#results").classList.add("hidden");
+  $("#game").classList.remove("hidden");
+  document.body.classList.add("playing");
+
+  prepareTurn();
+  sfx("success");
+  note("Игра началась! 😈");
 }
+
 function spin(){
   if(!state.started||state.spinning||state.active)return;
-  state.spinning=true;$("#spin").disabled=true;sfx("spin");buzz(25);
-  const key=state.enabled[random(state.enabled.length)],index=order.indexOf(key);
-  const target=(360-index*60)%360,current=((state.angle%360)+360)%360;
+
+  state.spinning=true;
+  $("#spin").disabled=true;
+  $("#spin").textContent="ВРАЩАЕМ…";
+  sfx("spin");
+  buzz(25);
+
+  const key=state.enabled[random(state.enabled.length)];
+  const index=order.indexOf(key);
+  const target=(360-index*60)%360;
+  const current=((state.angle%360)+360)%360;
   const delta=(target-current+360)%360;
+
   state.angle+=1440+delta;
-  const wheel=$("#wheel");wheel.style.transition=canAnimate()?"transform 3.2s cubic-bezier(.11,.78,.12,1)":"none";
-  wheel.style.transform=`rotate(${state.angle}deg)`;
+
+  const wheel=$("#wheel");
+  wheel.style.transition=canAnimate()?
+    "transform 3.2s cubic-bezier(.11,.78,.12,1)":"none";
+  wheel.style.transform="rotate("+state.angle+"deg)";
+
   const token=++state.spinToken;
-  const show=()=>{
+  state.spinTimeout=setTimeout(()=>{
     if(token!==state.spinToken||!state.started)return;
-    state.spinning=false;state.category=key;state.task=chooseTask(key);showChallenge();
-  };
-  state.spinTimeout=setTimeout(show,canAnimate()?3250:60);
+    state.spinTimeout=null;
+    state.spinning=false;
+    state.category=key;
+    state.task=chooseTask(key);
+    showChallenge();
+  },canAnimate()?3250:60);
 }
+
 function showChallenge(){
-  const category=data[state.category],task=state.task;
-  $("#wheelPanel").classList.add("hidden");$("#challenge").classList.remove("hidden");
-  $("#badge").textContent=`${category.emoji} ${category.name}`;
+  const category=data[state.category];
+  const task=state.task;
+
+  $("#wheelPanel").classList.add("hidden");
+  $("#spin").classList.add("hidden");
+  $("#challenge").classList.remove("hidden");
+
+  $("#badge").textContent=category.emoji+" "+category.name;
   $("#task").textContent=signature(task);
-  $("#taskMeta").textContent=state.category==="bonus"?"⭐ Бонусные очки":`+${category.points} ★ за выполнение`;
+  $("#taskMeta").textContent=state.category==="bonus"?
+    "⭐ Бонусные очки":
+    "+"+category.points+" ★ за выполнение";
+  $("#remainingBank").textContent="🎲 В запасе: "+remainingCount();
+
   const hasAnswer=typeof task==="object"&&Boolean(task.answer);
   $("#answerBtn").classList.toggle("hidden",!hasAnswer);
-  $("#answerBtn").textContent="🧠 Показать ответ";$("#answerBtn").setAttribute("aria-expanded","false");
-  $("#answerBox").textContent=hasAnswer?task.answer:"";$("#answerBox").classList.add("hidden");
-  const needsPartner=state.category==="bonus"&&typeof task==="object"&&["choose","partner"].includes(task.effect);
+  $("#answerBtn").textContent="🧠 Показать ответ";
+  $("#answerBtn").setAttribute("aria-expanded","false");
+  $("#answerBox").textContent=hasAnswer?task.answer:"";
+  $("#answerBox").classList.add("hidden");
+
+  const needsPartner=state.category==="bonus"&&
+    typeof task==="object"&&
+    (task.effect==="choose"||task.effect==="partner");
+
   $("#partnerSelect").classList.toggle("hidden",!needsPartner);
-  const options=$("#bonusRecipient");options.replaceChildren();
-  if(needsPartner){state.players.forEach((p,i)=>{if(i===state.turn)return;
-    const opt=document.createElement("option");opt.value=String(i);opt.textContent=p.name;options.append(opt);});}
-  $("#done").disabled=false;$("#skip").disabled=false;
-  state.active=true;state.deadline=Date.now()+60000;
-  clearInterval(state.timerId);tick();state.timerId=setInterval(tick,200);
-  sfx("reveal");$("#challenge").scrollIntoView({block:"start",behavior:canAnimate()?"smooth":"instant"});
+  const select=$("#bonusRecipient");
+  select.replaceChildren();
+
+  if(needsPartner){
+    state.players.forEach((player,index)=>{
+      if(index===state.turn)return;
+      const option=document.createElement("option");
+      option.value=String(index);
+      option.textContent=player.name;
+      select.append(option);
+    });
+  }
+
+  $("#done").disabled=false;
+  $("#skip").disabled=false;
+
+  state.active=true;
+  state.deadline=Date.now()+60000;
+
+  clearInterval(state.timerId);
+  tick();
+  state.timerId=setInterval(tick,200);
+
+  sfx("reveal");
+  scrollTopNow();
+  focusWithoutScroll(hasAnswer?$("#answerBtn"):$("#done"));
 }
-function tick(){if(!state.active)return;
-  const remain=Math.max(0,state.deadline-Date.now()),seconds=Math.ceil(remain/1000);
-  $("#timer").textContent=seconds;$("#timer").classList.toggle("warning",seconds<=10);
-  $("#fill").style.width=`${remain/600}%`;
+
+function tick(){
+  if(!state.active)return;
+
+  const remaining=Math.max(0,state.deadline-Date.now());
+  const seconds=Math.ceil(remaining/1000);
+
+  $("#timer").textContent=seconds;
+  $("#timer").classList.toggle("warning",seconds<=10);
+  $("#fill").style.width=(remaining/600)+"%";
   $("#fill").style.background=seconds<=10?"var(--red)":"var(--mint)";
-  if(remain===0)finishTurn(false,true);
+
+  if(remaining===0)finishTurn(false,true);
 }
+
 function bonusEffect(task){
   const player=state.players[state.turn];
-  if(task.effect==="all"){state.players.forEach(x=>x.score+=task.points);return "Все игроки получили бонус!";}
-  if(task.effect==="choose"||task.effect==="partner"){
-    const index=Number($("#bonusRecipient").value),chosen=state.players[index];
-    if(!chosen||chosen===player)return "Бонус не начислен";
-    chosen.score+=task.points;
-    if(task.effect==="partner")player.score+=task.points;
-    return task.effect==="partner"?`${chosen.name} и ${player.name}: +${task.points} ★`:`${chosen.name}: +${task.points} ★`;
+
+  if(task.effect==="all"){
+    state.players.forEach(item=>item.score+=task.points);
+    return "Всем игрокам +"+task.points+" ★";
   }
-  player.score+=task.points;return `${player.name}: +${task.points} ★`;
+
+  if(task.effect==="choose"||task.effect==="partner"){
+    const value=$("#bonusRecipient").value;
+    if(value==="")return "Бонус не начислен: игрок не выбран";
+
+    const index=Number(value);
+    const chosen=state.players[index];
+
+    if(!Number.isInteger(index)||!chosen||index===state.turn){
+      return "Бонус не начислен: выберите другого игрока";
+    }
+
+    chosen.score+=task.points;
+    if(task.effect==="partner"){
+      player.score+=task.points;
+      return player.name+" и "+chosen.name+": +"+task.points+" ★";
+    }
+    return chosen.name+": +"+task.points+" ★";
+  }
+
+  player.score+=task.points;
+  return player.name+": +"+task.points+" ★";
 }
+
 function finishTurn(completed,timedOut=false){
   if(!state.active)return;
-  clearInterval(state.timerId);state.timerId=null;state.active=false;
-  $("#done").disabled=true;$("#skip").disabled=true;
-  const player=state.players[state.turn];let message;
+
+  clearInterval(state.timerId);
+  state.timerId=null;
+  state.active=false;
+
+  $("#done").disabled=true;
+  $("#skip").disabled=true;
+
+  const player=state.players[state.turn];
+  let message;
+
   if(completed){
-    if(state.category==="bonus")message=bonusEffect(state.task);
-    else {const points=data[state.category].points;player.score+=points;message=`${player.name}: +${points} ★`;}
-    sfx("success");buzz();
-  } else {message=timedOut?"Время вышло — без штрафа":"Пас принят — без штрафа";sfx("skip");}
-  player.turns++;state.taken++;
-  $("#challenge").classList.add("hidden");$("#wheelPanel").classList.remove("hidden");
-  if(state.taken>=state.max){showResults();note(message);return;}
+    if(state.category==="bonus"){
+      message=bonusEffect(state.task);
+    }else{
+      const points=data[state.category].points;
+      player.score+=points;
+      message=player.name+": +"+points+" ★";
+    }
+    sfx("success");
+    buzz();
+  }else{
+    message=timedOut?
+      "Время вышло — без штрафа":
+      "Пас принят — без штрафа";
+    sfx("skip");
+  }
+
+  player.turns++;
+  state.taken++;
+
+  if(state.taken>=state.max){
+    showResults();
+    note(message);
+    return;
+  }
+
   state.turn=(state.turn+1)%state.players.length;
-  updateGame();$("#spin").disabled=false;note(message);
-  $("#playerName").scrollIntoView({block:"center",behavior:canAnimate()?"smooth":"instant"});
+  prepareTurn();
+  note(message);
 }
+
 function showResults(){
-  stopAsync();state.started=false;
-  $("#game").classList.add("hidden");$("#setup").classList.add("hidden");$("#results").classList.remove("hidden");
-  const sorted=[...state.players].sort((a,b)=>b.score-a.score),top=sorted[0]?.score??0;
-  const winners=sorted.filter(p=>p.score===top);
-  $("#winner").textContent=winners.length>1?`🤝 Ничья: ${winners.map(x=>x.name).join(", ")}`:`👑 ${winners[0].name} — король каверз!`;
-  scoreRows("#finalScores",sorted);sfx("win");confetti();window.scrollTo({top:0,behavior:canAnimate()?"smooth":"instant"});
+  stopAsync();
+  state.started=false;
+  document.body.classList.remove("playing");
+
+  $("#game").classList.add("hidden");
+  $("#setup").classList.add("hidden");
+  $("#results").classList.remove("hidden");
+
+  const sorted=state.players.slice().sort((a,b)=>b.score-a.score);
+  const top=sorted.length?sorted[0].score:0;
+  const winners=sorted.filter(player=>player.score===top);
+
+  $("#winner").textContent=winners.length>1?
+    "🤝 Ничья: "+winners.map(player=>player.name).join(", "):
+    winners.length?"👑 "+winners[0].name+" — король каверз!":"Игра завершена";
+
+  scoreRows("#finalScores",sorted);
+  sfx("win");
+  confetti();
+  scrollTopNow();
+  focusWithoutScroll($("#again"));
 }
-function backToSetup(){stopAsync();state.started=false;
-  renderInputs(state.players.map(p=>p.name));
-  $("#game").classList.add("hidden");$("#results").classList.add("hidden");$("#setup").classList.remove("hidden");
-  window.scrollTo({top:0,behavior:canAnimate()?"smooth":"instant"});
+
+function backToSetup(){
+  stopAsync();
+  state.started=false;
+  document.body.classList.remove("playing");
+
+  renderInputs(state.players.length?
+    state.players.map(player=>player.name):
+    ["Игрок 1","Игрок 2"]);
+
+  $("#game").classList.add("hidden");
+  $("#results").classList.add("hidden");
+  $("#setup").classList.remove("hidden");
+  scrollTopNow();
 }
+
 function showBankInfo(){
-  const total=order.reduce((n,key)=>n+data[key].soft.length+data[key].bold.length,0);
-  $("#bankInfo").textContent=`🎲 ${total.toLocaleString("ru-RU")} заданий • два уровня сложности`;
+  const total=order.reduce((sum,key)=>{
+    return sum+data[key].soft.length+data[key].bold.length;
+  },0);
+  $("#bankInfo").textContent=
+    "🎲 "+total.toLocaleString("ru-RU")+" заданий • два уровня сложности";
 }
-$("#addPlayer").addEventListener("click",()=>{const names=$$("#playerInputs input").map(x=>x.value);if(names.length>=10)return;renderInputs([...names,""]);$$("#playerInputs input").at(-1).focus();});
+
+$("#addPlayer").addEventListener("click",()=>{
+  const names=$$("#playerInputs input").map(input=>input.value);
+  if(names.length>=10)return;
+  renderInputs(names.concat(""));
+  const inputs=$$("#playerInputs input");
+  inputs[inputs.length-1].focus();
+});
+
 $("#start").addEventListener("click",startGame);
 $("#spin").addEventListener("click",spin);
 $("#done").addEventListener("click",()=>finishTurn(true));
 $("#skip").addEventListener("click",()=>finishTurn(false));
-$("#endGame").addEventListener("click",()=>{if(state.started&&confirm("Закончить игру и показать текущие результаты?"))showResults();});
-$("#again").addEventListener("click",()=>{renderInputs(state.players.map(p=>p.name));startGame();});
-$("#changeSettings").addEventListener("click",backToSetup);
-$("#answerBtn").addEventListener("click",()=>{
-  const isHidden=$("#answerBox").classList.toggle("hidden");
-  $("#answerBtn").textContent=isHidden?"🧠 Показать ответ":"🙈 Скрыть ответ";
-  $("#answerBtn").setAttribute("aria-expanded",String(!isHidden));
+
+$("#endGame").addEventListener("click",()=>{
+  if(state.started&&confirm("Закончить игру и показать результаты?")){
+    showResults();
+  }
 });
-$$("input[name=level]").forEach(x=>x.addEventListener("change",refreshSettings));
-$("#soundToggle").addEventListener("click",()=>{state.sound=!state.sound;saveFlag("kaverza-sound",state.sound);refreshSettings();if(state.sound)sfx("click");});
-$("#motionToggle").addEventListener("click",()=>{state.motion=!state.motion;saveFlag("kaverza-motion",state.motion);refreshSettings();note(state.motion?"Эффекты включены":"Эффекты отключены");});
-document.addEventListener("pointerdown",ripple,{passive:true});
-document.addEventListener("click",event=>{if(event.target.closest("button")&&!event.target.closest("#soundToggle"))sfx("click");});
-window.addEventListener("pagehide",()=>{if(audioContext?.state==="running")audioContext.suspend().catch(()=>{});});
-buildWheel();renderInputs(["Игрок 1","Игрок 2"]);refreshSettings();showBankInfo();
+
+$("#again").addEventListener("click",()=>{
+  renderInputs(state.players.map(player=>player.name));
+  startGame();
+});
+
+$("#changeSettings").addEventListener("click",backToSetup);
+
+$("#answerBtn").addEventListener("click",()=>{
+  const hidden=$("#answerBox").classList.toggle("hidden");
+  $("#answerBtn").textContent=hidden?
+    "🧠 Показать ответ":"🙈 Скрыть ответ";
+  $("#answerBtn").setAttribute("aria-expanded",String(!hidden));
+});
+
+$("#soundToggle").addEventListener("click",()=>{
+  state.sound=!state.sound;
+  saveFlag("kaverza-sound",state.sound);
+  refreshSettings();
+  if(state.sound)sfx("click");
+});
+
+$("#motionToggle").addEventListener("click",()=>{
+  state.motion=!state.motion;
+  saveFlag("kaverza-motion",state.motion);
+  refreshSettings();
+  note(state.motion?"Эффекты включены":"Эффекты отключены");
+});
+
+document.addEventListener("click",event=>{
+  const button=event.target.closest("button");
+  if(button&&button.id!=="soundToggle")sfx("click");
+});
+
+/* Удерживание Enter на пульте не должно выполнять несколько ходов. */
+document.addEventListener("keydown",event=>{
+  if(event.key!=="Enter"&&event.key!==" ")return;
+  const button=event.target.closest("button");
+  if(!button)return;
+
+  if(event.repeat){
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    return;
+  }
+
+  const now=Date.now();
+  if(now-lastKeyboardActivation<250){
+    event.preventDefault();
+    return;
+  }
+  lastKeyboardActivation=now;
+},true);
+
+window.addEventListener("pagehide",()=>{
+  if(audioContext&&audioContext.state==="running"){
+    audioContext.suspend().catch(()=>{});
+  }
+});
+
+buildWheel();
+renderInputs(["Игрок 1","Игрок 2"]);
+refreshSettings();
+showBankInfo();
 </script>
+
 <script src="./kaverza-metrika.js" defer></script>
 </body>
 </html>
-
