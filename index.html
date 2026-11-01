@@ -6,14 +6,9 @@
 <meta name="theme-color" content="#0b0b19">
 <meta name="description" content="КАВЕРЗА — игра для компании: неожиданные вопросы, весёлые действия, каверзы и интеллектуальные задачи.">
 <title>КАВЕРЗА — игра для компании</title>
-
-<script>
-window.yaContextCb = window.yaContextCb || [];
-</script>
+<script>window.yaContextCb=window.yaContextCb||[];</script>
 <script src="https://yandex.ru/ads/system/context.js" async></script>
-
-<style>
-:root{
+<style>:root{
   color-scheme:dark;
   --bg:#0b0b19;
   --panel:#19172b;
@@ -24,44 +19,58 @@ window.yaContextCb = window.yaContextCb || [];
   --violet:#a78bfa;
   --mint:#64e8c1;
   --red:#ff7892;
-  --shadow:0 18px 48px #0005;
+  --shadow:0 18px 48px #0005
 }
-*{box-sizing:border-box}
-html{scroll-behavior:auto}
+
+*{
+  box-sizing:border-box
+}
+html{
+  scroll-behavior:auto
+}
+
 body{
   margin:0;
   min-height:100vh;
   min-height:100dvh;
   color:var(--ink);
-  background:
-    radial-gradient(ellipse 85% 35% at 50% -5%,#68265e88,transparent),
-    radial-gradient(ellipse 60% 42% at 100% 60%,#26246788,transparent),
-    var(--bg);
-  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:radial-gradient(ellipse 85% 35% at 50% -5%,#68265e88,transparent),radial-gradient(ellipse 60% 42% at 100% 60%,#26246788,transparent),var(--bg);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif
 }
-button,input,select{font:inherit}
+
+button,input,select{
+  font:inherit
+}
 button{
   cursor:pointer;
   touch-action:manipulation;
-  -webkit-tap-highlight-color:transparent;
+  -webkit-tap-highlight-color:transparent
 }
-button:disabled{opacity:.45;cursor:not-allowed}
+button:disabled{
+  opacity:.45;
+  cursor:not-allowed
+}
 button:focus-visible,input:focus-visible,select:focus-visible{
   outline:3px solid #d0afff;
-  outline-offset:3px;
+  outline-offset:3px
 }
+
 .app{
   width:min(calc(100% - 26px),900px);
   margin:auto;
-  padding:20px 0 max(36px,env(safe-area-inset-bottom));
+  padding:20px 0 max(36px,env(safe-area-inset-bottom))
 }
-header{text-align:center;margin:9px 0 22px}
+
+header{
+  text-align:center;
+  margin:9px 0 22px
+}
 .eyebrow{
   color:#e6a3cf;
   font-size:11px;
   letter-spacing:.27em;
   font-weight:900;
-  text-transform:uppercase;
+  text-transform:uppercase
 }
 .logo{
   font-size:clamp(49px,11vw,86px);
@@ -72,15 +81,20 @@ header{text-align:center;margin:9px 0 22px}
   color:transparent;
   -webkit-background-clip:text;
   background-clip:text;
-  filter:drop-shadow(0 8px 28px #fd51a12b);
+  filter:drop-shadow(0 8px 28px #fd51a12b)
 }
-.subtitle{color:var(--muted);font-size:14px;margin-top:6px}
+.subtitle{
+  color:var(--muted);
+  font-size:14px;
+  margin-top:6px
+}
+
 .toolbar{
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
   gap:8px;
-  margin:12px auto 0;
+  margin:12px auto 0
 }
 .icon-btn{
   border:1px solid #ffffff26;
@@ -90,34 +104,58 @@ header{text-align:center;margin:9px 0 22px}
   background:#ffffff0e;
   font-size:12px;
   font-weight:800;
-  min-height:40px;
+  min-height:40px
 }
-.statline{margin:10px 0 0;color:#d6c8e7;font-size:12px}
+.statline{
+  margin:10px 0 0;
+  color:#d6c8e7;
+  font-size:12px
+}
+
 .panel{
   background:linear-gradient(145deg,#23203bfa,#171527f7);
   border:1px solid var(--edge);
   border-radius:24px;
   padding:20px;
   margin-bottom:14px;
-  box-shadow:var(--shadow);
+  box-shadow:var(--shadow)
 }
 h2{
   margin:0 0 10px;
   font-size:clamp(20px,4vw,24px);
-  letter-spacing:-.035em;
+  letter-spacing:-.035em
 }
-h3{margin:0 0 8px;font-size:17px}
-.muted{color:var(--muted);font-size:14px;line-height:1.55}
-.field{margin:19px 0}
+h3{
+  margin:0 0 8px;
+  font-size:17px
+}
+.muted{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.55
+}
+
+.field{
+  margin:19px 0
+}
 .field-title{
   font-size:13px;
   font-weight:850;
   margin-bottom:9px;
-  display:block;
+  display:block
 }
-.row{display:flex;gap:10px;align-items:center}
-.row>*{min-width:0}
-.grow{flex:1}
+.row{
+  display:flex;
+  gap:10px;
+  align-items:center
+}
+.row>*{
+  min-width:0
+}
+.grow{
+  flex:1
+}
+
 input[type=text],select{
   width:100%;
   background:#0f1020;
@@ -125,8 +163,9 @@ input[type=text],select{
   border-radius:13px;
   padding:12px;
   color:white;
-  min-height:45px;
+  min-height:45px
 }
+
 .btn{
   border:1px solid #ffffff1a;
   border-radius:15px;
@@ -137,32 +176,53 @@ input[type=text],select{
   position:relative;
   overflow:hidden;
   min-height:48px;
-  transition:transform .16s,filter .16s;
+  transition:transform .16s,filter .16s
 }
-.btn:active{transform:scale(.97)}
-.btn:hover:not(:disabled){filter:brightness(1.12)}
+.btn:active{
+  transform:scale(.97)
+}
+.btn:hover:not(:disabled){
+  filter:brightness(1.12)
+}
 .primary{
   color:#190d26;
   border:0;
-  background:linear-gradient(105deg,#ff63b0,#aa88ff);
+  background:linear-gradient(105deg,#ff63b0,#aa88ff)
 }
 .success{
   color:#10241f;
   border:0;
-  background:linear-gradient(105deg,#5ce4b9,#b6ffe0);
+  background:linear-gradient(105deg,#5ce4b9,#b6ffe0)
 }
-.danger{background:#5a2944;border-color:#e8779560}
-.block{width:100%;margin-top:10px}
+.danger{
+  background:#5a2944;
+  border-color:#e8779560
+}
+.block{
+  width:100%;
+  margin-top:10px
+}
 .small{
   background:none;
   border:0;
   color:#a9e4ff;
   padding:9px;
-  font-weight:800;
+  font-weight:800
 }
-.player-list{display:grid;gap:9px}
-.player-row{display:flex;align-items:center;gap:8px}
-.player-row input{flex:1;min-width:0}
+
+.player-list{
+  display:grid;
+  gap:9px
+}
+.player-row{
+  display:flex;
+  align-items:center;
+  gap:8px
+}
+.player-row input{
+  flex:1;
+  min-width:0
+}
 .num{
   display:grid;
   place-items:center;
@@ -171,7 +231,7 @@ input[type=text],select{
   background:#ffffff11;
   border-radius:10px;
   color:var(--muted);
-  flex-shrink:0;
+  flex-shrink:0
 }
 .remove{
   border:0;
@@ -180,12 +240,13 @@ input[type=text],select{
   border-radius:9px;
   padding:9px 12px;
   min-width:42px;
-  min-height:42px;
+  min-height:42px
 }
+
 .categories{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:9px;
+  gap:9px
 }
 .category{
   display:flex;
@@ -198,26 +259,34 @@ input[type=text],select{
   font-size:12px;
   font-weight:850;
   cursor:pointer;
-  min-height:53px;
+  min-height:53px
 }
 .category:has(input:checked){
   border-color:#f88dd477;
-  background:#ff66b116;
+  background:#ff66b116
 }
 .category input{
   accent-color:var(--pink);
   width:17px;
   height:17px;
-  flex-shrink:0;
+  flex-shrink:0
 }
-.category b{font-size:19px}
+.category b{
+  font-size:19px
+}
 .levels{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:8px;
+  gap:8px
 }
-.level{position:relative;cursor:pointer}
-.level input{position:absolute;opacity:0}
+.level{
+  position:relative;
+  cursor:pointer
+}
+.level input{
+  position:absolute;
+  opacity:0
+}
 .level span{
   display:flex;
   align-items:center;
@@ -229,14 +298,17 @@ input[type=text],select{
   border-radius:13px;
   font-size:12px;
   font-weight:850;
-  background:#ffffff08;
+  background:#ffffff08
 }
 .level input:checked+span{
   background:#ff5aab22;
   border-color:#ff75ba;
-  color:#ffd2e7;
+  color:#ffd2e7
 }
-.level input:focus-visible+span{outline:3px solid #c8aaff}
+.level input:focus-visible+span{
+  outline:3px solid #c8aaff
+}
+
 .note{
   border-left:3px solid var(--pink);
   padding:8px 12px;
@@ -244,16 +316,20 @@ input[type=text],select{
   border-radius:5px;
   color:#c6bfd9;
   font-size:13px;
-  line-height:1.5;
+  line-height:1.5
 }
-.hidden{display:none!important}
-.center{text-align:center}
+.hidden{
+  display:none!important
+}
+.center{
+  text-align:center
+}
 .topbar{
   display:flex;
   justify-content:space-between;
   gap:8px;
   margin-bottom:12px;
-  flex-wrap:wrap;
+  flex-wrap:wrap
 }
 .pill{
   padding:9px 12px;
@@ -261,8 +337,9 @@ input[type=text],select{
   border:1px solid #ffffff14;
   border-radius:999px;
   font-size:12px;
-  font-weight:800;
+  font-weight:800
 }
+
 .turn-dock{
   position:sticky;
   top:max(8px,env(safe-area-inset-top));
@@ -274,42 +351,56 @@ input[type=text],select{
   padding:14px 18px;
   background:#211c35;
   border-color:#cf9bff66;
-  box-shadow:0 10px 32px #0008;
+  box-shadow:0 10px 32px #0008
 }
 .turn-person{
   display:flex;
   align-items:center;
   gap:12px;
   min-width:0;
-  flex:1;
+  flex:1
 }
-.turn-copy{min-width:0}
-.avatar{font-size:36px;flex-shrink:0}
+.turn-copy{
+  min-width:0
+}
+.avatar{
+  font-size:36px;
+  flex-shrink:0
+}
 .player-name{
   font-size:clamp(20px,3vw,30px);
   line-height:1.15;
   font-weight:950;
-  overflow-wrap:anywhere;
+  overflow-wrap:anywhere
 }
-.turn-dock .muted{font-size:12px;line-height:1.4}
+.turn-dock .muted{
+  font-size:12px;
+  line-height:1.4
+}
 #spin{
   flex:0 0 auto;
   min-height:54px;
   padding:14px 24px;
-  max-width:52%;
+  max-width:52%
 }
-body.playing header{margin:0 0 8px}
-body.playing .eyebrow,
-body.playing .logo,
-body.playing .subtitle,
-body.playing .statline{display:none}
-body.playing .toolbar{margin:0}
-body.playing .app{padding-top:max(8px,env(safe-area-inset-top))}
+
+body.playing header{
+  margin:0 0 8px
+}
+body.playing .eyebrow,body.playing .logo,body.playing .subtitle,body.playing .statline{
+  display:none
+}
+body.playing .toolbar{
+  margin:0
+}
+body.playing .app{
+  padding-top:max(8px,env(safe-area-inset-top))
+}
+
 .wheel-wrap{
-  width:min(62vw,300px);
   width:min(62vw,42svh,300px);
   margin:20px auto 12px;
-  position:relative;
+  position:relative
 }
 .pointer{
   position:absolute;
@@ -322,7 +413,7 @@ body.playing .app{padding-top:max(8px,env(safe-area-inset-top))}
   border-left:15px solid transparent;
   border-right:15px solid transparent;
   border-top:29px solid #fff;
-  filter:drop-shadow(0 3px 5px #0009);
+  filter:drop-shadow(0 3px 5px #0009)
 }
 .wheel{
   width:100%;
@@ -331,15 +422,7 @@ body.playing .app{padding-top:max(8px,env(safe-area-inset-top))}
   border-radius:50%;
   position:relative;
   box-shadow:0 0 0 6px #ffffff15,0 18px 50px #0007;
-  background:conic-gradient(
-    from -30deg,
-    #ff5e9d 0 60deg,
-    #ac79ff 60deg 120deg,
-    #53baf0 120deg 180deg,
-    #49d4b0 180deg 240deg,
-    #ffc061 240deg 300deg,
-    #e774dd 300deg 360deg
-  );
+  background:#a78bfa
 }
 .wheel-label{
   position:absolute;
@@ -353,14 +436,7 @@ body.playing .app{padding-top:max(8px,env(safe-area-inset-top))}
   font-size:10px;
   line-height:1.2;
   text-align:center;
-  transform:
-    rotate(var(--a))
-    translateY(calc(-1 * min(20vw,98px)))
-    rotate(calc(-1 * var(--a)));
-  transform:
-    rotate(var(--a))
-    translateY(calc(-1 * min(20vw,13.8svh,98px)))
-    rotate(calc(-1 * var(--a)));
+  transform:rotate(var(--a)) translateY(calc(-1 * min(20vw,13.8svh,98px))) rotate(calc(-1 * var(--a)))
 }
 .wheel-center{
   position:absolute;
@@ -374,16 +450,20 @@ body.playing .app{padding-top:max(8px,env(safe-area-inset-top))}
   border-radius:50%;
   background:#161326;
   border:4px solid white;
-  font-size:24px;
+  font-size:24px
 }
-.challenge{text-align:center;animation:slidein .3s both}
+
+.challenge{
+  text-align:center;
+  animation:slidein .3s both
+}
 .badge{
   display:inline-block;
   border-radius:999px;
   padding:9px 14px;
   background:#ffffff15;
   font-size:13px;
-  font-weight:850;
+  font-weight:850
 }
 .task{
   font-size:clamp(22px,5.5vw,34px);
@@ -391,9 +471,13 @@ body.playing .app{padding-top:max(8px,env(safe-area-inset-top))}
   line-height:1.32;
   margin:18px 0;
   overflow-wrap:anywhere;
-  letter-spacing:-.025em;
+  letter-spacing:-.025em
 }
-.task-meta{color:#e7c8ef;font-size:13px;font-weight:750}
+.task-meta{
+  color:#e7c8ef;
+  font-size:13px;
+  font-weight:750
+}
 .answer-box{
   margin:14px auto;
   max-width:620px;
@@ -402,37 +486,45 @@ body.playing .app{padding-top:max(8px,env(safe-area-inset-top))}
   border:1px solid #ffffff17;
   border-radius:12px;
   font-size:14px;
-  color:#d5ffe9;
+  color:#d5ffe9
 }
-#answerBtn{margin:10px auto}
-#partnerSelect{margin:14px 0;text-align:left}
+#answerBtn{
+  margin:10px auto
+}
+#partnerSelect{
+  margin:14px 0;
+  text-align:left
+}
 #partnerSelect label{
   display:block;
   color:#d8cdea;
   font-weight:800;
   font-size:13px;
-  margin-bottom:7px;
+  margin-bottom:7px
 }
 .timer{
   font-size:38px;
   font-weight:1000;
   font-variant-numeric:tabular-nums;
-  color:var(--mint);
+  color:var(--mint)
 }
-.timer.warning{color:var(--red)}
+.timer.warning{
+  color:var(--red)
+}
 .track{
   height:8px;
   background:#ffffff15;
   border-radius:9px;
   overflow:hidden;
-  margin:10px 0 16px;
+  margin:10px 0 16px
 }
 .fill{
   height:100%;
   width:100%;
   background:var(--mint);
-  transition:width .2s linear;
+  transition:width .2s linear
 }
+
 .actions{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -443,10 +535,16 @@ body.playing .app{padding-top:max(8px,env(safe-area-inset-top))}
   padding:8px;
   background:#211c35;
   border-radius:18px;
-  box-shadow:0 3px 20px #0008;
+  box-shadow:0 3px 20px #0008
 }
-.actions .btn{padding:14px 5px}
-.score-list{display:grid;gap:8px;margin-top:13px}
+.actions .btn{
+  padding:14px 5px
+}
+.score-list{
+  display:grid;
+  gap:8px;
+  margin-top:13px
+}
 .score-row{
   display:flex;
   align-items:center;
@@ -454,21 +552,25 @@ body.playing .app{padding-top:max(8px,env(safe-area-inset-top))}
   background:#ffffff0a;
   border:1px solid #ffffff0c;
   padding:11px;
-  border-radius:13px;
+  border-radius:13px
 }
-.score-name{flex:1;font-weight:800;overflow-wrap:anywhere}
+.score-name{
+  flex:1;
+  font-weight:800;
+  overflow-wrap:anywhere
+}
 .score-value{
   color:var(--mint);
   font-size:20px;
   font-weight:950;
-  white-space:nowrap;
+  white-space:nowrap
 }
 .footer{
   text-align:center;
   color:#9289ad;
   font-size:12px;
   line-height:1.7;
-  margin-top:20px;
+  margin-top:20px
 }
 .toast{
   position:fixed;
@@ -485,7 +587,7 @@ body.playing .app{padding-top:max(8px,env(safe-area-inset-top))}
   max-width:92%;
   width:max-content;
   font-size:14px;
-  pointer-events:none;
+  pointer-events:none
 }
 #confettiCanvas{
   position:fixed;
@@ -493,256 +595,283 @@ body.playing .app{padding-top:max(8px,env(safe-area-inset-top))}
   z-index:11;
   pointer-events:none;
   width:100%;
-  height:100%;
+  height:100%
 }
+
 @keyframes slidein{
-  from{opacity:0;transform:translateY(10px)}
-  to{opacity:1;transform:translateY(0)}
+  from{
+    opacity:0;
+    transform:translateY(10px)
+  }
+  to{
+    opacity:1;
+    transform:translateY(0)
+  }
+
 }
 @media(min-width:560px){
-  .panel{padding:25px}
-  .turn-dock{padding:14px 18px}
-  .categories{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .panel{
+    padding:25px
+  }
+  .turn-dock{
+    padding:14px 18px
+  }
+  .categories{
+    grid-template-columns:repeat(3,minmax(0,1fr))
+  }
+
 }
 @media(min-width:780px){
-  .app{width:min(calc(100% - 64px),900px)}
+  .app{
+    width:min(calc(100% - 64px),900px)
+  }
+
 }
 @media(max-width:480px){
-  .turn-dock{gap:10px;padding:12px}
-  .turn-dock .avatar{display:none}
-  #spin{font-size:13px;padding:12px;min-height:52px}
-  .player-name{font-size:22px}
-  .turn-dock .muted{font-size:11px}
-}
-@media(max-height:520px) and (min-width:600px){
-  .wheel-wrap{width:210px}
-  .wheel-label{
-    transform:rotate(var(--a)) translateY(-66px) rotate(calc(-1 * var(--a)));
+  .turn-dock{
+    gap:10px;
+    padding:12px
   }
-  #wheelPanel>p{display:none}
-  .turn-dock{padding:8px 14px}
-  #spin{min-height:46px}
-  .task{font-size:24px}
+  .turn-dock .avatar{
+    display:none
+  }
+  #spin{
+    font-size:13px;
+    padding:12px;
+    min-height:52px
+  }
+  .player-name{
+    font-size:22px
+  }
+  .turn-dock .muted{
+    font-size:11px
+  }
+  .wheel-label{
+    font-size:9px;
+    width:68px;
+    margin-left:-34px
+  }
+
+}
+
+@media(max-height:520px) and (min-width:600px){
+  .wheel-wrap{
+    width:210px
+  }
+  .wheel-label{
+    transform:rotate(var(--a)) translateY(-66px) rotate(calc(-1 * var(--a)))
+  }
+  #wheelPanel>p{
+    display:none
+  }
+  .turn-dock{
+    padding:8px 14px
+  }
+  #spin{
+    min-height:46px
+  }
+  .task{
+    font-size:24px
+  }
+
 }
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{
     animation:none!important;
     transition:none!important;
-    scroll-behavior:auto!important;
+    scroll-behavior:auto!important
   }
+
+}body.no-motion *,body.no-motion *::before,body.no-motion *::after{
+ animation:none!important;transition:none!important;scroll-behavior:auto!important;
 }
+@media(max-width:360px){.turn-dock{gap:6px}.player-name{font-size:18px}#spin{max-width:48%;font-size:11px}}
 </style>
 </head>
-
 <body>
-<canvas id="confettiCanvas" aria-hidden="true"></canvas>
-
+<canvas id="confettiCanvas" aria-hidden="true">
+</canvas>
 <div class="app">
 <header>
   <div class="eyebrow">Игра для смелой компании</div>
-  <div class="logo">КАВЕРЗА</div>
+<div class="logo">КАВЕРЗА</div>
   <div class="subtitle">Неловко. Смешно. Ещё один раунд.</div>
   <div class="toolbar">
-    <button class="icon-btn" id="soundToggle" type="button" aria-pressed="true">🔊 Звук: вкл.</button>
-    <button class="icon-btn" id="motionToggle" type="button" aria-pressed="true">✨ Эффекты: вкл.</button>
-  </div>
-  <p class="statline" id="bankInfo"></p>
+<button class="icon-btn" id="soundToggle" type="button" aria-pressed="true">🔊 Звук: вкл.</button>
+<button class="icon-btn" id="motionToggle" type="button" aria-pressed="true">✨ Эффекты: вкл.</button>
+</div>
+  <p class="statline" id="bankInfo">
+</p>
 </header>
-
 <main>
 <section id="setup">
   <div class="panel">
     <h2>😈 Кто сегодня рискует?</h2>
     <p class="muted">Соберите компанию, выберите градус неловкости и вращайте рулетку. Отказаться можно без объяснений.</p>
-
     <div class="field">
-      <div class="row">
-        <span class="field-title grow">Игроки (2–10)</span>
-        <button class="small" id="addPlayer" type="button">+ Добавить</button>
-      </div>
-      <div class="player-list" id="playerInputs"></div>
-    </div>
-
+<div class="row">
+<span class="field-title grow">Игроки (2–10)</span>
+<button class="small" id="addPlayer" type="button">+ Добавить</button>
+</div>
+<div class="player-list" id="playerInputs">
+</div>
+</div>
     <div class="field">
-      <label class="field-title" for="rounds">Раундов на игрока</label>
-      <select id="rounds">
-        <option value="5">5 — быстрый разогрев</option>
-        <option value="7">7 — короткая вечеринка</option>
-        <option value="10" selected>10 — классика</option>
-        <option value="15">15 — марафон</option>
-        <option value="25">25 — ночь без сна</option>
-      </select>
-    </div>
-
+<label class="field-title" for="rounds">Раундов на игрока</label>
+<select id="rounds">
+<option value="5">5 — быстрый разогрев</option>
+<option value="7">7 — короткая вечеринка</option>
+<option value="10" selected>10 — классика</option>
+<option value="15">15 — марафон</option>
+<option value="25">25 — ночь без сна</option>
+</select>
+</div>
     <div class="field">
-      <span class="field-title">Градус неловкости</span>
-      <div class="levels">
-        <label class="level">
-          <input type="radio" name="level" value="soft">
-          <span>🙂 Лайт</span>
-        </label>
-        <label class="level">
-          <input type="radio" name="level" value="bold" checked>
-          <span>😏 Смело</span>
-        </label>
-      </div>
-      <p class="muted">В режиме «Смело» доступны все каверзные, романтические и неожиданные задания.</p>
-    </div>
-
+<span class="field-title">Градус неловкости</span>
+<div class="levels">
+<label class="level">
+<input type="radio" name="level" value="soft">
+<span>🙂 Лайт</span>
+</label>
+<label class="level">
+<input type="radio" name="level" value="bold" checked>
+<span>😏 Смело</span>
+</label>
+</div>
+<p class="muted">В режиме «Смело» доступны все каверзные, романтические и неожиданные задания.</p>
+</div>
     <div class="field">
-      <span class="field-title">Категории</span>
-      <div class="categories" id="categoryChoices">
-        <label class="category"><input type="checkbox" value="question" checked><b>💬</b> Вопрос</label>
-        <label class="category"><input type="checkbox" value="action" checked><b>⚡</b> Действие</label>
-        <label class="category"><input type="checkbox" value="dare" checked><b>🔥</b> Вызов</label>
-        <label class="category"><input type="checkbox" value="reveal" checked><b>🤫</b> Откровение</label>
-        <label class="category"><input type="checkbox" value="twist" checked><b>🌀</b> Каверза</label>
-        <label class="category"><input type="checkbox" value="bonus" checked><b>⭐</b> Бонус</label>
-      </div>
+<span class="field-title">Категории</span>
+<div class="categories" id="categoryChoices">
+      <label class="category">
+<input type="checkbox" value="question" checked>
+<b>💬</b> Вопрос</label>
+      <label class="category">
+<input type="checkbox" value="action" checked>
+<b>⚡</b> Действие</label>
+      <label class="category">
+<input type="checkbox" value="dare" checked>
+<b>🔥</b> Вызов</label>
+      <label class="category">
+<input type="checkbox" value="reveal" checked>
+<b>🤫</b> Откровение</label>
+      <label class="category">
+<input type="checkbox" value="twist" checked>
+<b>🌀</b> Каверза</label>
+      <label class="category">
+<input type="checkbox" value="bonus" checked>
+<b>⭐</b> Бонус</label>
     </div>
-
+</div>
     <button class="btn primary block" id="start" type="button">НАЧАТЬ ВЕЧЕРИНКУ →</button>
   </div>
-
   <div class="panel">
-    <h3>📜 Правила без занудства</h3>
-    <p class="muted">Ходите по очереди. Рулетка выбирает категорию, за выполненное задание начисляются очки. На задание — 60 секунд. Пас — без штрафа.</p>
-    <div class="note">Прикосновения, объятия и поцелуи — только по взаимному согласию. Можно выбрать альтернативу или пропустить задание. Не показывайте чужие переписки и не раскрывайте чужие секреты.</div>
-  </div>
+<h3>📜 Правила без занудства</h3>
+<p class="muted">Ходите по очереди. Рулетка выбирает категорию, за выполненное задание начисляются очки. Время по умолчанию — 60 секунд, в коротких испытаниях — по условию. Пас — без штрафа.</p>
+<div class="note">Прикосновения, объятия и поцелуи — только по взаимному согласию. Можно выбрать альтернативу или пропустить задание. Не показывайте чужие переписки и не раскрывайте чужие секреты.</div>
+</div>
 </section>
-
 <section id="game" class="hidden">
   <div class="panel turn-dock" id="turnDock" aria-label="Текущий ход">
-    <div class="turn-person">
-      <div class="avatar" id="avatar">😎</div>
-      <div class="turn-copy">
-        <div class="muted">Сейчас ходит</div>
-        <div class="player-name" id="playerName" aria-live="polite"></div>
-        <div class="muted" id="turnInfo"></div>
-      </div>
-    </div>
-    <button class="btn primary" id="spin" type="button">КРУТИТЬ РУЛЕТКУ</button>
-  </div>
-
+<div class="turn-person">
+<div class="avatar" id="avatar">😎</div>
+<div class="turn-copy">
+<div class="muted">Сейчас ходит</div>
+<div class="player-name" id="playerName" aria-live="polite">
+</div>
+<div class="muted" id="turnInfo">
+</div>
+</div>
+</div>
+<button class="btn primary" id="spin" type="button">КРУТИТЬ РУЛЕТКУ</button>
+</div>
   <div class="topbar">
-    <span class="pill" id="progress"></span>
-    <span class="pill" id="currentScore"></span>
-    <span class="pill" id="remainingBank"></span>
-  </div>
-
+<span class="pill" id="progress">
+</span>
+<span class="pill" id="currentScore">
+</span>
+<span class="pill" id="remainingBank">
+</span>
+</div>
   <div class="panel center" id="wheelPanel">
-    <h2>🎯 Рулетка решает</h2>
-    <p class="muted">Каждый ход — новая каверза!</p>
-    <div class="wheel-wrap">
-      <div class="pointer"></div>
-      <div class="wheel" id="wheel">
-        <div class="wheel-center">😈</div>
-      </div>
-    </div>
-  </div>
-
+<h2>🎯 Рулетка решает</h2>
+<p class="muted">Каждый ход — новая каверза!</p>
+<div class="wheel-wrap">
+<div class="pointer">
+</div>
+<div class="wheel" id="wheel">
+<div class="wheel-center">😈</div>
+</div>
+</div>
+</div>
   <div class="panel challenge hidden" id="challenge">
-    <div class="badge" id="badge"></div>
-    <div class="task" id="task"></div>
-    <div class="task-meta" id="taskMeta"></div>
-
-    <button class="small hidden" id="answerBtn" type="button" aria-expanded="false">🧠 Показать ответ</button>
-    <div class="answer-box hidden" id="answerBox"></div>
-
+<div class="badge" id="badge">
+</div>
+<div class="task" id="task">
+</div>
+<div class="task-meta" id="taskMeta">
+</div>
+<button class="small hidden" id="answerBtn" type="button" aria-expanded="false">🧠 Показать ответ</button>
+<div class="answer-box hidden" id="answerBox">
+</div>
     <div class="hidden" id="partnerSelect">
-      <label for="bonusRecipient">Кому достаются бонусные очки?</label>
-      <select id="bonusRecipient"></select>
-    </div>
-
+<label for="bonusRecipient">Кому достаются бонусные очки?</label>
+<select id="bonusRecipient">
+</select>
+</div>
     <div id="timerArea">
-      <div class="timer" id="timer">60</div>
-      <div class="muted">секунд осталось</div>
-      <div class="track"><div class="fill" id="fill"></div></div>
-    </div>
-
+<div class="timer" id="timer">60</div>
+<div class="muted">секунд осталось</div>
+<div class="track">
+<div class="fill" id="fill">
+</div>
+</div>
+</div>
     <div class="actions">
-      <button class="btn success" id="done" type="button">✓ Выполнено</button>
-      <button class="btn danger" id="skip" type="button">✕ Пропустить</button>
-    </div>
-
-    <p class="muted">Можно сказать «пас» — без штрафа и объяснений. Для совместных действий нужно взаимное согласие.</p>
+<button class="btn success" id="done" type="button">✓ Выполнено</button>
+<button class="btn danger" id="skip" type="button">✕ Пропустить</button>
+</div>
+<p class="muted">Можно сказать «пас» — без штрафа и объяснений. Для совместных действий нужно взаимное согласие.</p>
   </div>
-
   <div class="panel">
-    <h3>🏆 Турнирная таблица</h3>
-    <div class="score-list" id="scores"></div>
-  </div>
-
+<h3>🏆 Турнирная таблица</h3>
+<div class="score-list" id="scores">
+</div>
+</div>
   <button class="btn block" id="endGame" type="button">Завершить игру</button>
 </section>
-
 <section id="results" class="hidden">
-  <div class="panel center">
-    <div style="font-size:32px">✨🎉✨</div>
-    <h2>Вот это была вечеринка!</h2>
-    <p class="muted">Финальные результаты</p>
-    <div class="task" id="winner"></div>
-    <div class="score-list" id="finalScores"></div>
-    <button class="btn primary block" id="again" type="button">РЕВАНШ 🔥</button>
-    <button class="btn block" id="changeSettings" type="button">Изменить настройки</button>
-  </div>
+<div class="panel center">
+<div style="font-size:32px">✨🎉✨</div>
+<h2>Вот это была вечеринка!</h2>
+<p class="muted">Финальные результаты</p>
+<div class="task" id="winner">
+</div>
+<div class="score-list" id="finalScores">
+</div>
+<button class="btn primary block" id="again" type="button">РЕВАНШ 🔥</button>
+<button class="btn block" id="changeSettings" type="button">Изменить настройки</button>
+</div>
 </section>
-
-<div id="yandex_rtb_R-A-20268433-2"></div>
-<script>
-window.yaContextCb.push(function(){
-  if(window.Ya && Ya.Context && Ya.Context.AdvManager){
-    Ya.Context.AdvManager.render({
-      blockId:"R-A-20268433-2",
-      renderTo:"yandex_rtb_R-A-20268433-2"
-    });
-  }
-});
-</script>
+<div id="yandex_rtb_R-A-20268433-2">
+</div>
+<script>window.yaContextCb.push(function(){if(window.Ya&&Ya.Context&&Ya.Context.AdvManager){Ya.Context.AdvManager.render({blockId:"R-A-20268433-2",renderTo:"yandex_rtb_R-A-20268433-2",onError:function(error){console.warn("РСЯ: блок не показан",error);}});}});</script>
 </main>
-
-<div class="footer">
-  КАВЕРЗА · Играйте смело, уважайте границы 💜<br>
-  Без регистрации. Прямо в браузере.
+<div class="footer">КАВЕРЗА · Играйте смело, уважайте границы 💜<br>Без регистрации. Прямо в браузере.</div>
 </div>
+<div class="toast hidden" id="toast" role="status" aria-live="polite">
 </div>
-
-<div class="toast hidden" id="toast" role="status" aria-live="polite"></div>
-
 <script>
 "use strict";
-
-const $ = selector => document.querySelector(selector);
-const $$ = selector => Array.from(document.querySelectorAll(selector));
-const order = ["question","action","dare","reveal","twist","bonus"];
-const avatars = ["😎","🦊","🐼","🐸","🐯","🐙","🐺","🦄","🐲","👽"];
-
-function cards(text){
-  return text.trim().split("\n").map(line=>line.trim()).filter(Boolean).map(line=>{
-    const separator=line.indexOf(" | ");
-    if(separator<0)return line;
-    return {
-      text:line.slice(0,separator),
-      answer:line.slice(separator+3)
-    };
-  });
-}
-
-function bonusCards(text){
-  return text.trim().split("\n").map(line=>line.trim()).filter(Boolean).map(line=>{
-    const parts=line.split(" | ");
-    return {
-      text:parts[0],
-      effect:parts[1],
-      points:Number(parts[2])
-    };
-  });
-}
-
+const $=selector=>document.querySelector(selector);
+const $$=selector=>Array.from(document.querySelectorAll(selector));
+const order=["question","action","dare","reveal","twist","bonus"];
+const avatars=["😎","🦊","🐼","🐸","🐯","🐙","🐺","🦄","🐲","👽"];
+function cards(text){return text.trim().split("\n").map(s=>s.trim()).filter(Boolean).map(line=>{const separator=line.indexOf(" | ");return separator<0?line:{text:line.slice(0,separator),answer:line.slice(separator+3)};});}
+function bonusCards(text){return text.trim().split("\n").map(s=>s.trim()).filter(Boolean).map(line=>{const p=line.split(" | ");return {text:p[0],effect:p[1],points:Number(p[2])};});}
 const data={
-question:{
-  name:"ВОПРОС",emoji:"💬",points:1,
-  soft:cards(`
+question:{name:"ВОПРОС",emoji:"💬",points:1,
+soft:cards(`
 Какой звук мгновенно возвращает тебя в детство?
 Что бы ты купил, став миллионером на пять минут, если деньги нельзя откладывать?
 Какой странный факт о себе ты рассказываешь при знакомстве?
@@ -814,13 +943,13 @@ question:{
 Какого комплимента ждёшь от питомца?
 Какая семейная традиция самая смешная?
 `),
-  bold:cards(`
+bold:cards(`
 Кто здесь убедил бы тебя купить ненужную вещь?
 Какое обещание себе нарушал чаще всего?
 Кто легче всех проживёт неделю без телефона?
 За что тебя несправедливо хвалили?
 Когда говорил «выхожу», ещё находясь дома?
-Какой свой поступок увидел бы чужими глазами?
+На какой свой поступок хотел бы посмотреть со стороны?
 Какую черту скрываешь в начале знакомства?
 Кому доверил бы организовать свой праздник вслепую?
 Какой свой совет друзьям ты игнорируешь?
@@ -840,7 +969,7 @@ question:{
 Какой поступок изменил твоё мнение о дружбе?
 О чём не расскажешь на первом собеседовании?
 С кем согласился бы поменяться телефонами на минуту, не открывая личные данные?
-Когда мнение о человеке улучшилось?
+Вспомни случай, когда ты изменил мнение о человеке в лучшую сторону.
 Какая невинная провокация на тебе сработала?
 Кому доверил бы свой провальный рецепт?
 Какое глупое решение оказалось правильным?
@@ -956,11 +1085,9 @@ question:{
 С кем сыграл бы романтическую комедию?
 Кто произнесёт финальную драматичную реплику этого вечера?
 Кому доверил бы придумать дерзкую фразу знакомства?
-`)
-},
-action:{
-  name:"ДЕЙСТВИЕ",emoji:"⚡",points:2,
-  soft:cards(`
+`)} ,
+action:{name:"ДЕЙСТВИЕ",emoji:"⚡",points:2,
+soft:cards(`
 Изобрази будильник, который хочет выходной.
 Произнеси «кабачок» как величайшую трагедию.
 Сыграй прогноз погоды в мире пельменных дождей.
@@ -997,7 +1124,7 @@ action:{
 Изобрази супергероя, находящего пульт.
 Скажи «я всё контролирую» так, чтобы никто не поверил.
 `),
-  bold:cards(`
+bold:cards(`
 Прорекламируй себя как собеседника на вечеринке.
 Сыграй разговор с тем, кого забыл поздравить.
 Скажи до трёх театральных комплиментов разным игрокам; вдвоём достаточно одного.
@@ -1093,11 +1220,9 @@ action:{
 Придумай и произнеси нелепую фразу знакомства.
 С добровольцем сыграй свидание, где официант — инопланетянин; можно сыграть все роли.
 Сыграй смешное прощание с воображаемым бывшим.
-`)
-},
-dare:{
-  name:"ВЫЗОВ",emoji:"🔥",points:3,
-  soft:cards(`
+`)},
+dare:{name:"ВЫЗОВ",emoji:"🔥",points:3,
+soft:cards(`
 Назови пять фруктов за восемь секунд.
 Трижды произнеси «Шла Саша по шоссе».
 За десять секунд придумай рифму к «вечеринке».
@@ -1133,7 +1258,7 @@ dare:{
 Что больше: 0,7 или 0,65? | 0,7.
 Можно ли делить пять на ноль? | Нет, деление на ноль не определено.
 Два отца и два сына съели три яблока, каждый по одному. Как? | Это дедушка, отец и сын.
-Сколько раз можно последовательно вычитать 10 из 100 до нуля? | Десять.
+Если каждый раз вычитать 10 из предыдущего результата, сколько вычитаний потребуется, чтобы получить 0, начиная со 100? | Десять.
 На столе три яблока. Ты забрал два. Сколько у тебя? | Два.
 Сколько нулей в миллионе? | Шесть.
 Как называется многоугольник с восемью сторонами? | Восьмиугольник.
@@ -1146,7 +1271,7 @@ dare:{
 Все коты — животные. Все ли животные — коты? | Нет.
 Можно ли надёжно определить характер по знаку зодиака? | Научных доказательств такой возможности нет.
 `),
-  bold:cards(`
+bold:cards(`
 За тридцать секунд придумай глупую легенду своего имени.
 Назови четыре причины, почему тебя не возьмут в разведку.
 Ответь на три вопроса без «я» и «мне».
@@ -1202,11 +1327,9 @@ dare:{
 Сыграй свидание двух скрывающих волнение людей.
 За пятнадцать секунд придумай два уважительных отказа в поцелуе.
 Назови пять слов, которые не стоит писать подряд в романтическом чате.
-`)
-},
-reveal:{
-  name:"ОТКРОВЕНИЕ",emoji:"🤫",points:2,
-  soft:cards(`
+`)},
+reveal:{name:"ОТКРОВЕНИЕ",emoji:"🤫",points:2,
+soft:cards(`
 Какую привычку ты приобрёл незаметно?
 Какой детский страх теперь смешон?
 Какое маленькое достижение радует до сих пор?
@@ -1233,7 +1356,7 @@ reveal:{
 Какой мем связан с конкретным воспоминанием?
 Был ли настолько провальный день, что стало смешно?
 `),
-  bold:cards(`
+bold:cards(`
 Когда завидовал чужой смелости?
 Какую черту обменял бы с другом?
 Ты преуменьшал свои успехи?
@@ -1289,11 +1412,9 @@ reveal:{
 Когда понял, что химия взаимна?
 Какая маленькая просьба смущает сильнее откровенного разговора?
 Что ошибочно счёл намёком?
-`)
-},
-twist:{
-  name:"КАВЕРЗА",emoji:"🌀",points:3,
-  soft:cards(`
+`)},
+twist:{name:"КАВЕРЗА",emoji:"🌀",points:3,
+soft:cards(`
 Докажи, что чайник должен стать министром культуры.
 Придумай бесполезный закон для компании.
 Опиши утро как трейлер блокбастера.
@@ -1315,7 +1436,7 @@ twist:{
 Абсурдно продолжи «Любишь кататься — люби и…».
 Расскажи анекдот со словами «Wi-Fi», «бабушка», «оливье».
 Сколько месяцев имеют хотя бы 28 дней? | Все двенадцать.
-У трёх братьев две общие сестры. Сколько детей? | Пятеро.
+У трёх братьев две общие сестры, других детей в семье нет. Сколько детей? | Пятеро.
 Что увеличивается, если из него убрать землю? | Яма.
 Две монеты дают 15 рублей. Одна не пятирублёвая. Какие? | 10 и 5 рублей. Десятирублёвая не пятирублёвая.
 Сколько минут в двух с половиной часах? | 150.
@@ -1336,7 +1457,7 @@ twist:{
 Чему равен квадрат девяти? | 81.
 Сколько граней у обычного игрального кубика? | Шесть.
 `),
-  bold:cards(`
+bold:cards(`
 Распредели роли сыщика и подозреваемого между игроками.
 Почему переписку с доставкой еды стоит экранизировать?
 Придумай нелепый светский скандал всей компании.
@@ -1393,23 +1514,22 @@ twist:{
 Что значит «просто общаемся», если один уже выбрал имена детям? | Шутливый ответ: ожидания не совпадают, стоит поговорить.
 Что хуже на свидании: отсутствие плана или неуважение? | Неуважение.
 Какое «нет» превращается в «да» после уговоров? | Никакое. Отказ нужно уважать.
-`)
-},
-bonus:{
-  name:"БОНУС",emoji:"⭐",points:0,
-  soft:bonusCards(`
+`)},
+
+bonus:{name:"БОНУС",emoji:"⭐",points:0,
+soft:bonusCards(`
 Улыбнись компании — получи 2 ★. | self | 2
 Расскажи короткую шутку — получи 3 ★. | self | 3
 Поблагодари за компанию — каждому по 1 ★. | all | 1
 Выбери другого игрока — подари ему 2 ★. | choose | 2
 Выбери напарника — обоим по 1 ★ за командный дух. | partner | 1
 Назови три причины любить выходные — получи 2 ★. | self | 2
-Скажи комплимент соседу — каждому по 1 ★. | all | 1
+Скажи комплимент выбранному соседу — вам обоим по 1 ★. | partner | 1
 Выбери весёлого игрока — подари ему 3 ★. | choose | 3
 Назови напарника по удаче — обоим по 2 ★. | partner | 2
 Придумай девиз вечера — получи 3 ★. | self | 3
 `),
-  bold:bonusCards(`
+bold:bonusCards(`
 Скажи «я легенда» смешно — получи 2 ★. | self | 2
 Поаплодируй компании — каждому по 1 ★. | all | 1
 Скажи тост без слова «счастье» — получи 3 ★. | self | 3
@@ -1426,12 +1546,9 @@ bonus:{
 Покажи галантный поклон — получи 2 ★. | self | 2
 Придумай смешное приглашение на свидание — получи 3 ★. | self | 3
 Назови два качества хорошего партнёра — получи 2 ★. | self | 2
-`)
-}
+`)}
 };
-
-/* Новые карточки: 500 штук. */
-
+// Дополнительный банк из исходной версии игры.
 const expansion={
 "question.soft":cards(`
 Какое качество друга ты оценил только после совместной поездки?
@@ -1496,17 +1613,17 @@ const expansion={
 Как понять, что двое уже посмотрели «очень интересный фильм»?
 Что сложнее сохранить при намёке: серьёзный голос или взгляд?
 Какую фразу о совместной тренировке придётся объяснять друзьям?
-С кем из другой пары сходил бы в кино? Если других пар нет — выбери любого игрока.
+С кем из компании сходил бы в кино в жанре романтической комедии?
 Кого выбрал бы на свидание вслепую, если бы все были свободны?
-Кто здесь способен понравиться твоему партнёру с первого разговора?
-С кем не отправил бы партнёра за подарком тебе: слишком хорошо сговорятся?
+Кто здесь способен понравиться твоему партнёру (реальному или воображаемому) с первого разговора?
+С кем не отправил бы партнёра за подарком тебе: слишком хорошо сговорятся? Если партнёра нет, представь ситуацию.
 Кому доверил бы придумать алиби для сорванного сюрприза?
 Кто опаснее всех умеет говорить «между нами ничего нет»?
 С кем сыграл бы влюблённых так, что зрители поверят?
 Чья похвала заставила бы тебя стараться сильнее?
 Кого не хотел бы видеть соперником на шоу знакомств?
 Кто понравился бы твоим родителям больше, чем ты сам?
-С кем из другой пары пошёл бы на танцевальный мастер-класс? Если других пар нет — выбери игрока.
+С кем из компании пошёл бы на танцевальный мастер-класс?
 Кто умеет выглядеть невиновным после провокационного вопроса?
 Чьё мнение о твоей привлекательности тебе любопытно?
 Кто убедил бы тебя согласиться на свидание необычным аргументом?
@@ -1526,7 +1643,7 @@ const expansion={
 Что обиднее: «слишком хороший» или «не готов к отношениям»?
 Кто меньше всех продержится в шоу, где нельзя флиртовать?
 Какой твой критерий партнёра друзья сочтут поверхностным?
-Как отреагируешь, если партнёр назовёт другого своим идеалом внешности?
+Как отреагируешь, если партнёр назовёт другого своим идеалом внешности? Если партнёра нет, представь ситуацию.
 Какой комплимент от чужого партнёра уже лишний?
 Что больше похоже на флирт: личный плейлист или ежедневное «как день»?
 На какую тему не хотел бы отвечать первым?
@@ -1534,7 +1651,7 @@ const expansion={
 Что неловче: узнать, что ты нравился, или что все это знали?
 Какой жест внимания не примешь от человека в отношениях?
 Кто убедительно сыграет твою идеальную пару в рекламе?
-О чём спросил бы партнёра, если бы он гарантированно не обиделся?
+О чём спросил бы партнёра, если бы он гарантированно не обиделся? Если партнёра нет, представь ситуацию.
 Чей ответ за столом ждёшь с особым любопытством?
 `),
 "action.soft":cards(`
@@ -1643,9 +1760,9 @@ const expansion={
 `),
 "dare.soft":cards(`
 У прямоугольника стороны 6 и 4. Чему равен периметр? | 20.
-Сколько двузначных чисел в десятичной системе? | 90: от 10 до 99.
+Сколько положительных двузначных целых чисел в десятичной системе? | 90: от 10 до 99.
 Чему равны 15 процентов от 200? | 30.
-Из 4 красных и 6 синих шаров достают один. Каков шанс красного? | 40 процентов.
+Из 4 красных и 6 синих шаров достают один наугад. Каков шанс красного? | 40 процентов.
 Продолжи ряд с удвоением: 3, 6, 12, 24. | 48.
 180 километров за 3 часа: какова средняя скорость? | 60 км/ч.
 Сколько рёбер у куба? | 12.
@@ -1718,7 +1835,7 @@ const expansion={
 Сколько битов в современном стандартном байте? | Восемь.
 Чему равно двоичное 101 в десятичной системе? | Пяти.
 Как называется поиск с делением отсортированного диапазона пополам? | Бинарный, или двоичный, поиск.
-Для логического «И» достаточно одного истинного условия? | Нет, истинными должны быть оба.
+Для логического «И» достаточно одного истинного условия? | Нет, истинными должны быть все условия.
 Кто написал «Преступление и наказание»? | Фёдор Достоевский.
 Кто написал «Мастера и Маргариту»? | Михаил Булгаков.
 Как называется намеренное художественное преувеличение? | Гипербола.
@@ -1820,10 +1937,10 @@ const expansion={
 В четырёх углах комнаты по коту. Каждый видит остальных. Сколько котов? | Четыре.
 Что будет с белой футболкой в Чёрном море? | Она намокнет.
 Сколько букв в слове «алфавит»? | Семь.
-Сколько концов у трёх с половиной отдельных палок? | Восемь: четыре отдельных отрезка.
+Есть три целые палки и одна отдельная половинка палки. Сколько у них концов? | Восемь: у четырёх отдельных кусков по два конца.
 Три свечи горели, две погасили. Сколько погашенных свечей сразу после этого? | Две.
 Что нельзя обхватить правой рукой на собственной правой руке? | Например, собственный правый локоть.
-Можно ли на обычной плоской карте идти только на юг и вернуться к началу? | Нет.
+Можно ли на обычной плоской карте идти только на юг и вернуться к началу? | Нет, если перемещаться по карте строго на юг.
 Можно ли получить «кот» из «крот», не добавляя букв? | Да, убрать «р».
 Какая цифра при повороте на 180 градусов становится другой? | 6 становится 9 и наоборот в подходящем начертании.
 Из 10 печений четверым дали по два. Сколько осталось? | Два.
@@ -1832,12 +1949,12 @@ const expansion={
 Есть спичка, свеча и газовая плита. Что зажжёшь первым? | Спичку.
 `),
 "twist.bold":cards(`
-Если все свободны, с кем из другой пары выбрал бы последний ряд кино? Если других пар нет — любого игрока.
+Если все свободны, с кем из компании выбрал бы последний ряд кино?
 С кем собрал бы опасную команду, поменявшись партнёрами только в настольной игре?
 Кто вызовет ревность одним случайным комплиментом?
 Чью симпатию тебе труднее скрыть?
 С кем сыграл бы свадьбу без репетиции?
-Кого партнёр назначил бы твоим опасным знакомым в сериале?
+Кого партнёр (реальный или воображаемый) назначил бы твоим опасным знакомым в сериале?
 Кого позвал бы парой на обложку романтического романа?
 С кем не остался бы выбирать музыку до утра: легко заболтаетесь?
 Кому дал бы второе свидание после ужасного первого?
@@ -1847,7 +1964,7 @@ const expansion={
 С кем получился бы убедительный фиктивный роман в кино?
 Кого выбрал бы судьёй в споре о ревности, а кого нет?
 Кому запретил бы давать тебе советы по флирту?
-С кем из другой пары отправился бы в воображаемое путешествие? Если других пар нет — выбери игрока.
+С кем из компании отправился бы в воображаемое путешествие?
 Кто говорит «всё равно», когда это неправда?
 Кто лучше всех задаёт вопросы с известным ответом?
 Кому подходит работа разоблачителя оправданий?
@@ -1873,28 +1990,28 @@ const expansion={
 Кому доверил бы роль своего партнёра на семейном празднике в комедии?
 Кто слишком хорошо узнаёт людей, которые «просто общаются»?
 Выберешь честную оценку флирта или запись неловкого знакомства?
-Что неприятнее: партнёр хвалит бывшего или друг слишком подробно хвалит партнёра?
+Что неприятнее: партнёр хвалит бывшего или друг слишком подробно хвалит партнёра? Представь ситуацию, если необходимо.
 О чьих чувствах задал бы один вопрос?
 Хочешь узнать имя игрока, подходящего под типаж партнёра?
 Какую фразу сочтёшь флиртом незнакомца, но простишь другу?
 Узнать о давней симпатии друга сейчас или никогда?
 Что тревожнее: исчезновение ревности или внезапный пароль на телефоне?
-Как объяснишь дружескую встречу, которую оба скрывают от партнёров?
+Как объяснишь дружескую встречу, которую оба скрывают от партнёров? Представь ситуацию, если необходимо.
 Кому обозначить границы, если один шутит, а другой надеется?
 Можно ли обижаться на честный ответ, если настоял на вопросе?
-Какой комплимент другому не хочешь слышать от партнёра?
+Какой комплимент другому не хочешь слышать от партнёра? Представь ситуацию, если необходимо.
 Что сильнее выдаёт симпатию: детали или неловкость?
 Что ответишь на «просто уснули рядом», если договорённости не нарушались?
 Где грань дружеской заботы и замены отношений?
 Что сложнее: признать ревность или признать свой повод?
-Какой аргумент друга против партнёра выслушаешь?
+Какой аргумент друга против партнёра выслушаешь? Представь ситуацию, если необходимо.
 Расскажешь другу, что его партнёр с тобой флиртовал?
 Какой вопрос о бывших честный, но бесполезный?
 Что хуже: спорить при друзьях или любой ценой изображать идеал?
 Выберешь неделю без комплиментов или честный разговор о недостатках?
 Какой слоган знакомств подходит игроку справа?
 Придумай игроку слева смешной титул за стиль общения.
-Кому поручишь объяснить твоё опоздание партнёру?
+Кому поручишь объяснить твоё опоздание партнёру? Если партнёра нет, представь ситуацию.
 Кто сыграет главных героев «Всё началось с одного взгляда»?
 Кто мог бы преподавать «Как заставить написать первым»?
 С кем сыграл бы пару в конкурсе взаимопонимания?
@@ -1958,724 +2075,838 @@ const expansion={
 Вручи игроку титул «Мастер интриги» — ему 1 ★. | choose | 1
 `)
 };
-
 for(const [path,list] of Object.entries(expansion)){
   const [category,level]=path.split(".");
   data[category][level].push(...list);
 }
+// «Действие» содержит вопросы. Исходные сценки сохранены в «Вызове».
+for(const level of ["soft","bold"]){
+  data.dare[level].push(...data.action[level]);
+  data.action[level]=data.question[level].splice(-25);
+}
+// Удаление точных дублей внутри категории, без удаления разных формулировок.
+for(const category of order){
+  const seen=new Set();
+  for(const level of ["soft","bold"]){
+    data[category][level]=data[category][level].filter(item=>{
+      const signature=typeof item==="string"?item:item.text;
+      const clean=signature.toLocaleLowerCase("ru-RU").replace(/[\s\p{P}]+/gu," ").trim();
+      if(seen.has(clean))return false;
+      seen.add(clean);
+      return true;
+    });
+  }
+}
+const PALETTE=["#ff5e9d","#ac79ff","#53baf0","#49d4b0","#ffc061","#e774dd","#91e48c"];
+
+const SAVE_KEY="kaverza-party-v4";
 
 const state={
-  players:[],
-  rounds:10,
-  turn:0,
-  taken:0,
-  max:0,
-  enabled:[],
-  level:"bold",
-  used:{},
-  category:null,
-  task:null,
-  angle:0,
-  spinning:false,
-  active:false,
-  started:false,
-  spinToken:0,
-  spinTimeout:null,
-  timerId:null,
-  deadline:0,
-  motion:true,
-  sound:true
-};
+players:[],rounds:10,turn:0,taken:0,max:0,enabled:[],level:"bold",used:{
+}
+,category:null,task:null,angle:0,spinning:false,active:false,started:false,spinToken:0,spinTimeout:null,timerId:null,deadline:0,timeLimit:60,phase:"setup",recipient:"",motion:true,sound:true,recentTopics:[]}
+;
 
-let toastId=null;
-let audioContext=null;
-let confettiFrame=null;
-let lastKeyboardActivation=0;
+let toastId=null,audioContext=null,confettiFrame=null,lastKeyboardActivation=0;
 
 function readFlag(key,fallback){
-  try{
-    const value=localStorage.getItem(key);
-    return value===null?fallback:value==="true";
-  }catch{
-    return fallback;
-  }
+try{
+const val=localStorage.getItem(key);
+return val===null?fallback:val==="true";
+}
+catch{
+return fallback;
+}
 }
 
 function saveFlag(key,value){
-  try{localStorage.setItem(key,String(value));}catch{}
+try{
+localStorage.setItem(key,String(value));
+}
+catch{
+}
 }
 
 state.sound=readFlag("kaverza-sound",true);
 state.motion=readFlag("kaverza-motion",true);
 
 function reduceMotion(){
-  return window.matchMedia?
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches:false;
+return !!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches);
 }
 
 function canAnimate(){
-  return state.motion&&!reduceMotion();
+return state.motion&&!reduceMotion();
 }
 
 function refreshSettings(){
+
   $("#soundToggle").textContent=state.sound?"🔊 Звук: вкл.":"🔇 Звук: выкл.";
+
   $("#soundToggle").setAttribute("aria-pressed",String(state.sound));
+
   $("#motionToggle").textContent=state.motion?"✨ Эффекты: вкл.":"✨ Эффекты: выкл.";
+
   $("#motionToggle").setAttribute("aria-pressed",String(state.motion));
+  document.body.classList.toggle("no-motion",!canAnimate());
+  if(!canAnimate()){
+    if(confettiFrame)cancelAnimationFrame(confettiFrame);
+    confettiFrame=null;
+    const canvas=$("#confettiCanvas"), ctx=canvas.getContext("2d");
+    if(ctx)ctx.clearRect(0,0,canvas.width,canvas.height);
+    if(navigator.vibrate)navigator.vibrate(0);
+  }
+
 }
 
 function note(message){
-  const element=$("#toast");
-  element.textContent=message;
-  element.classList.remove("hidden");
-  clearTimeout(toastId);
-  toastId=setTimeout(()=>element.classList.add("hidden"),2600);
+const el=$("#toast");
+el.textContent=message;
+el.classList.remove("hidden");
+clearTimeout(toastId);
+toastId=setTimeout(()=>el.classList.add("hidden"),2600);
 }
 
 function random(count){
-  if(count<=1)return 0;
-  if(globalThis.crypto&&globalThis.crypto.getRandomValues){
-    const buffer=new Uint32Array(1);
-    const limit=Math.floor(4294967296/count)*count;
-    do{globalThis.crypto.getRandomValues(buffer);}while(buffer[0]>=limit);
-    return buffer[0]%count;
-  }
-  return Math.floor(Math.random()*count);
+if(count<=1)return 0;
+if(window.crypto&&window.crypto.getRandomValues){
+const buffer=new Uint32Array(1),max=Math.floor(4294967296/count)*count;
+do{
+window.crypto.getRandomValues(buffer);
+}
+while(buffer[0]>=max);
+return buffer[0]%count;
+}
+return Math.floor(Math.random()*count);
 }
 
 function playTone(frequency,duration=.09,wave="sine",volume=.04,delay=0){
-  if(!state.sound)return;
-  try{
-    const Context=window.AudioContext||window.webkitAudioContext;
-    if(!Context)return;
-    if(!audioContext)audioContext=new Context();
-    if(audioContext.state==="suspended"){
-      audioContext.resume().catch(()=>{});
-    }
-    const now=audioContext.currentTime+delay;
-    const oscillator=audioContext.createOscillator();
-    const gain=audioContext.createGain();
-    oscillator.type=wave;
-    oscillator.frequency.setValueAtTime(frequency,now);
-    gain.gain.setValueAtTime(.0001,now);
-    gain.gain.exponentialRampToValueAtTime(Math.max(.001,volume),now+.012);
-    gain.gain.exponentialRampToValueAtTime(.0001,now+duration);
-    oscillator.connect(gain);
-    gain.connect(audioContext.destination);
-    oscillator.start(now);
-    oscillator.stop(now+duration+.01);
-  }catch{}
+if(!state.sound)return;
+try{
+const Context=window.AudioContext||window.webkitAudioContext;
+if(!Context)return;
+if(!audioContext)audioContext=new Context();
+if(audioContext.state==="suspended")audioContext.resume().catch(()=>{
+}
+);
+const now=audioContext.currentTime+delay,oscillator=audioContext.createOscillator(),gain=audioContext.createGain();
+oscillator.type=wave;
+oscillator.frequency.setValueAtTime(frequency,now);
+gain.gain.setValueAtTime(.0001,now);
+gain.gain.exponentialRampToValueAtTime(Math.max(.001,volume),now+.012);
+gain.gain.exponentialRampToValueAtTime(.0001,now+duration);
+oscillator.connect(gain);
+gain.connect(audioContext.destination);
+oscillator.start(now);
+oscillator.stop(now+duration+.01);
+}
+catch{
+}
 }
 
 function sfx(kind){
-  if(kind==="click")playTone(490,.075,"sine",.025);
-  if(kind==="spin"){
-    playTone(260,.13,"triangle");
-    playTone(360,.15,"triangle",.04,.10);
-  }
-  if(kind==="reveal"){
-    playTone(600,.11);
-    playTone(860,.18,"sine",.035,.09);
-  }
-  if(kind==="success"){
-    playTone(520,.12,"triangle");
-    playTone(770,.20,"triangle",.04,.10);
-  }
-  if(kind==="skip")playTone(230,.17,"sine",.035);
-  if(kind==="win"){
-    [523,659,784,1046,1318].forEach((frequency,index)=>{
-      playTone(frequency,.24,"triangle",.04,index*.13);
-    });
-  }
+if(kind==="click")playTone(490,.075,"sine",.025);
+if(kind==="spin"){
+playTone(260,.13,"triangle");
+playTone(360,.15,"triangle",.04,.10);
+}
+if(kind==="reveal"){
+playTone(600,.11);
+playTone(860,.18,"sine",.035,.09);
+}
+if(kind==="success"){
+playTone(520,.12,"triangle");
+playTone(770,.20,"triangle",.04,.10);
+}
+if(kind==="skip")playTone(230,.17,"sine",.035);
+if(kind==="win")[523,659,784,1046,1318].forEach((frequency,i)=>playTone(frequency,.24,"triangle",.04,i*.13));
 }
 
 function buzz(milliseconds=15){
-  if(canAnimate()&&navigator.vibrate){
-    try{navigator.vibrate(milliseconds);}catch{}
-  }
+if(canAnimate()&&navigator.vibrate){
+try{
+navigator.vibrate(milliseconds);
+}
+catch{
+}
+}
 }
 
 function confetti(seconds=2.7){
-  if(!canAnimate())return;
-  const canvas=$("#confettiCanvas");
-  const context=canvas.getContext("2d");
-  if(!context)return;
-  if(confettiFrame)cancelAnimationFrame(confettiFrame);
-
-  const width=window.innerWidth;
-  const height=window.innerHeight;
-  const ratio=Math.min(window.devicePixelRatio||1,2);
-
-  canvas.width=Math.round(width*ratio);
-  canvas.height=Math.round(height*ratio);
-  context.setTransform(ratio,0,0,ratio,0,0);
-
-  const colors=["#ff5aab","#a78bfa","#64e8c1","#ffdf83","#fff"];
-  const pieces=Array.from({length:Math.min(150,Math.max(55,Math.floor(width/7)))},()=>({
-    x:Math.random()*width,
-    y:-Math.random()*height*.7,
-    w:3+Math.random()*5,
-    h:5+Math.random()*7,
-    speed:1.8+Math.random()*4,
-    rotation:Math.random()*6,
-    offset:Math.random()*6,
-    color:colors[random(colors.length)]
-  }));
-
-  const end=performance.now()+seconds*1000;
-  function frame(time){
-    context.clearRect(0,0,width,height);
-    for(const piece of pieces){
-      piece.y+=piece.speed;
-      piece.x+=Math.sin(time/350+piece.offset)*.6;
-      piece.rotation+=.05;
-      context.save();
-      context.translate(piece.x,piece.y);
-      context.rotate(piece.rotation);
-      context.fillStyle=piece.color;
-      context.fillRect(-piece.w/2,-piece.h/2,piece.w,piece.h);
-      context.restore();
-    }
-    if(time<end){
-      confettiFrame=requestAnimationFrame(frame);
-    }else{
-      context.clearRect(0,0,width,height);
-      confettiFrame=null;
-    }
-  }
-  confettiFrame=requestAnimationFrame(frame);
+if(!canAnimate())return;
+const canvas=$("#confettiCanvas"),context=canvas.getContext("2d");
+if(!context)return;
+if(confettiFrame)cancelAnimationFrame(confettiFrame);
+const width=window.innerWidth,height=window.innerHeight,ratio=Math.min(window.devicePixelRatio||1,2);
+canvas.width=Math.round(width*ratio);
+canvas.height=Math.round(height*ratio);
+context.setTransform(ratio,0,0,ratio,0,0);
+const colors=["#ff5aab","#a78bfa","#64e8c1","#ffdf83","#fff"],pieces=Array.from({
+length:Math.min(150,Math.max(55,Math.floor(width/7)))}
+,()=>({
+x:Math.random()*width,y:-Math.random()*height*.7,w:3+Math.random()*5,h:5+Math.random()*7,speed:1.8+Math.random()*4,rotation:Math.random()*6,offset:Math.random()*6,color:colors[random(colors.length)]}
+));
+const end=performance.now()+seconds*1000;
+function frame(time){
+context.clearRect(0,0,width,height);
+for(const piece of pieces){
+piece.y+=piece.speed;
+piece.x+=Math.sin(time/350+piece.offset)*.6;
+piece.rotation+=.05;
+context.save();
+context.translate(piece.x,piece.y);
+context.rotate(piece.rotation);
+context.fillStyle=piece.color;
+context.fillRect(-piece.w/2,-piece.h/2,piece.w,piece.h);
+context.restore();
+}
+if(time<end){
+confettiFrame=requestAnimationFrame(frame);
+}
+else{
+context.clearRect(0,0,width,height);
+confettiFrame=null;
+}
+}
+confettiFrame=requestAnimationFrame(frame);
 }
 
 function renderInputs(names){
-  const container=$("#playerInputs");
-  container.replaceChildren();
-
-  names.forEach((name,index)=>{
-    const row=document.createElement("div");
-    row.className="player-row";
-
-    const number=document.createElement("span");
-    number.className="num";
-    number.textContent=index+1;
-
-    const input=document.createElement("input");
-    input.type="text";
-    input.maxLength=24;
-    input.autocomplete="off";
-    input.value=name;
-    input.placeholder="Игрок "+(index+1);
-    input.setAttribute("aria-label","Имя игрока "+(index+1));
-
-    const remove=document.createElement("button");
-    remove.className="remove";
-    remove.type="button";
-    remove.textContent="×";
-    remove.disabled=names.length<=2;
-    remove.setAttribute("aria-label","Удалить игрока "+(index+1));
-    remove.addEventListener("click",()=>{
-      const current=$$("#playerInputs input").map(element=>element.value);
-      renderInputs(current.filter((_,position)=>position!==index));
-    });
-
-    row.append(number,input,remove);
-    container.append(row);
-  });
-
-  $("#addPlayer").disabled=names.length>=10;
+const container=$("#playerInputs");
+container.replaceChildren();
+names.forEach((name,index)=>{
+const row=document.createElement("div");
+row.className="player-row";
+const number=document.createElement("span");
+number.className="num";
+number.textContent=index+1;
+const input=document.createElement("input");
+input.type="text";
+input.maxLength=24;
+input.autocomplete="off";
+input.value=name;
+input.placeholder="Игрок "+(index+1);
+input.setAttribute("aria-label","Имя игрока "+(index+1));
+const remove=document.createElement("button");
+remove.className="remove";
+remove.type="button";
+remove.textContent="×";
+remove.disabled=names.length<=2;
+remove.setAttribute("aria-label","Удалить игрока "+(index+1));
+remove.addEventListener("click",()=>{
+const current=$$("#playerInputs input").map(el=>el.value);
+renderInputs(current.filter((_,i)=>i!==index));
+}
+);
+row.append(number,input,remove);
+container.append(row);
+}
+);
+$("#addPlayer").disabled=names.length>=10;
 }
 
 function stopAsync(){
-  clearInterval(state.timerId);
-  clearTimeout(state.spinTimeout);
-  state.timerId=null;
-  state.spinTimeout=null;
-  state.spinToken++;
-  state.spinning=false;
-  state.active=false;
+clearInterval(state.timerId);
+clearTimeout(state.spinTimeout);
+state.timerId=null;
+state.spinTimeout=null;
+state.spinToken++;
+state.spinning=false;
+state.active=false;
 }
 
 function buildWheel(){
-  const wheel=$("#wheel");
-  wheel.querySelectorAll(".wheel-label").forEach(element=>element.remove());
-
-  order.forEach((key,index)=>{
-    const label=document.createElement("span");
-    label.className="wheel-label";
-    label.style.setProperty("--a",(index*60)+"deg");
-    label.textContent=data[key].emoji+" "+data[key].name;
-    wheel.append(label);
-  });
+const wheel=$("#wheel");
+wheel.querySelectorAll(".wheel-label").forEach(el=>el.remove());
+const keys=state.enabled.length?state.enabled:order,n=keys.length,step=360/n;
+wheel.style.background="conic-gradient(from "+(-step/2)+"deg, "+keys.map((_,i)=>PALETTE[order.indexOf(keys[i])%PALETTE.length]+" "+(i*step)+"deg "+((i+1)*step)+"deg").join(", ")+")";
+keys.forEach((key,index)=>{
+const label=document.createElement("span");
+label.className="wheel-label";
+label.style.setProperty("--a",(index*step)+"deg");
+label.textContent=data[key].emoji+" "+data[key].name;
+if(n>5){
+label.style.width="62px";
+label.style.marginLeft="-31px";
+label.style.fontSize="9px";
+}
+wheel.append(label);
+}
+);
 }
 
 function taskPool(key){
-  return state.level==="soft"?
-    data[key].soft:
-    data[key].soft.concat(data[key].bold);
+return state.level==="soft"?data[key].soft:data[key].soft.concat(data[key].bold);
 }
 
 function signature(task){
-  return typeof task==="string"?task:task.text;
+return typeof task==="string"?task:task.text;
 }
 
-function chooseTask(key){
-  const pool=taskPool(key);
-  const used=state.used[key]||new Set();
-
-  let available=pool.filter(task=>!used.has(signature(task)));
-  if(!available.length){
-    used.clear();
-    available=pool.slice();
-  }
-  if(!available.length){
-    throw new Error("Пустая категория: "+key);
-  }
-
-  const task=available[random(available.length)];
-  used.add(signature(task));
-  state.used[key]=used;
-  return task;
+function categoryRemaining(key){
+const used=state.used[key];
+return taskPool(key).reduce((sum,task)=>sum+(!used||!used.has(signature(task))?1:0),0);
 }
 
 function remainingCount(){
-  return state.enabled.reduce((sum,key)=>{
-    const used=state.used[key];
-    return sum+taskPool(key).filter(task=>!used||!used.has(signature(task))).length;
-  },0);
+return state.enabled.reduce((sum,key)=>sum+categoryRemaining(key),0);
+}
+
+// Исключаем подряд несколько однотипных действий: поцелуи, объятия и танцы.
+function topic(task){
+const t=signature(task).toLowerCase();
+if(/поцелу(й|и|я|е)|поцеловать/.test(t))return "kiss";
+if(/обним|объят/.test(t))return "hug";
+if(/медленный танец|медляк|мини-медляк/.test(t))return "slowdance";
+if(/взгляд|глаз(а|ами)/.test(t))return "gaze";
+return "";
+}
+
+function chooseTask(key){
+const pool=taskPool(key),used=state.used[key]||new Set();
+let available=pool.filter(t=>!used.has(signature(t)));
+if(!available.length){
+used.clear();
+available=pool.slice();
+}
+if(!available.length)throw new Error("Пустая категория: "+key);
+const preferred=available.filter(t=>{
+const tag=topic(t);
+return !tag||!state.recentTopics.includes(tag);
+}
+);
+const chosen=(preferred.length?preferred:available)[random(preferred.length||available.length)];
+used.add(signature(chosen));
+state.used[key]=used;
+const tag=topic(chosen);
+state.recentTopics.push(tag);
+if(state.recentTopics.length>12)state.recentTopics.shift();
+return chosen;
 }
 
 function scoreRows(selector,players){
-  const container=$(selector);
-  container.replaceChildren();
-
-  players.forEach((player,index)=>{
-    const row=document.createElement("div");
-    row.className="score-row";
-
-    const avatar=document.createElement("span");
-    avatar.textContent=player.avatar;
-    avatar.style.fontSize="24px";
-
-    const name=document.createElement("span");
-    name.className="score-name";
-    name.textContent=(index+1)+". "+player.name;
-
-    const score=document.createElement("span");
-    score.className="score-value";
-    score.textContent=player.score+" ★";
-
-    row.append(avatar,name,score);
-    container.append(row);
-  });
+const container=$(selector);
+container.replaceChildren();
+players.forEach((player,index)=>{
+const row=document.createElement("div");
+row.className="score-row";
+const avatar=document.createElement("span");
+avatar.textContent=player.avatar;
+avatar.style.fontSize="24px";
+const name=document.createElement("span");
+name.className="score-name";
+name.textContent=(index+1)+". "+player.name;
+const score=document.createElement("span");
+score.className="score-value";
+score.textContent=player.score+" ★";
+row.append(avatar,name,score);
+container.append(row);
+}
+);
 }
 
 function updateGame(){
-  const player=state.players[state.turn];
-  if(!player)return;
-
-  $("#avatar").textContent=player.avatar;
-  $("#playerName").textContent=player.name;
-  $("#progress").textContent="Ход "+Math.min(state.taken+1,state.max)+" / "+state.max;
-  $("#currentScore").textContent=player.score+" ★";
-  $("#turnInfo").textContent="Личный раунд "+Math.min(player.turns+1,state.rounds)+" / "+state.rounds;
-  $("#remainingBank").textContent="🎲 В запасе: "+remainingCount();
-  scoreRows("#scores",state.players.slice().sort((a,b)=>b.score-a.score));
+const player=state.players[state.turn];
+if(!player)return;
+$("#avatar").textContent=player.avatar;
+$("#playerName").textContent=player.name;
+$("#progress").textContent="Ход "+Math.min(state.taken+1,state.max)+" / "+state.max;
+$("#currentScore").textContent=player.score+" ★";
+$("#turnInfo").textContent="Личный раунд "+Math.min(player.turns+1,state.rounds)+" / "+state.rounds;
+$("#remainingBank").textContent="🎲 До нового круга: "+remainingCount();
+scoreRows("#scores",state.players.slice().sort((a,b)=>b.score-a.score));
 }
 
 function scrollTopNow(){
-  try{
-    window.scrollTo({top:0,left:0,behavior:"instant"});
-  }catch{
-    window.scrollTo(0,0);
-  }
+try{
+window.scrollTo({
+top:0,left:0,behavior:"instant"}
+);
+}
+catch{
+window.scrollTo(0,0);
+}
 }
 
 function focusWithoutScroll(element){
-  try{element.focus({preventScroll:true});}catch{element.focus();}
+try{
+element.focus({
+preventScroll:true}
+);
+}
+catch{
+element.focus();
+}
+}
+
+function saveGame(){
+try{
+const dataToSave={
+version:4,phase:state.phase,players:state.players,rounds:state.rounds,turn:state.turn,taken:state.taken,max:state.max,enabled:state.enabled,level:state.level,used:Object.fromEntries(Object.entries(state.used).map(([key,set])=>[key,Array.from(set)])),category:state.category,task:state.task,angle:state.angle,deadline:state.deadline,timeLimit:state.timeLimit,recipient:state.recipient,recentTopics:state.recentTopics}
+;
+localStorage.setItem(SAVE_KEY,JSON.stringify(dataToSave));
+}
+catch{
+}
+}
+
+function clearSavedGame(){
+try{
+localStorage.removeItem(SAVE_KEY);
+}
+catch{
+}
 }
 
 function prepareTurn(){
-  $("#challenge").classList.add("hidden");
-  $("#wheelPanel").classList.remove("hidden");
-  $("#spin").classList.remove("hidden");
-  $("#spin").disabled=false;
-  $("#spin").textContent="КРУТИТЬ РУЛЕТКУ";
-
-  updateGame();
-  scrollTopNow();
-  focusWithoutScroll($("#spin"));
+state.phase="turn";
+$("#challenge").classList.add("hidden");
+$("#wheelPanel").classList.remove("hidden");
+$("#spin").classList.remove("hidden");
+$("#spin").disabled=false;
+$("#spin").textContent="КРУТИТЬ РУЛЕТКУ";
+updateGame();
+saveGame();
+scrollTopNow();
+focusWithoutScroll($("#spin"));
 }
 
 function startGame(){
-  const inputs=$$("#playerInputs input");
-  if(inputs.length<2||inputs.length>10){
-    note("Нужно от 2 до 10 игроков");
-    return;
-  }
-  if(inputs.some(input=>!input.value.trim())){
-    note("Заполните имена всех игроков");
-    return;
-  }
-
-  const names=inputs.map(input=>input.value.trim());
-  if(new Set(names.map(name=>name.toLocaleLowerCase("ru"))).size!==names.length){
-    note("Имена игроков должны отличаться");
-    return;
-  }
-
-  const enabled=$$("#categoryChoices input:checked").map(input=>input.value);
-  if(!enabled.length){
-    note("Выберите хотя бы одну категорию");
-    return;
-  }
-
-  const selectedLevel=$('input[name="level"]:checked');
-  if(!selectedLevel){
-    note("Выберите уровень");
-    return;
-  }
-
-  stopAsync();
-  state.players=names.map((name,index)=>({
-    name,
-    avatar:avatars[index],
-    score:0,
-    turns:0
-  }));
-  state.rounds=Number($("#rounds").value);
-  state.turn=0;
-  state.taken=0;
-  state.max=state.players.length*state.rounds;
-  state.enabled=enabled;
-  state.level=selectedLevel.value;
-  state.used={};
-  state.category=null;
-  state.task=null;
-  state.angle=0;
-  state.started=true;
-
-  const wheel=$("#wheel");
-  wheel.style.transition="none";
-  wheel.style.transform="rotate(0deg)";
-  void wheel.offsetWidth;
-
-  $("#setup").classList.add("hidden");
-  $("#results").classList.add("hidden");
-  $("#game").classList.remove("hidden");
-  document.body.classList.add("playing");
-
-  prepareTurn();
-  sfx("success");
-  note("Игра началась! 😈");
+const inputs=$$("#playerInputs input");
+if(inputs.length<2||inputs.length>10){
+note("Нужно от 2 до 10 игроков");
+return;
+}
+if(inputs.some(input=>!input.value.trim())){
+note("Заполните имена всех игроков");
+return;
+}
+const names=inputs.map(el=>el.value.trim());
+if(new Set(names.map(s=>s.toLocaleLowerCase("ru"))).size!==names.length){
+note("Имена игроков должны отличаться");
+return;
+}
+const enabled=$$("#categoryChoices input:checked").map(el=>el.value);
+if(!enabled.length){
+note("Выберите хотя бы одну категорию");
+return;
+}
+const level=$("input[name=level]:checked");
+if(!level){
+note("Выберите уровень");
+return;
+}
+stopAsync();
+state.players=names.map((name,index)=>({
+name,avatar:avatars[index],score:0,turns:0}
+));
+state.rounds=Number($("#rounds").value);
+state.turn=0;
+state.taken=0;
+state.max=state.players.length*state.rounds;
+state.enabled=enabled;
+state.level=level.value;
+state.used={
+}
+;
+state.category=null;
+state.task=null;
+state.recentTopics=[];
+state.recipient="";
+state.angle=0;
+state.deadline=0;
+state.timeLimit=60;
+state.started=true;
+const wheel=$("#wheel");
+buildWheel();
+wheel.style.transition="none";
+wheel.style.transform="rotate(0deg)";
+void wheel.offsetWidth;
+$("#setup").classList.add("hidden");
+$("#results").classList.add("hidden");
+$("#game").classList.remove("hidden");
+document.body.classList.add("playing");
+prepareTurn();
+sfx("success");
+note("Игра началась! 😈");
 }
 
 function spin(){
-  if(!state.started||state.spinning||state.active)return;
-
-  state.spinning=true;
-  $("#spin").disabled=true;
-  $("#spin").textContent="ВРАЩАЕМ…";
-  sfx("spin");
-  buzz(25);
-
-  const key=state.enabled[random(state.enabled.length)];
-  const index=order.indexOf(key);
-  const target=(360-index*60)%360;
-  const current=((state.angle%360)+360)%360;
-  const delta=(target-current+360)%360;
-
-  state.angle+=1440+delta;
-
-  const wheel=$("#wheel");
-  wheel.style.transition=canAnimate()?
-    "transform 3.2s cubic-bezier(.11,.78,.12,1)":"none";
-  wheel.style.transform="rotate("+state.angle+"deg)";
-
-  const token=++state.spinToken;
-  state.spinTimeout=setTimeout(()=>{
-    if(token!==state.spinToken||!state.started)return;
-    state.spinTimeout=null;
-    state.spinning=false;
-    state.category=key;
-    state.task=chooseTask(key);
-    showChallenge();
-  },canAnimate()?3250:60);
+if(!state.started||state.spinning||state.active)return;
+state.spinning=true;
+$("#spin").disabled=true;
+$("#spin").textContent="ВРАЩАЕМ…";
+sfx("spin");
+buzz(25);
+if(remainingCount()===0){
+  state.used={};
+  note("Все карточки пройдены — начинается новый круг");
+}
+const availableKeys=state.enabled.filter(key=>categoryRemaining(key)>0);
+const keys=availableKeys.length?availableKeys:state.enabled;
+const key=keys[random(keys.length)];
+const index=state.enabled.indexOf(key),step=360/state.enabled.length,target=(360-index*step)%360,current=((state.angle%360)+360)%360,delta=(target-current+360)%360;
+state.angle+=1440+delta;
+const wheel=$("#wheel"),animated=canAnimate();
+wheel.style.transition=animated?"transform 3.2s cubic-bezier(.11,.78,.12,1)":"none";
+wheel.style.transform="rotate("+state.angle+"deg)";
+const token=++state.spinToken;
+state.spinTimeout=setTimeout(()=>{
+if(token!==state.spinToken||!state.started)return;
+state.spinTimeout=null;
+state.spinning=false;
+state.category=key;
+state.task=chooseTask(key);
+state.timeLimit=60;
+state.deadline=Date.now()+state.timeLimit*1000;
+showChallenge(false);
+}
+,animated?3250:60);
 }
 
-function showChallenge(){
-  const category=data[state.category];
-  const task=state.task;
-
-  $("#wheelPanel").classList.add("hidden");
-  $("#spin").classList.add("hidden");
-  $("#challenge").classList.remove("hidden");
-
-  $("#badge").textContent=category.emoji+" "+category.name;
-  $("#task").textContent=signature(task);
-  $("#taskMeta").textContent=state.category==="bonus"?
-    "⭐ Бонусные очки":
-    "+"+category.points+" ★ за выполнение";
-  $("#remainingBank").textContent="🎲 В запасе: "+remainingCount();
-
-  const hasAnswer=typeof task==="object"&&Boolean(task.answer);
-  $("#answerBtn").classList.toggle("hidden",!hasAnswer);
-  $("#answerBtn").textContent="🧠 Показать ответ";
-  $("#answerBtn").setAttribute("aria-expanded","false");
-  $("#answerBox").textContent=hasAnswer?task.answer:"";
-  $("#answerBox").classList.add("hidden");
-
-  const needsPartner=state.category==="bonus"&&
-    typeof task==="object"&&
-    (task.effect==="choose"||task.effect==="partner");
-
-  $("#partnerSelect").classList.toggle("hidden",!needsPartner);
-  const select=$("#bonusRecipient");
-  select.replaceChildren();
-
-  if(needsPartner){
-    state.players.forEach((player,index)=>{
-      if(index===state.turn)return;
-      const option=document.createElement("option");
-      option.value=String(index);
-      option.textContent=player.name;
-      select.append(option);
-    });
-  }
-
-  $("#done").disabled=false;
-  $("#skip").disabled=false;
-
-  state.active=true;
-  state.deadline=Date.now()+60000;
-
-  clearInterval(state.timerId);
-  tick();
-  state.timerId=setInterval(tick,200);
-
-  sfx("reveal");
-  scrollTopNow();
-  focusWithoutScroll(hasAnswer?$("#answerBtn"):$("#done"));
+function showChallenge(resume){
+const category=data[state.category],task=state.task;
+$("#wheelPanel").classList.add("hidden");
+$("#spin").classList.add("hidden");
+$("#challenge").classList.remove("hidden");
+$("#badge").textContent=category.emoji+" "+category.name;
+$("#task").textContent=signature(task);
+$("#taskMeta").textContent=state.category==="bonus"?"⭐ Бонусные очки":"+"+category.points+" ★ за выполнение";
+$("#remainingBank").textContent="🎲 До нового круга: "+remainingCount();
+const hasAnswer=typeof task==="object"&&Boolean(task.answer);
+$("#answerBtn").classList.toggle("hidden",!hasAnswer);
+$("#answerBtn").textContent="🧠 Показать ответ";
+$("#answerBtn").setAttribute("aria-expanded","false");
+$("#answerBox").textContent=hasAnswer?task.answer:"";
+$("#answerBox").classList.add("hidden");
+const needsPartner=state.category==="bonus"&&typeof task==="object"&&(task.effect==="choose"||task.effect==="partner");
+$("#partnerSelect").classList.toggle("hidden",!needsPartner);
+const select=$("#bonusRecipient");
+select.replaceChildren();
+if(needsPartner){
+state.players.forEach((player,index)=>{
+if(index===state.turn)return;
+const option=document.createElement("option");
+option.value=String(index);
+option.textContent=player.name;
+select.append(option);
+}
+);
+if(state.recipient&&Array.from(select.options).some(o=>o.value===state.recipient))select.value=state.recipient;
+state.recipient=select.value;
+}
+else state.recipient="";
+$("#done").disabled=false;
+$("#skip").disabled=false;
+state.active=true;
+state.phase="challenge";
+if(!resume){
+state.deadline=Date.now()+state.timeLimit*1000;
+sfx("reveal");
+}
+clearInterval(state.timerId);
+tick();
+if(state.active)state.timerId=setInterval(tick,200);
+saveGame();
+scrollTopNow();
+if(!resume&&state.active)focusWithoutScroll(hasAnswer?$("#answerBtn"):$("#done"));
 }
 
 function tick(){
-  if(!state.active)return;
-
-  const remaining=Math.max(0,state.deadline-Date.now());
-  const seconds=Math.ceil(remaining/1000);
-
-  $("#timer").textContent=seconds;
-  $("#timer").classList.toggle("warning",seconds<=10);
-  $("#fill").style.width=(remaining/600)+"%";
-  $("#fill").style.background=seconds<=10?"var(--red)":"var(--mint)";
-
-  if(remaining===0)finishTurn(false,true);
+if(!state.active)return;
+const remaining=Math.max(0,state.deadline-Date.now()),seconds=Math.ceil(remaining/1000);
+$("#timer").textContent=seconds;
+$("#timer").classList.toggle("warning",seconds<=10);
+$("#fill").style.width=(remaining/(state.timeLimit*10))+"%";
+$("#fill").style.background=seconds<=10?"var(--red)":"var(--mint)";
+if(remaining===0)finishTurn(false,true);
 }
 
 function bonusEffect(task){
-  const player=state.players[state.turn];
-
-  if(task.effect==="all"){
-    state.players.forEach(item=>item.score+=task.points);
-    return "Всем игрокам +"+task.points+" ★";
-  }
-
-  if(task.effect==="choose"||task.effect==="partner"){
-    const value=$("#bonusRecipient").value;
-    if(value==="")return "Бонус не начислен: игрок не выбран";
-
-    const index=Number(value);
-    const chosen=state.players[index];
-
-    if(!Number.isInteger(index)||!chosen||index===state.turn){
-      return "Бонус не начислен: выберите другого игрока";
-    }
-
-    chosen.score+=task.points;
-    if(task.effect==="partner"){
-      player.score+=task.points;
-      return player.name+" и "+chosen.name+": +"+task.points+" ★";
-    }
-    return chosen.name+": +"+task.points+" ★";
-  }
-
-  player.score+=task.points;
-  return player.name+": +"+task.points+" ★";
+const player=state.players[state.turn];
+if(task.effect==="all"){
+state.players.forEach(item=>item.score+=task.points);
+return "Всем игрокам +"+task.points+" ★";
+}
+if(task.effect==="choose"||task.effect==="partner"){
+const val=$("#bonusRecipient").value;
+if(val==="")return "Бонус не начислен: игрок не выбран";
+const index=Number(val),chosen=state.players[index];
+if(!Number.isInteger(index)||!chosen||index===state.turn)return "Бонус не начислен: выберите другого игрока";
+chosen.score+=task.points;
+if(task.effect==="partner"){
+player.score+=task.points;
+return player.name+" и "+chosen.name+": +"+task.points+" ★";
+}
+return chosen.name+": +"+task.points+" ★";
+}
+player.score+=task.points;
+return player.name+": +"+task.points+" ★";
 }
 
 function finishTurn(completed,timedOut=false){
-  if(!state.active)return;
+if(!state.active)return;
+if(Date.now()>=state.deadline){completed=false;timedOut=true;}
+clearInterval(state.timerId);
+state.timerId=null;
+state.active=false;
+$("#done").disabled=true;
+$("#skip").disabled=true;
+const player=state.players[state.turn];
+let message;
+if(completed){
+if(state.category==="bonus")message=bonusEffect(state.task);
+else{
+const points=data[state.category].points;
+player.score+=points;
+message=player.name+": +"+points+" ★";
+}
+sfx("success");
+buzz();
+}
+else{
+message=timedOut?"Время вышло — без штрафа":"Пас принят — без штрафа";
+sfx("skip");
+}
+player.turns++;
+state.taken++;
+if(state.taken>=state.max){
+showResults();
+note(message);
+return;
+}
+state.turn=(state.turn+1)%state.players.length;
+state.task=null;
+state.category=null;
+state.recipient="";
+prepareTurn();
+note(message);
+}
 
-  clearInterval(state.timerId);
-  state.timerId=null;
-  state.active=false;
-
-  $("#done").disabled=true;
-  $("#skip").disabled=true;
-
-  const player=state.players[state.turn];
-  let message;
-
-  if(completed){
-    if(state.category==="bonus"){
-      message=bonusEffect(state.task);
-    }else{
-      const points=data[state.category].points;
-      player.score+=points;
-      message=player.name+": +"+points+" ★";
-    }
-    sfx("success");
-    buzz();
-  }else{
-    message=timedOut?
-      "Время вышло — без штрафа":
-      "Пас принят — без штрафа";
-    sfx("skip");
-  }
-
-  player.turns++;
-  state.taken++;
-
-  if(state.taken>=state.max){
-    showResults();
-    note(message);
-    return;
-  }
-
-  state.turn=(state.turn+1)%state.players.length;
-  prepareTurn();
-  note(message);
+function renderResults(playEffects){
+stopAsync();
+state.started=false;
+state.phase="results";
+document.body.classList.remove("playing");
+$("#game").classList.add("hidden");
+$("#setup").classList.add("hidden");
+$("#results").classList.remove("hidden");
+const sorted=state.players.slice().sort((a,b)=>b.score-a.score),top=sorted.length?sorted[0].score:0,winners=sorted.filter(p=>p.score===top);
+$("#winner").textContent=winners.length>1?"🤝 Ничья: "+winners.map(p=>p.name).join(", "):winners.length?"👑 "+winners[0].name+" — король каверз!":"Игра завершена";
+scoreRows("#finalScores",sorted);
+saveGame();
+if(playEffects){
+sfx("win");
+confetti();
+}
+scrollTopNow();
+if(playEffects)focusWithoutScroll($("#again"));
 }
 
 function showResults(){
-  stopAsync();
-  state.started=false;
-  document.body.classList.remove("playing");
-
-  $("#game").classList.add("hidden");
-  $("#setup").classList.add("hidden");
-  $("#results").classList.remove("hidden");
-
-  const sorted=state.players.slice().sort((a,b)=>b.score-a.score);
-  const top=sorted.length?sorted[0].score:0;
-  const winners=sorted.filter(player=>player.score===top);
-
-  $("#winner").textContent=winners.length>1?
-    "🤝 Ничья: "+winners.map(player=>player.name).join(", "):
-    winners.length?"👑 "+winners[0].name+" — король каверз!":"Игра завершена";
-
-  scoreRows("#finalScores",sorted);
-  sfx("win");
-  confetti();
-  scrollTopNow();
-  focusWithoutScroll($("#again"));
+renderResults(true);
 }
 
 function backToSetup(){
-  stopAsync();
-  state.started=false;
-  document.body.classList.remove("playing");
+stopAsync();
+state.started=false;
+state.phase="setup";
+document.body.classList.remove("playing");
+renderInputs(state.players.length?state.players.map(p=>p.name):["Игрок 1","Игрок 2"]);
+$("#rounds").value=String(state.rounds);
+const level=$("input[name=level][value="+state.level+"]");
+if(level)level.checked=true;
+$$("#categoryChoices input").forEach(el=>el.checked=state.enabled.length?state.enabled.includes(el.value):true);
+$("#game").classList.add("hidden");
+$("#results").classList.add("hidden");
+$("#setup").classList.remove("hidden");
+clearSavedGame();
+scrollTopNow();
+}
 
-  renderInputs(state.players.length?
-    state.players.map(player=>player.name):
-    ["Игрок 1","Игрок 2"]);
-
-  $("#game").classList.add("hidden");
-  $("#results").classList.add("hidden");
-  $("#setup").classList.remove("hidden");
-  scrollTopNow();
+function restoreGame(){
+let raw;
+try{
+raw=localStorage.getItem(SAVE_KEY);
+}
+catch{
+return false;
+}
+if(!raw)return false;
+try{
+const saved=JSON.parse(raw);
+if(saved.version!==4||!["turn","challenge","results"].includes(saved.phase)||!Array.isArray(saved.players)||saved.players.length<2||saved.players.length>10||!Array.isArray(saved.enabled)||!saved.enabled.length||!saved.enabled.every(key=>order.includes(key))||!["soft","bold"].includes(saved.level)||!Number.isInteger(saved.taken)||!Number.isInteger(saved.turn)||saved.turn<0||saved.turn>=saved.players.length||![5,7,10,15,25].includes(saved.rounds)||saved.max!==saved.players.length*saved.rounds||saved.taken<0||saved.taken>saved.max||!saved.players.every(p=>typeof p.name==="string"&&p.name.length>0&&Number.isFinite(p.score)&&Number.isInteger(p.turns)))throw Error("invalid save");
+stopAsync();
+state.players=saved.players;
+state.rounds=saved.rounds;
+state.turn=saved.turn;
+state.taken=saved.taken;
+state.max=saved.max;
+state.enabled=saved.enabled;
+state.level=saved.level;
+state.used=Object.fromEntries(Object.entries(saved.used||{
+}
+).filter(([key,val])=>order.includes(key)&&Array.isArray(val)).map(([key,val])=>[key,new Set(val.filter(s=>typeof s==="string"))]));
+state.category=saved.category;
+state.task=saved.task;
+state.angle=Number(saved.angle)||0;
+state.deadline=Number(saved.deadline)||0;
+state.timeLimit=60;
+if(saved.phase==="challenge"){
+ if(!state.enabled.includes(state.category)||!state.task)throw Error("invalid task");
+ const canonical=taskPool(state.category).find(t=>signature(t)===signature(state.task));
+ if(!canonical||!Number.isFinite(saved.deadline)||saved.deadline<=0)throw Error("invalid task");
+ state.task=canonical;
+}
+state.recipient=String(saved.recipient||"");
+state.recentTopics=Array.isArray(saved.recentTopics)?saved.recentTopics.slice(-12):[];
+if(new Set(saved.enabled).size!==saved.enabled.length||!saved.players.every(p=>p.name.length<=24&&Number.isSafeInteger(p.score)&&p.score>=0&&p.score<=10000&&p.turns>=0&&p.turns<=saved.rounds)||saved.players.reduce((n,p)=>n+p.turns,0)!==saved.taken)throw Error("invalid totals");
+state.phase=saved.phase;
+state.started=saved.phase!=="results";
+renderInputs(state.players.map(p=>p.name));
+$("#rounds").value=String(state.rounds);
+$("input[name=level][value="+state.level+"]").checked=true;
+$$("#categoryChoices input").forEach(el=>el.checked=state.enabled.includes(el.value));
+buildWheel();
+$("#wheel").style.transition="none";
+$("#wheel").style.transform="rotate("+state.angle+"deg)";
+if(state.phase==="results"){
+renderResults(false);
+return true;
+}
+$("#setup").classList.add("hidden");
+$("#results").classList.add("hidden");
+$("#game").classList.remove("hidden");
+document.body.classList.add("playing");
+if(state.phase==="challenge"&&state.category&&state.enabled.includes(state.category)&&state.task&&state.deadline>0){
+updateGame();
+showChallenge(true);
+}
+else prepareTurn();
+return true;
+}
+catch{
+stopAsync();state.started=false;state.players=[];state.enabled=[];
+document.body.classList.remove("playing");
+$("#game").classList.add("hidden");$("#results").classList.add("hidden");$("#setup").classList.remove("hidden");
+clearSavedGame();
+return false;
+}
 }
 
 function showBankInfo(){
-  const total=order.reduce((sum,key)=>{
-    return sum+data[key].soft.length+data[key].bold.length;
-  },0);
-  $("#bankInfo").textContent=
-    "🎲 "+total.toLocaleString("ru-RU")+" заданий • два уровня сложности";
+const total=order.reduce((sum,key)=>sum+data[key].soft.length+data[key].bold.length,0);
+$("#bankInfo").textContent="🎲 "+total.toLocaleString("ru-RU")+" заданий • два уровня сложности";
 }
 
 $("#addPlayer").addEventListener("click",()=>{
-  const names=$$("#playerInputs input").map(input=>input.value);
-  if(names.length>=10)return;
-  renderInputs(names.concat(""));
-  const inputs=$$("#playerInputs input");
-  inputs[inputs.length-1].focus();
-});
+const names=$$("#playerInputs input").map(el=>el.value);
+if(names.length>=10)return;
+renderInputs(names.concat(""));
+const inputs=$$("#playerInputs input");
+inputs[inputs.length-1].focus();
+}
+);
 
 $("#start").addEventListener("click",startGame);
+
 $("#spin").addEventListener("click",spin);
+
 $("#done").addEventListener("click",()=>finishTurn(true));
+
 $("#skip").addEventListener("click",()=>finishTurn(false));
 
 $("#endGame").addEventListener("click",()=>{
-  if(state.started&&confirm("Закончить игру и показать результаты?")){
-    showResults();
-  }
-});
+if(state.started&&confirm("Закончить игру и показать результаты?"))showResults();
+}
+);
 
 $("#again").addEventListener("click",()=>{
-  renderInputs(state.players.map(player=>player.name));
-  startGame();
-});
+renderInputs(state.players.map(p=>p.name));
+startGame();
+}
+);
 
 $("#changeSettings").addEventListener("click",backToSetup);
 
 $("#answerBtn").addEventListener("click",()=>{
-  const hidden=$("#answerBox").classList.toggle("hidden");
-  $("#answerBtn").textContent=hidden?
-    "🧠 Показать ответ":"🙈 Скрыть ответ";
-  $("#answerBtn").setAttribute("aria-expanded",String(!hidden));
-});
+const hidden=$("#answerBox").classList.toggle("hidden");
+$("#answerBtn").textContent=hidden?"🧠 Показать ответ":"🙈 Скрыть ответ";
+$("#answerBtn").setAttribute("aria-expanded",String(!hidden));
+}
+);
+
+$("#bonusRecipient").addEventListener("change",event=>{
+state.recipient=event.target.value;
+saveGame();
+}
+);
 
 $("#soundToggle").addEventListener("click",()=>{
-  state.sound=!state.sound;
-  saveFlag("kaverza-sound",state.sound);
-  refreshSettings();
-  if(state.sound)sfx("click");
-});
+state.sound=!state.sound;
+saveFlag("kaverza-sound",state.sound);
+refreshSettings();
+if(state.sound)sfx("click");
+}
+);
 
 $("#motionToggle").addEventListener("click",()=>{
-  state.motion=!state.motion;
-  saveFlag("kaverza-motion",state.motion);
-  refreshSettings();
-  note(state.motion?"Эффекты включены":"Эффекты отключены");
-});
+state.motion=!state.motion;
+saveFlag("kaverza-motion",state.motion);
+refreshSettings();
+note(state.motion?"Эффекты включены":"Эффекты отключены");
+}
+);
 
 document.addEventListener("click",event=>{
-  const button=event.target.closest("button");
-  if(button&&button.id!=="soundToggle")sfx("click");
-});
+const button=event.target.closest("button");
+if(button&&!["soundToggle","spin","done","skip","start","again","endGame"].includes(button.id))sfx("click");
+}
+);
 
-/* Удерживание Enter на пульте не должно выполнять несколько ходов. */
 document.addEventListener("keydown",event=>{
-  if(event.key!=="Enter"&&event.key!==" ")return;
-  const button=event.target.closest("button");
-  if(!button)return;
-
-  if(event.repeat){
-    event.preventDefault();
-    event.stopImmediatePropagation();
-    return;
-  }
-
-  const now=Date.now();
-  if(now-lastKeyboardActivation<250){
-    event.preventDefault();
-    return;
-  }
-  lastKeyboardActivation=now;
-},true);
+if(event.key!=="Enter"&&event.key!==" ")return;
+const button=event.target.closest("button");
+if(!button)return;
+if(event.repeat){
+event.preventDefault();
+event.stopImmediatePropagation();
+return;
+}
+const now=Date.now();
+if(now-lastKeyboardActivation<250){
+event.preventDefault();
+return;
+}
+lastKeyboardActivation=now;
+}
+,true);
 
 window.addEventListener("pagehide",()=>{
-  if(audioContext&&audioContext.state==="running"){
-    audioContext.suspend().catch(()=>{});
-  }
-});
+if(audioContext&&audioContext.state==="running")audioContext.suspend().catch(()=>{
+}
+);
+}
+);
 
-buildWheel();
 renderInputs(["Игрок 1","Игрок 2"]);
 refreshSettings();
 showBankInfo();
-</script>
+buildWheel();
+if(window.matchMedia){const mq=window.matchMedia("(prefers-reduced-motion: reduce)");if(mq.addEventListener)mq.addEventListener("change",refreshSettings);}
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)tick();});
+window.addEventListener("pageshow",()=>{tick();if(audioContext&&state.sound&&audioContext.state==="suspended")audioContext.resume().catch(()=>{});});
+if(restoreGame())note("Предыдущая партия восстановлена 🎲");
 
-<script src="./kaverza-metrika.js" defer></script>
+</script>
+<!-- Метрика: укажите действительный ID вашего счётчика вместо 0. -->
+<script>
+const METRIKA_ID=0;
+if(Number.isSafeInteger(METRIKA_ID)&&METRIKA_ID>0){
+ window.ym=window.ym||function(){(window.ym.a=window.ym.a||[]).push(arguments)};
+ window.ym.l=Date.now();
+ const tag=document.createElement("script");tag.async=true;tag.src="https://mc.yandex.ru/metrika/tag.js";document.head.append(tag);
+ ym(METRIKA_ID,"init",{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});
+}
+</script>
 </body>
 </html>
