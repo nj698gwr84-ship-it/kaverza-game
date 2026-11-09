@@ -199,6 +199,9 @@ function renderInputs(names) {
     input.autocomplete = "off";
     input.value = name;
     input.placeholder = "Игрок " + (index + 1);
+    input.addEventListener("change", () =>
+      audio.prepareNames([input.value.trim()]),
+    );
     input.setAttribute("aria-label", "Имя игрока " + (index + 1));
     const remove = document.createElement("button");
     remove.className = "remove";
@@ -237,28 +240,35 @@ function buildWheel() {
   const keys = state.enabled.length ? state.enabled : order,
     n = keys.length,
     step = 360 / n;
-  wheel.style.background =
-    "conic-gradient(from " +
-    -step / 2 +
-    "deg, " +
-    keys
-      .map((key, i) => {
-        const color = PALETTE[order.indexOf(key)];
-        return (
-          color +
-          " " +
-          i * step +
-          "deg " +
-          ((i + 1) * step - 0.75) +
-          "deg, #140c29 " +
-          ((i + 1) * step - 0.75) +
-          "deg " +
-          (i + 1) * step +
-          "deg"
-        );
-      })
-      .join(", ") +
-    ")";
+  const svg = "http://www.w3.org/2000/svg";
+  const sectors = $("#wheelSectors");
+  sectors.replaceChildren();
+  const edge = (angle) => {
+    const rad = ((angle - 90) * Math.PI) / 180;
+    return [160 + 156 * Math.cos(rad), 160 + 156 * Math.sin(rad)].join(" ");
+  };
+  keys.forEach((key, index) => {
+    const sector = document.createElementNS(svg, n === 1 ? "circle" : "path");
+    if (n === 1) {
+      sector.setAttribute("cx", "160");
+      sector.setAttribute("cy", "160");
+      sector.setAttribute("r", "156");
+    } else {
+      const center = index * step;
+      sector.setAttribute(
+        "d",
+        "M 160 160 L " +
+          edge(center - step / 2) +
+          " A 156 156 0 0 1 " +
+          edge(center + step / 2) +
+          " Z",
+      );
+      sector.setAttribute("stroke", "#231235");
+      sector.setAttribute("stroke-width", "1.5");
+    }
+    sector.setAttribute("fill", PALETTE[order.indexOf(key)]);
+    sectors.append(sector);
+  });
   keys.forEach((key, index) => {
     const label = document.createElement("span");
     label.className = "wheel-label";
@@ -451,7 +461,7 @@ function prepareTurn(gains = []) {
   $("#wheel")
     .querySelectorAll(".selected-sector")
     .forEach((label) => label.classList.remove("selected-sector"));
-  $("#wheelPanel").classList.remove("wheel-result");
+  $("#wheelPanel").classList.remove("wheel-result", "wheel-spinning");
   state.phase = "turn";
   $("#challenge").classList.add("hidden");
   $("#wheelPanel").classList.remove("hidden");
@@ -488,6 +498,7 @@ function startGame() {
   }
 
   stopAsync();
+  audio.prepareNames(names);
   state.players = names.map((name, index) => ({
     name,
     avatar: avatars[index],
@@ -537,6 +548,7 @@ function spin() {
   audio.unlock();
   audio.stopVoice();
   state.spinning = true;
+  $("#wheelPanel").classList.add("wheel-spinning");
   $("#spin").disabled = true;
   $("#spin").textContent = "ВРАЩАЕМ…";
   sfx("spin");
@@ -579,6 +591,7 @@ function spin() {
       wheel
         .querySelector('[data-key="' + key + '"]')
         .classList.add("selected-sector");
+      $("#wheelPanel").classList.remove("wheel-spinning");
       $("#wheelPanel").classList.add("wheel-result");
       sfx("stop");
       sfx("category");
@@ -1119,7 +1132,11 @@ $("#soundToggle").addEventListener("click", () => {
   audio.set("enabled", state.sound);
   saveFlag("kaverza-sound", state.sound);
   refreshSettings();
-  if (state.sound) sfx("click");
+  updateVoiceStatus();
+  if (state.sound) {
+    audio.unlock();
+    sfx("click");
+  }
 });
 
 $("#motionToggle").addEventListener("click", () => {
@@ -1189,9 +1206,23 @@ const soundSettings = {
   voiceVolume: ["voiceVolume", false],
 };
 function updateVoiceStatus() {
-  $("#voiceStatus").textContent = audio.hasVoice()
-    ? "Русский голос устройства доступен"
-    : "Русский голос устройства пока недоступен";
+  $("#voiceStatus").textContent = !audio.settings.voice
+    ? "Ведущий выключен"
+    : audio.hasVoice()
+      ? "Русский ведущий · нейросетевая озвучка"
+      : "Реплики загружаются при включённом звуке";
+  const status = audio.nickStatus();
+  const nickname = $("#nicknameStatus");
+  nickname.textContent =
+    status === "loading"
+      ? "Готовим голос для ников. Можно начинать игру."
+      : status === "error"
+        ? "Голос для новых ников пока недоступен. Игра работает."
+        : "";
+  nickname.classList.toggle(
+    "hidden",
+    !audio.settings.enabled || !audio.settings.voice || !nickname.textContent,
+  );
 }
 Object.entries(soundSettings).forEach(([id, [key, checkbox]]) => {
   const input = $("#" + id);
@@ -1200,7 +1231,14 @@ Object.entries(soundSettings).forEach(([id, [key, checkbox]]) => {
   input.addEventListener("input", () => {
     audio.set(key, checkbox ? input.checked : Number(input.value) / 100);
     if (key === "effects" && input.value > 0) sfx("click");
+    if (key === "voice") updateVoiceStatus();
   });
+});
+$("#audioTest").addEventListener("click", () => {
+  if (!state.sound) $("#soundToggle").click();
+  audio.unlock();
+  sfx("success");
+  voice("preview", {});
 });
 audio.onVoicesChanged(updateVoiceStatus);
 updateVoiceStatus();

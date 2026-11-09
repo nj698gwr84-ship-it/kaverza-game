@@ -8,7 +8,7 @@
 <title>КАВЕРЗА 2.0 — игра для компании</title>
 <script>window.yaContextCb=window.yaContextCb||[];</script>
 <script src="https://yandex.ru/ads/system/context.js" async></script>
-<link rel="stylesheet" href="kaverza.css">
+<link rel="stylesheet" href="kaverza.css?v=2.0.2">
 
 </head>
 <body>
@@ -29,6 +29,7 @@
         <label class="setting-line"><span>Громкость музыки</span><input id="musicVolume" type="range" min="0" max="100"></label>
         <label class="setting-line"><span>Голосовой ведущий</span><input id="voiceToggle" type="checkbox"></label>
         <label class="setting-line"><span>Громкость ведущего</span><input id="voiceVolume" type="range" min="0" max="100"></label>
+        <button class="icon-btn" id="audioTest" type="button">♫ Проверить звук</button>
         <small id="voiceStatus" class="muted"></small>
       </div>
     </details>
@@ -53,6 +54,7 @@
 </div>
 <div class="player-list" id="playerInputs">
 </div>
+<p class="muted hidden" id="nicknameStatus" role="status"></p>
 </div>
     <div class="field">
 <span class="field-title" id="roundLabel">Раундов на игрока</span>
@@ -125,8 +127,19 @@
 <div class="pointer">
 </div>
 <div class="wheel" id="wheel">
-<div class="wheel-center" aria-hidden="true">ϟ</div>
+  <svg class="wheel-face" viewBox="0 0 320 320" aria-hidden="true">
+    <defs>
+      <radialGradient id="wheelShade">
+        <stop offset="0" stop-color="#1b1029" stop-opacity=".36"/>
+        <stop offset=".73" stop-color="#1b1029" stop-opacity="0"/>
+        <stop offset="1" stop-color="#1b1029" stop-opacity=".32"/>
+      </radialGradient>
+    </defs>
+    <g id="wheelSectors"></g>
+    <circle cx="160" cy="160" r="156" fill="url(#wheelShade)" stroke="#f7d7ff" stroke-width="3.5"/>
+  </svg>
 </div>
+<div class="wheel-center" aria-hidden="true">ϟ</div>
 </div>
 </div>
   <div class="panel challenge hidden" id="challenge">
@@ -189,8 +202,8 @@
 </div>
 <script src="kaverza-cards.js"></script>
 <script src="kaverza-card-engine.js"></script>
-<script src="kaverza-audio.js"></script>
-<script src="kaverza-game.js"></script>
+<script src="kaverza-audio.js?v=2.0.2"></script>
+<script src="kaverza-game.js?v=2.0.2"></script>
 <!-- Метрика: укажите действительный ID вашего счётчика вместо 0. -->
 <script>
 const METRIKA_ID=113760198;
