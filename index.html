@@ -216,5 +216,12 @@ if(Number.isSafeInteger(METRIKA_ID)&&METRIKA_ID>0){
  ym(METRIKA_ID,"init",{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});
 }
 </script>
+<script>
+document.getElementById('start').addEventListener('click', function () {
+  if (typeof window.ym === 'function') {
+    window.ym(113760198, 'reachGoal', 'game_start');
+  }
+});
+</script>
 </body>
 </html>
