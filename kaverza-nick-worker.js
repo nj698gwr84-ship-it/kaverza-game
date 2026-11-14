@@ -1,5 +1,60 @@
 "use strict";
 
+  // A stable spoken form: text is never inserted as HTML or silently discarded.
+  function spokenNickname(value) {
+    const latin = {
+      a: "а", b: "б", c: "к", d: "д", e: "е", f: "ф", g: "г",
+      h: "х", i: "и", j: "дж", k: "к", l: "л", m: "м", n: "н",
+      o: "о", p: "п", q: "кв", r: "р", s: "с", t: "т", u: "у",
+      v: "в", w: "в", x: "кс", y: "й", z: "з",
+    };
+    const digits = ["ноль", "один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять"];
+    const symbols = {
+      "_": "подчёркивание", "-": "дефис", ".": "точка", ",": "запятая",
+      "!": "восклицательный знак", "?": "вопросительный знак", "@": "собака",
+      "#": "решётка", "$": "доллар", "%": "процент", "&": "амперсанд",
+      "*": "звёздочка", "+": "плюс", "=": "равно", "/": "слэш",
+      "\\": "обратный слэш", ":": "двоеточие", ";": "точка с запятой",
+      "(": "открывающая скобка", ")": "закрывающая скобка",
+      "[": "открывающая квадратная скобка", "]": "закрывающая квадратная скобка",
+      "{": "открывающая фигурная скобка", "}": "закрывающая фигурная скобка",
+      "<": "меньше", ">": "больше", "|": "вертикальная черта",
+      "~": "тильда", "^": "крышечка", "`": "обратная кавычка",
+      '"': "кавычка", "'": "апостроф", "№": "номер", "€": "евро", "₽": "рубль",
+      "🔥": "огонь", "😈": "чертёнок", "😎": "крутой смайлик", "😂": "смех",
+      "😀": "улыбка", "😁": "улыбка", "🤣": "смех", "😊": "улыбка",
+      "🥰": "улыбка с сердечками", "😍": "влюблённый смайлик", "💜": "фиолетовое сердце",
+      "❤": "сердце", "♥": "сердце", "💙": "синее сердце", "💚": "зелёное сердце",
+      "💛": "жёлтое сердце", "★": "звезда", "⭐": "звезда", "✨": "искры",
+      "⚡": "молния", "☠": "череп", "💀": "череп", "👑": "корона",
+      "🎮": "геймпад", "🐱": "кот", "🐈": "кот", "🐺": "волк", "🦊": "лиса",
+      "👍": "палец вверх", "👎": "палец вниз", "🤖": "робот", "🚀": "ракета",
+      "💩": "какашка", "🇷🇺": "флаг России",
+    };
+    const hexLetters = { a: "а", b: "бэ", c: "цэ", d: "дэ", e: "е", f: "эф" };
+    const code = (character) => Array.from(character).map((part) =>
+      Array.from(part.codePointAt(0).toString(16)).map((digit) =>
+        digits[Number(digit)] || hexLetters[digit],
+      ).join(" "),
+    ).join(" затем ");
+    const text = String(value).normalize("NFC");
+    const chunks = typeof Intl.Segmenter === "function"
+      ? Array.from(new Intl.Segmenter("ru", { granularity: "grapheme" }).segment(text), (part) => part.segment)
+      : Array.from(text);
+    return chunks.map((chunk) => {
+      // Variation selectors change emoji presentation, not its spoken name.
+      const plain = chunk.replace(/[\uFE0E\uFE0F]/g, "");
+      if (symbols[plain]) return " " + symbols[plain] + " ";
+      if (/^[А-Яа-яЁё]$/.test(plain)) return plain;
+      if (/^[A-Za-z]$/.test(plain)) return latin[plain.toLowerCase()];
+      if (/^\d$/.test(plain)) return " " + digits[Number(plain)] + " ";
+      if (/^\s+$/u.test(plain)) return " ";
+      if (!plain) return "";
+      return " символ юникод " + code(plain) + " ";
+    }).join("").replace(/\s+/g, " ").trim() || "Пустой ник";
+  }
+
+
 const ROOT = new URL("./", self.location.href);
 const SAMPLE_RATE = 22050;
 let engine;
@@ -72,14 +127,7 @@ async function initialize() {
 }
 
 function normalizeNickname(value) {
-  const words = value
-    .normalize("NFC")
-    .replace(/([\p{Ll}\d])([\p{Lu}])/gu, "$1 $2")
-    .replace(/[_./\\-]+/gu, " ")
-    .replace(/[^\p{L}\p{N}\p{M} !?+]+/gu, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-  return words.slice(0, 42);
+  return spokenNickname(value);
 }
 
 async function synthesize(nickname) {
@@ -87,6 +135,7 @@ async function synthesize(nickname) {
   const spoken = /[\p{L}\p{N}]/u.test(text) ? text : "Ник из символов";
   const {ort, session, phonemeData, phonemeWasm} = await (engine ??= initialize().catch(
     (error) => {
+      engine = null;
       throw Error("Voice initialization: " + error);
     },
   ));

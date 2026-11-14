@@ -52,7 +52,25 @@ let toastId = null,
   lastKeyboardActivation = 0;
 const audio = KaverzaAudio.create({ enabled: state.sound });
 const sfx = audio.sfx;
-const voice = audio.announce;
+let startingGame = false, turnVoiceToken = 0, pendingTurnVoice = null;
+const voice = (event, details) => {
+  const locksSpin = ["start", "turn", "round"].includes(event) &&
+    audio.settings.enabled && audio.settings.voice && audio.settings.voiceVolume > 0;
+  const token = locksSpin ? ++turnVoiceToken : turnVoiceToken;
+  if (locksSpin) {
+    pendingTurnVoice = { event, details };
+    $("#spin").disabled = true;
+    $("#spin").textContent = "ВЕДУЩИЙ ОБЪЯВЛЯЕТ ИГРОКА…";
+  }
+  return Promise.resolve(audio.announce(event, details)).then((ok) => {
+    if (!locksSpin || token !== turnVoiceToken || state.phase !== "turn") return ok;
+    if (ok) pendingTurnVoice = null;
+    $("#spin").disabled = false;
+    $("#spin").textContent = ok ? "КРУТИТЬ РУЛЕТКУ" : "ПОВТОРИТЬ ОЗВУЧКУ ИГРОКА";
+    if (!ok) note("Не удалось объявить игрока. Нажмите «Повторить озвучку игрока».");
+    return ok;
+  });
+};
 
 function readFlag(key, fallback) {
   try {
@@ -474,7 +492,8 @@ function prepareTurn(gains = []) {
   focusWithoutScroll($("#spin"));
 }
 
-function startGame() {
+async function startGame() {
+  if (startingGame) return;
   const inputs = $$("#playerInputs input");
   if (inputs.length < 2 || inputs.length > 10) {
     note("Нужно от 2 до 10 игроков");
@@ -497,15 +516,28 @@ function startGame() {
     return;
   }
 
+  const rounds = Number($("#rounds").value);
+  const controls = $$("#setup input, #setup button, #setup select").concat([$("#again"), $("#changeSettings")]);
+  const disabled = controls.map((control) => control.disabled);
+  const startLabel = $("#start").textContent;
+  startingGame = true;
+  controls.forEach((control) => { control.disabled = true; });
+  $("#start").textContent = "ВЕДУЩИЙ ЗНАКОМИТСЯ С ИГРОКАМИ…";
+  try {
+  const ready = await audio.prepareGameNames(names);
+  if (!ready) {
+    note("Не удалось озвучить ники. Нажмите «Начать» ещё раз и проверьте звук устройства.");
+    return;
+  }
   stopAsync();
-  audio.prepareNames(names);
+  pendingTurnVoice = null;
   state.players = names.map((name, index) => ({
     name,
     avatar: avatars[index],
     score: 0,
     turns: 0,
   }));
-  state.rounds = Number($("#rounds").value);
+  state.rounds = rounds;
   state.turn = 0;
   state.taken = 0;
   state.max = state.players.length * state.rounds;
@@ -535,9 +567,25 @@ function startGame() {
   sfx("start");
   voice("start", { player: state.players[0].name });
   note("Игра началась! 😈");
+  } catch (error) {
+    console.warn("Каверза: не удалось подготовить ведущего", error);
+    note("Не удалось подготовить ведущего. Попробуйте начать ещё раз.");
+  } finally {
+    controls.forEach((control, index) => { control.disabled = disabled[index]; });
+    $("#start").textContent = startLabel;
+    startingGame = false;
+  }
 }
 
 function spin() {
+  if (audio.isSpeaking()) return;
+  if (pendingTurnVoice) {
+    if (audio.settings.enabled && audio.settings.voice && audio.settings.voiceVolume > 0) {
+      voice(pendingTurnVoice.event, pendingTurnVoice.details);
+      return;
+    }
+    pendingTurnVoice = null;
+  }
   if (
     !state.started ||
     state.phase !== "turn" ||
@@ -1209,15 +1257,15 @@ function updateVoiceStatus() {
   $("#voiceStatus").textContent = !audio.settings.voice
     ? "Ведущий выключен"
     : audio.hasVoice()
-      ? "Русский ведущий · нейросетевая озвучка"
+      ? audio.usesDeviceVoice() ? "Русский ведущий · голос устройства" : "Русский ведущий · локальный голос"
       : "Реплики загружаются при включённом звуке";
   const status = audio.nickStatus();
   const nickname = $("#nicknameStatus");
   nickname.textContent =
     status === "loading"
-      ? "Готовим голос для ников. Можно начинать игру."
+      ? "Проверяем озвучку ников перед первым раундом…"
       : status === "error"
-        ? "Голос для новых ников пока недоступен. Игра работает."
+        ? "Ники не удалось озвучить. Проверьте звук и нажмите «Начать» ещё раз."
         : "";
   nickname.classList.toggle(
     "hidden",
@@ -1263,6 +1311,10 @@ window.addEventListener("pageshow", () => {
   tick();
 });
 const restored = restoreGame();
+if (restored && state.started && state.phase === "turn") {
+  pendingTurnVoice = { event: "turn", details: { player: state.players[state.turn].name } };
+  $("#spin").textContent = "ПРОДОЛЖИТЬ С ВЕДУЩИМ";
+}
 if (restored)
   note(
     restored === "replay"
