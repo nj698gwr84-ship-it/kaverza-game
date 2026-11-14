@@ -198,74 +198,6 @@ const KaverzaAudio = (() => {
     }
     return { ids, names };
   }
-  // A stable spoken form: text is never inserted as HTML or silently discarded.
-  function spokenNickname(value) {
-    const latin = {
-      a: "а", b: "б", c: "к", d: "д", e: "е", f: "ф", g: "г",
-      h: "х", i: "и", j: "дж", k: "к", l: "л", m: "м", n: "н",
-      o: "о", p: "п", q: "кв", r: "р", s: "с", t: "т", u: "у",
-      v: "в", w: "в", x: "кс", y: "й", z: "з",
-    };
-    const digits = ["ноль", "один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять"];
-    const symbols = {
-      "_": "подчёркивание", "-": "дефис", ".": "точка", ",": "запятая",
-      "!": "восклицательный знак", "?": "вопросительный знак", "@": "собака",
-      "#": "решётка", "$": "доллар", "%": "процент", "&": "амперсанд",
-      "*": "звёздочка", "+": "плюс", "=": "равно", "/": "слэш",
-      "\\": "обратный слэш", ":": "двоеточие", ";": "точка с запятой",
-      "(": "открывающая скобка", ")": "закрывающая скобка",
-      "[": "открывающая квадратная скобка", "]": "закрывающая квадратная скобка",
-      "{": "открывающая фигурная скобка", "}": "закрывающая фигурная скобка",
-      "<": "меньше", ">": "больше", "|": "вертикальная черта",
-      "~": "тильда", "^": "крышечка", "`": "обратная кавычка",
-      '"': "кавычка", "'": "апостроф", "№": "номер", "€": "евро", "₽": "рубль",
-      "🔥": "огонь", "😈": "чертёнок", "😎": "крутой смайлик", "😂": "смех",
-      "😀": "улыбка", "😁": "улыбка", "🤣": "смех", "😊": "улыбка",
-      "🥰": "улыбка с сердечками", "😍": "влюблённый смайлик", "💜": "фиолетовое сердце",
-      "❤": "сердце", "♥": "сердце", "💙": "синее сердце", "💚": "зелёное сердце",
-      "💛": "жёлтое сердце", "★": "звезда", "⭐": "звезда", "✨": "искры",
-      "⚡": "молния", "☠": "череп", "💀": "череп", "👑": "корона",
-      "🎮": "геймпад", "🐱": "кот", "🐈": "кот", "🐺": "волк", "🦊": "лиса",
-      "👍": "палец вверх", "👎": "палец вниз", "🤖": "робот", "🚀": "ракета",
-      "💩": "какашка", "🇷🇺": "флаг России",
-    };
-    const hexLetters = { a: "а", b: "бэ", c: "цэ", d: "дэ", e: "е", f: "эф" };
-    const code = (character) => Array.from(character).map((part) =>
-      Array.from(part.codePointAt(0).toString(16)).map((digit) =>
-        digits[Number(digit)] || hexLetters[digit],
-      ).join(" "),
-    ).join(" затем ");
-    const text = String(value).normalize("NFC");
-    const chunks = typeof Intl.Segmenter === "function"
-      ? Array.from(new Intl.Segmenter("ru", { granularity: "grapheme" }).segment(text), (part) => part.segment)
-      : Array.from(text);
-    return chunks.map((chunk) => {
-      // Variation selectors change emoji presentation, not its spoken name.
-      const plain = chunk.replace(/[\uFE0E\uFE0F]/g, "");
-      if (symbols[plain]) return " " + symbols[plain] + " ";
-      if (/^[А-Яа-яЁё]$/.test(plain)) return plain;
-      if (/^[A-Za-z]$/.test(plain)) return latin[plain.toLowerCase()];
-      if (/^\d$/.test(plain)) return " " + digits[Number(plain)] + " ";
-      if (/^\s+$/u.test(plain)) return " ";
-      if (!plain) return "";
-      return " символ юникод " + code(plain) + " ";
-    }).join("").replace(/\s+/g, " ").trim() || "Пустой ник";
-  }
-
-  function narration(event, details) {
-    const name = (value) => spokenNickname(value || "Игрок");
-    if (event === "start") return "Вечеринка начинается! Первым ходит " + name(details.player) + ".";
-    if (event === "turn") return "Следующий ход. " + name(details.player) + ".";
-    if (event === "round") return "Раунд " + details.round + ". Ходит " + name(details.player) + ".";
-    if (event === "card") {
-      const cast = details.cast || [];
-      return "Категория: " + details.category + "." +
-        (cast.length ? " Участвуют: " + cast.map(name).join(". ") + "." : "");
-    }
-    if (event === "end") return (details.winners.length > 1 ? "Победители: " : "Победитель: ") + details.winners.map(name).join(". ") + ". Поздравляем!";
-    return "Привет! Я ведущий игры Каверза. Я буду объявлять ваши ники.";
-  }
-
   const key = "kaverza-audio-v2";
 
   function create({ enabled }) {
@@ -298,23 +230,8 @@ const KaverzaAudio = (() => {
       activeVoice = new Set();
     const listeners = new Set();
     const lastPhrase = {};
-    const nativeSpeech = window.speechSynthesis;
-    const NativeUtterance = window.SpeechSynthesisUtterance;
-    const nativeSupported = Boolean(nativeSpeech && NativeUtterance);
-    let nativeMode = nativeSupported,
-      nativeSpeaking = false,
-      cancelNative = null,
-      finishRecorded = null,
-      voiceError = "";
-    if (nativeSupported) {
-      // Safari may populate its voice list after the page has loaded.
-      try {
-        nativeSpeech.getVoices();
-        nativeSpeech.addEventListener?.("voiceschanged", () =>
-          listeners.forEach((callback) => callback()),
-        );
-      } catch {}
-    }
+    let finishRecorded = null;
+    let voiceError = "";
     const nickPending = new Map(),
       nickCache = new Map(),
       nickInFlight = new Map(),
@@ -423,79 +340,41 @@ const KaverzaAudio = (() => {
 
     function prepareNames(names) {
       if (!settings.enabled || !settings.voice || !settings.voiceVolume) return;
-      // Device voices synthesize the whole phrase immediately; no ONNX download.
-      if (!nativeMode)
-        names.filter((name) => name && !recordedName(name)).forEach(getNick);
+      names.filter((name) => name && !recordedName(name)).forEach(getNick);
     }
 
-    function splitSpeech(text) {
-      const chunks = [];
-      let chunk = "";
-      for (const word of text.split(/\s+/)) {
-        if (chunk && chunk.length + word.length > 160) {
-          chunks.push(chunk);
-          chunk = "";
+    function nicknameBuffer(clip) {
+      const buffer = context.createBuffer(1, clip.samples.length, clip.sampleRate);
+      buffer.copyToChannel(clip.samples, 0);
+      return buffer;
+    }
+
+    function playRoster(names, token) {
+      const parts = [];
+      for (const name of names) {
+        const recorded = clips["name:" + nameKey(name)];
+        if (recorded) {
+          parts.push({ buffer: buffers.host, offset: recorded[0], duration: recorded[1] });
+        } else {
+          const clip = nickCache.get(nameKey(name));
+          if (!clip) return Promise.resolve(false);
+          const buffer = nicknameBuffer(clip);
+          parts.push({ buffer, offset: 0, duration: buffer.duration });
         }
-        chunk += (chunk ? " " : "") + word;
       }
-      if (chunk) chunks.push(chunk);
-      return chunks;
-    }
-
-    function speakNative(text, token) {
       return new Promise((resolve) => {
-        const chunks = splitSpeech(text);
-        let settled = false, started = false, remaining = chunks.length;
-        let startTimer, endTimer;
-        // Keep utterances alive until the browser has finished their callbacks.
-        const utterances = [];
-        const finish = (ok, error = "") => {
-          if (settled) return;
-          settled = true;
-          clearTimeout(startTimer);
-          clearTimeout(endTimer);
-          cancelNative = null;
-          nativeSpeaking = false;
-          utterances.length = 0;
-          if (!ok) {
-            voiceError = error;
-            try { nativeSpeech.cancel(); } catch {}
-          }
-          applyMix();
-          resolve(ok);
-        };
-        cancelNative = () => finish(false, "interrupted");
-        nativeSpeaking = true;
+        finishRecorded = resolve;
+        let when = context.currentTime + 0.025;
+        parts.forEach((part, index) => {
+          playVoice(part.buffer, when, part.offset, part.duration,
+            index === parts.length - 1 ? () => {
+              if (token !== voiceToken) return;
+              finishRecorded = null;
+              resolve(true);
+            } : null);
+          when += part.duration + 0.08;
+        });
         applyMix();
-        startTimer = setTimeout(() => finish(false, "speech-start-timeout"), 8000);
-        endTimer = setTimeout(() => finish(false, "speech-timeout"), Math.max(20000, text.length * 180 + 10000));
-        try {
-          const voices = nativeSpeech.getVoices();
-          const russian = voices.find((voice) => /^ru(?:-|_|$)/i.test(voice.lang));
-          for (const chunk of chunks) {
-            const utterance = new NativeUtterance(chunk);
-            utterance.lang = "ru-RU";
-            if (russian) utterance.voice = russian;
-            utterance.rate = 0.98;
-            utterance.pitch = 1;
-            utterance.volume = settings.voiceVolume;
-            utterance.onstart = () => {
-              started = true;
-              clearTimeout(startTimer);
-            };
-            utterance.onend = () => {
-              if (token !== voiceToken) { finish(false, "interrupted"); return; }
-              if (--remaining === 0) finish(started, started ? "" : "speech-not-started");
-            };
-            utterance.onerror = (event) => finish(false, event.error || "speech-error");
-            utterances.push(utterance);
-          }
-          nativeSpeech.resume();
-          // Queue synchronously inside the Start click to satisfy mobile gesture rules.
-          for (const utterance of utterances) nativeSpeech.speak(utterance);
-        } catch (error) {
-          finish(false, String(error?.message || error));
-        }
       });
     }
 
@@ -503,23 +382,27 @@ const KaverzaAudio = (() => {
       if (!settings.enabled || !settings.voice || !settings.voiceVolume) return true;
       stopVoice();
       unlock();
+      const token = voiceToken;
       voiceError = "";
-      nativeMode = nativeSupported;
       setNickStatus("loading");
-      if (nativeMode) {
-        // Speaking the roster verifies real playback before round one can begin.
-        const ok = await speakNative("Сегодня играют: " + names.map(spokenNickname).join(". ") + ".", voiceToken);
-        setNickStatus(ok ? "ready" : "error");
-        return ok;
-      }
-      // Browsers without device speech retain the bundled local voice engine.
       try {
+        const hostReady = loadAudio("host");
         const generated = await Promise.all(names.filter((name) => !recordedName(name)).map(getNick));
-        await loadAudio("host");
-        const ready = Boolean(buffers.host && generated.every(Boolean) && context?.state === "running");
-        setNickStatus(ready ? "ready" : "error");
-        return ready;
-      } catch {
+        await hostReady;
+        if (context && context.state !== "running") await context.resume();
+        const ready = Boolean(token === voiceToken && !document.hidden && buffers.host &&
+          generated.every(Boolean) && context?.state === "running");
+        if (!ready) {
+          voiceError = "local-voice-not-ready";
+          setNickStatus("error");
+          return false;
+        }
+        // The roster and every subsequent phrase use the original recorded/local voice.
+        const spoken = await playRoster(names, token);
+        setNickStatus(spoken ? "ready" : "error");
+        return spoken;
+      } catch (error) {
+        voiceError = String(error?.message || error);
         setNickStatus("error");
         return false;
       }
@@ -585,7 +468,7 @@ const KaverzaAudio = (() => {
       )
         stopVoice();
       if (settings.enabled && settings.music) loadAudio("music");
-      if (settings.enabled && settings.voice && !nativeMode) loadAudio("host");
+      if (settings.enabled && settings.voice) loadAudio("host");
       refreshMusic();
     }
 
@@ -597,7 +480,7 @@ const KaverzaAudio = (() => {
       effects.gain.setTargetAtTime(settings.effects, now, 0.012);
       music.gain.setTargetAtTime(
         settings.enabled && settings.music
-          ? settings.musicVolume * (activeVoice.size || nativeSpeaking ? 0.42 : 0.76)
+          ? settings.musicVolume * (activeVoice.size ? 0.42 : 0.76)
           : 0,
         now,
         0.02,
@@ -642,6 +525,7 @@ const KaverzaAudio = (() => {
           master.connect(context.destination);
           applyMix();
           context.addEventListener("statechange", () => {
+            if (context.state !== "running" && finishRecorded) stopVoice();
             refreshMusic();
             flushPending();
           });
@@ -655,7 +539,7 @@ const KaverzaAudio = (() => {
               flushPending();
             })
             .catch(() => {});
-        if (settings.voice && !nativeMode) loadAudio("host");
+        if (settings.voice) loadAudio("host");
         if (settings.music) loadAudio("music");
         refreshMusic();
       } catch {
@@ -736,7 +620,6 @@ const KaverzaAudio = (() => {
     function stopVoice() {
       pendingVoice = null;
       voiceToken++;
-      cancelNative?.();
       const finish = finishRecorded;
       finishRecorded = null;
       finish?.(false);
@@ -797,7 +680,6 @@ const KaverzaAudio = (() => {
       )
         return Promise.resolve(false);
       stopVoice();
-      if (nativeMode) return speakNative(narration(event, details), voiceToken);
       if (!context) return Promise.resolve(false);
       if (context.state !== "running" || !buffers.host) {
         pendingVoice = { event, details, at: performance.now() };
@@ -853,11 +735,11 @@ const KaverzaAudio = (() => {
       resume,
       prepareNames,
       prepareGameNames,
-      isSpeaking: () => nativeSpeaking || Boolean(finishRecorded),
+      isSpeaking: () => Boolean(finishRecorded),
       voiceError: () => voiceError,
-      usesDeviceVoice: () => nativeMode,
+      usesDeviceVoice: () => false,
       nickStatus: () => nickStatus,
-      hasVoice: () => nativeMode || Boolean(buffers.host),
+      hasVoice: () => Boolean(buffers.host),
       onVoicesChanged: (callback) => listeners.add(callback),
     };
   }
