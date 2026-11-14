@@ -231,53 +231,108 @@ const KaverzaAudio = (() => {
     const listeners = new Set();
     const lastPhrase = {};
     const nickPending = new Map(),
-      nickCache = new Map();
+      nickCache = new Map(),
+      nickInFlight = new Map(),
+      nickRetryAfter = new Map();
+    const nickRetryDelays = [1000, 3000];
+    const nickTimeout = 90000;
+    const nickCooldown = 15000;
+    let nickQueue = Promise.resolve();
     function setNickStatus(value) {
       if (nickStatus === value) return;
       nickStatus = value;
       listeners.forEach((callback) => callback());
     }
 
+    function resetNickWorker(worker) {
+      // Ignore late errors from a worker replaced by a retry.
+      if (nickWorker !== worker) return;
+      nickWorker = null;
+      worker.terminate();
+      for (const finish of nickPending.values()) finish(null);
+    }
+
+    function requestNick(name) {
+      return new Promise((resolve) => {
+        try {
+          if (!nickWorker) {
+            const worker = new Worker("kaverza-nick-worker.js?v=2.0.2");
+            nickWorker = worker;
+            worker.onerror = (event) => {
+              event.preventDefault?.();
+              resetNickWorker(worker);
+            };
+            worker.onmessageerror = () => resetNickWorker(worker);
+            worker.onmessage = ({ data }) => {
+              if (nickWorker !== worker) return;
+              const finish = nickPending.get(data?.id);
+              if (!finish) return;
+              if (
+                data.error ||
+                !(data.samples instanceof Float32Array) ||
+                !data.samples.length ||
+                !Number.isFinite(data.sampleRate) ||
+                data.sampleRate <= 0
+              ) {
+                resetNickWorker(worker);
+                return;
+              }
+              finish(data);
+            };
+          }
+          const worker = nickWorker;
+          const id = ++nickRequest;
+          const timer = setTimeout(() => resetNickWorker(worker), nickTimeout);
+          nickPending.set(id, (result) => {
+            clearTimeout(timer);
+            nickPending.delete(id);
+            resolve(result);
+          });
+          worker.postMessage({ id, name });
+        } catch {
+          if (nickWorker) resetNickWorker(nickWorker);
+          resolve(null);
+        }
+      });
+    }
+
+    async function generateNick(name, key) {
+      setNickStatus("loading");
+      for (let attempt = 0; attempt <= nickRetryDelays.length; attempt++) {
+        if (attempt) {
+          await new Promise((resolve) =>
+            setTimeout(resolve, nickRetryDelays[attempt - 1]),
+          );
+        }
+        const result = await requestNick(name);
+        if (result) {
+          if (nickCache.size >= 32) nickCache.delete(nickCache.keys().next().value);
+          // Cache successful speech only. Errors must remain retryable.
+          nickCache.set(key, result);
+          nickRetryAfter.delete(key);
+          setNickStatus("ready");
+          return result;
+        }
+      }
+      if (nickRetryAfter.size >= 32)
+        nickRetryAfter.delete(nickRetryAfter.keys().next().value);
+      nickRetryAfter.set(key, Date.now() + nickCooldown);
+      setNickStatus("error");
+      return null;
+    }
+
     function getNick(name) {
       const key = nameKey(name);
       if (!key || !Context) return Promise.resolve(null);
-      if (nickCache.has(key)) return nickCache.get(key);
-      if (nickStatus === "error") return Promise.resolve(null);
-      if (!nickWorker) {
-        try {
-          nickWorker = new Worker("kaverza-nick-worker.js?v=2.0.2");
-        } catch {
-          setNickStatus("error");
-          return Promise.resolve(null);
-        }
-        setNickStatus("loading");
-        const fail = () => {
-          setNickStatus("error");
-          for (const resolve of nickPending.values()) resolve(null);
-          nickPending.clear();
-          nickWorker.terminate();
-          nickWorker = null;
-        };
-        nickWorker.onerror = fail;
-        nickWorker.onmessage = ({ data }) => {
-          if (data.error) {
-            if (nickStatus === "loading") fail();
-            else {
-              nickPending.get(data.id)?.(null);
-              nickPending.delete(data.id);
-            }
-            return;
-          }
-          setNickStatus("ready");
-          nickPending.get(data.id)?.(data.samples ? data : null);
-          nickPending.delete(data.id);
-        };
-      }
-      const id = ++nickRequest;
-      const pending = new Promise((resolve) => nickPending.set(id, resolve));
-      if (nickCache.size >= 32) nickCache.delete(nickCache.keys().next().value);
-      nickCache.set(key, pending);
-      nickWorker.postMessage({ id, name });
+      if (nickCache.has(key)) return Promise.resolve(nickCache.get(key));
+      if (nickInFlight.has(key)) return nickInFlight.get(key);
+      if (Date.now() < (nickRetryAfter.get(key) || 0)) return Promise.resolve(null);
+      // Serialize generation so a failed worker does not cancel other names.
+      const pending = nickQueue
+        .then(() => generateNick(name, key))
+        .finally(() => nickInFlight.delete(key));
+      nickInFlight.set(key, pending);
+      nickQueue = pending.catch(() => null);
       return pending;
     }
 
