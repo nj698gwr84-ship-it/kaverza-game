@@ -74,52 +74,60 @@ async function file(name, gzip = false) {
   ).arrayBuffer();
 }
 
-function unpackWeights(parts) {
-  const count = parts.reduce((total, part) => total + part.byteLength / 2, 0);
-  const floats = new Float32Array(count);
-  const bits = new Uint32Array(floats.buffer);
-  let index = 0;
-  for (const part of parts) {
-    for (const half of new Uint16Array(part)) {
-      const exponent = (half >>> 10) & 31;
-      const fraction = half & 1023;
-      if (exponent === 0) {
-        floats[index] = (half & 0x8000 ? -1 : 1) * fraction * 2 ** -24;
-      } else {
-        bits[index] =
-          ((half & 0x8000) << 16) |
-          ((exponent === 31 ? 255 : exponent + 112) << 23) |
-          (fraction << 13);
-      }
-      index++;
+// Restore half-precision weights directly into the model, one part at a time.
+// Avoids a second model-sized float buffer on memory-constrained phones.
+function createWeightWriter(model, offsets) {
+  const target = new DataView(model);
+  let entry = 0, inside = 0;
+  function advance() {
+    while (entry < offsets.length && inside === offsets[entry][1]) {
+      entry++;
+      inside = 0;
     }
   }
-  return new Uint8Array(floats.buffer);
+  return {
+    write(halves) {
+      for (const half of halves) {
+        advance();
+        if (entry >= offsets.length || inside + 4 > offsets[entry][1])
+          throw Error("Voice weights length mismatch");
+        const position = offsets[entry][0] + inside;
+        const exponent = (half >>> 10) & 31;
+        const fraction = half & 1023;
+        if (exponent === 0) {
+          target.setFloat32(position, (half & 0x8000 ? -1 : 1) * fraction * 2 ** -24, true);
+        } else {
+          const bits = ((half & 0x8000) << 16) |
+            ((exponent === 31 ? 255 : exponent + 112) << 23) | (fraction << 13);
+          target.setUint32(position, bits, true);
+        }
+        inside += 4;
+      }
+    },
+    finish() {
+      advance();
+      if (entry !== offsets.length) throw Error("Voice weights length mismatch");
+    },
+  };
 }
 
 async function initialize() {
   if (!self.DecompressionStream) throw Error("Gzip voice assets unsupported");
   importScripts(new URL("piper_phonemize.js", ROOT).href);
-  const [ort, model, offsets, phonemeData, phonemeWasm, first, second] = await Promise.all([
+  const [ort, model, offsets, phonemeData, phonemeWasm] = await Promise.all([
     import(new URL("ort.wasm.min.mjs", ROOT).href),
     file("kaverza-voice.onnx.gz", true),
     fetch(new URL("kaverza-voice-offsets.json", ROOT)).then((r) => r.json()),
     file("piper_phonemize.data.gz", true),
     file("piper_phonemize.wasm"),
-    file("kaverza-weights-1.gz", true),
-    file("kaverza-weights-2.gz", true),
   ]);
   ort.env.wasm.numThreads = 1;
   ort.env.wasm.wasmPaths = ROOT.href;
-  const weights = unpackWeights([first, second]);
-  const modelBytes = new Uint8Array(model);
-  let offset = 0;
-  for (const [start, size] of offsets) {
-    modelBytes.set(weights.subarray(offset, offset + size), start);
-    offset += size;
+  const writer = createWeightWriter(model, offsets);
+  for (const part of ["kaverza-weights-1.gz", "kaverza-weights-2.gz"]) {
+    writer.write(new Uint16Array(await file(part, true)));
   }
-  if (offset !== weights.byteLength)
-    throw Error("Voice weights length mismatch");
+  writer.finish();
   const session = await ort.InferenceSession.create(model, {
     executionProviders: ["wasm"],
   });

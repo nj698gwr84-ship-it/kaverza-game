@@ -158,11 +158,542 @@ const KaverzaAudio = (() => {
     round24: [106.6321, 1.5951],
     round25: [108.2272, 1.4564],
   };
-  const media = { host: "kaverza-host.mp3", music: "kaverza-party.mp3" };
+  const media = { host: "kaverza-host.mp3", music: "kaverza-party.mp3", nicknames: "kaverza-nicknames-v207.mp3" };
 
   const nameKey = (name) =>
     name.trim().toLocaleLowerCase("ru-RU").normalize("NFC");
-  const recordedName = (name) => Object.hasOwn(clips, "name:" + nameKey(name));
+  const nicknameClips = {
+  "член": [
+    0.12,
+    0.55229
+  ],
+  "жопа": [
+    0.77229,
+    0.57878
+  ],
+  "вагина": [
+    1.45107,
+    0.68612
+  ],
+  "пизда": [
+    2.23719,
+    0.64313
+  ],
+  "хуй": [
+    2.98032,
+    0.4917
+  ],
+  "членосос": [
+    3.57202,
+    0.75043
+  ],
+  "хуесос": [
+    4.42245,
+    0.71728
+  ],
+  "сперма": [
+    5.23973,
+    0.67669
+  ],
+  "хер": [
+    6.01642,
+    0.48676
+  ],
+  "хрен": [
+    6.60317,
+    0.55705
+  ],
+  "пенис": [
+    7.26023,
+    0.57937
+  ],
+  "писюн": [
+    7.93959,
+    0.69406
+  ],
+  "писюнец": [
+    8.73365,
+    0.79052
+  ],
+  "писька": [
+    9.62417,
+    0.59968
+  ],
+  "пиписька": [
+    10.32385,
+    0.73061
+  ],
+  "пипирка": [
+    11.15447,
+    0.79438
+  ],
+  "пипка": [
+    12.04884,
+    0.62086
+  ],
+  "залупа": [
+    12.76971,
+    0.69179
+  ],
+  "залупка": [
+    13.5615,
+    0.69714
+  ],
+  "мошонка": [
+    14.35864,
+    0.77533
+  ],
+  "яйца": [
+    15.23397,
+    0.6059
+  ],
+  "яйцо": [
+    15.93986,
+    0.679
+  ],
+  "яички": [
+    16.71887,
+    0.85406
+  ],
+  "яичко": [
+    17.67293,
+    0.74839
+  ],
+  "сиська": [
+    18.52132,
+    0.61982
+  ],
+  "сиськи": [
+    19.24113,
+    0.67138
+  ],
+  "титька": [
+    20.01252,
+    0.5898
+  ],
+  "титьки": [
+    20.70231,
+    0.68345
+  ],
+  "титя": [
+    21.48576,
+    0.60853
+  ],
+  "тити": [
+    22.19429,
+    0.66544
+  ],
+  "сосок": [
+    22.95973,
+    0.7166
+  ],
+  "соски": [
+    23.77633,
+    0.73873
+  ],
+  "попа": [
+    24.61506,
+    0.52698
+  ],
+  "попка": [
+    25.24204,
+    0.62653
+  ],
+  "жопка": [
+    25.96857,
+    0.69224
+  ],
+  "жопища": [
+    26.76082,
+    0.72413
+  ],
+  "задница": [
+    27.58494,
+    0.75193
+  ],
+  "зад": [
+    28.43687,
+    0.45379
+  ],
+  "задок": [
+    28.99066,
+    0.60603
+  ],
+  "очко": [
+    29.69669,
+    0.7019
+  ],
+  "анус": [
+    30.49859,
+    0.53959
+  ],
+  "анал": [
+    31.13819,
+    0.58698
+  ],
+  "клитор": [
+    31.82517,
+    0.68943
+  ],
+  "клитер": [
+    32.6146,
+    0.6683
+  ],
+  "киска": [
+    33.3829,
+    0.59143
+  ],
+  "манда": [
+    34.07433,
+    0.69215
+  ],
+  "мандовошка": [
+    34.86649,
+    0.92018
+  ],
+  "вульва": [
+    35.88667,
+    0.52934
+  ],
+  "промежность": [
+    36.51601,
+    0.77052
+  ],
+  "конча": [
+    37.38653,
+    0.65546
+  ],
+  "спермач": [
+    38.142,
+    0.74404
+  ],
+  "сперматозоид": [
+    38.98603,
+    1.02467
+  ],
+  "оргазм": [
+    40.1107,
+    0.69678
+  ],
+  "секс": [
+    40.90748,
+    0.57365
+  ],
+  "дилдо": [
+    41.58113,
+    0.63401
+  ],
+  "дилдак": [
+    42.31515,
+    0.62517
+  ],
+  "дилдакос": [
+    43.04032,
+    0.73542
+  ],
+  "вибратор": [
+    43.87574,
+    0.76231
+  ],
+  "фаллос": [
+    44.73805,
+    0.5751
+  ],
+  "фаллоимитатор": [
+    45.41315,
+    0.98698
+  ],
+  "стояк": [
+    46.50014,
+    0.65864
+  ],
+  "говно": [
+    47.25878,
+    0.67986
+  ],
+  "говнюк": [
+    48.03864,
+    0.72263
+  ],
+  "говнючка": [
+    48.86127,
+    0.83025
+  ],
+  "говноед": [
+    49.79152,
+    0.70785
+  ],
+  "какашка": [
+    50.59937,
+    0.77283
+  ],
+  "какашки": [
+    51.4722,
+    0.81868
+  ],
+  "какаха": [
+    52.39088,
+    0.71524
+  ],
+  "пердун": [
+    53.20612,
+    0.64721
+  ],
+  "пердунец": [
+    53.95333,
+    0.7615
+  ],
+  "пердёж": [
+    54.81483,
+    0.67927
+  ],
+  "пук": [
+    55.5941,
+    0.45873
+  ],
+  "пукалка": [
+    56.15283,
+    0.6868
+  ],
+  "засранец": [
+    56.93964,
+    0.77424
+  ],
+  "засранка": [
+    57.81388,
+    0.79646
+  ],
+  "срака": [
+    58.71034,
+    0.57188
+  ],
+  "сракер": [
+    59.38222,
+    0.64268
+  ],
+  "жопошник": [
+    60.1249,
+    0.87628
+  ],
+  "жопогрыз": [
+    61.10118,
+    0.76508
+  ],
+  "жополиз": [
+    61.96626,
+    0.73007
+  ],
+  "жопастик": [
+    62.79633,
+    0.83519
+  ],
+  "жопастый": [
+    63.73152,
+    0.76744
+  ],
+  "хуеплёт": [
+    64.59896,
+    0.73211
+  ],
+  "хуесоска": [
+    65.43107,
+    0.89016
+  ],
+  "членососка": [
+    66.42122,
+    0.94671
+  ],
+  "хуило": [
+    67.46794,
+    0.70345
+  ],
+  "хуёк": [
+    68.27138,
+    0.60218
+  ],
+  "хуйня": [
+    68.97356,
+    0.69578
+  ],
+  "хуюшка": [
+    69.76934,
+    0.64871
+  ],
+  "сисястик": [
+    70.51805,
+    0.83279
+  ],
+  "сисястый": [
+    71.45084,
+    0.80009
+  ],
+  "сисечка": [
+    72.35093,
+    0.87655
+  ],
+  "титькотряс": [
+    73.32748,
+    0.85302
+  ],
+  "порнозвезда": [
+    74.2805,
+    0.92408
+  ],
+  "порноактёр": [
+    75.30458,
+    0.85592
+  ],
+  "порноактриса": [
+    76.2605,
+    0.90753
+  ],
+  "пошляк": [
+    77.26803,
+    0.72989
+  ],
+  "пошлячка": [
+    78.09791,
+    0.89016
+  ],
+  "развратник": [
+    79.08807,
+    0.90721
+  ],
+  "развратница": [
+    80.09528,
+    0.94535
+  ],
+  "извращенец": [
+    81.14063,
+    0.93927
+  ],
+  "извращенка": [
+    82.17991,
+    0.94032
+  ],
+  "ноль": [
+    83.22023,
+    0.49061
+  ],
+  "один": [
+    83.81084,
+    0.56317
+  ],
+  "два": [
+    84.47401,
+    0.50367
+  ],
+  "три": [
+    85.07769,
+    0.54113
+  ],
+  "четыре": [
+    85.71882,
+    0.72848
+  ],
+  "пять": [
+    86.5473,
+    0.50014
+  ],
+  "шесть": [
+    87.14744,
+    0.59705
+  ],
+  "семь": [
+    87.84449,
+    0.60045
+  ],
+  "восемь": [
+    88.54494,
+    0.65519
+  ],
+  "девять": [
+    89.30014,
+    0.62127
+  ],
+  "0": [
+    83.22023,
+    0.49061
+  ],
+  "1": [
+    83.81084,
+    0.56317
+  ],
+  "2": [
+    84.47401,
+    0.50367
+  ],
+  "3": [
+    85.07769,
+    0.54113
+  ],
+  "4": [
+    85.71882,
+    0.72848
+  ],
+  "5": [
+    86.5473,
+    0.50014
+  ],
+  "6": [
+    87.14744,
+    0.59705
+  ],
+  "7": [
+    87.84449,
+    0.60045
+  ],
+  "8": [
+    88.54494,
+    0.65519
+  ],
+  "9": [
+    89.30014,
+    0.62127
+  ]
+};
+  const tokenKey = (value) => nameKey(value).replace(/ё/g, "е").replace(/[\s_.\/\\-]+/g, "");
+  const tokenGroups = new Map();
+  const tokenEntries = new Map();
+  for (const [id, clip] of Object.entries(clips)) {
+    if (id.startsWith("name:")) {
+      const key = tokenKey(id.slice(5));
+      if (!tokenEntries.has(key)) tokenEntries.set(key, { media: "host", clip });
+    }
+  }
+  for (const [word, clip] of Object.entries(nicknameClips)) {
+    const key = tokenKey(word);
+    if (!tokenEntries.has(key)) tokenEntries.set(key, { media: "nicknames", clip });
+  }
+  for (const [key, part] of tokenEntries) {
+    if (!key) continue;
+    if (!tokenGroups.has(key[0])) tokenGroups.set(key[0], []);
+    tokenGroups.get(key[0]).push({ key, part });
+  }
+  for (const candidates of tokenGroups.values()) candidates.sort((a, b) => b.key.length - a.key.length);
+
+  function nicknameTokens(name) {
+    const key = tokenKey(name);
+    if (!key || key.length > 96) return null;
+    const memo = new Map();
+    function parse(position) {
+      if (position === key.length) return [];
+      if (memo.has(position)) return memo.get(position);
+      for (const entry of tokenGroups.get(key[position]) || []) {
+        if (!key.startsWith(entry.key, position)) continue;
+        const tail = parse(position + entry.key.length);
+        if (tail) {
+          const result = [entry.part, ...tail];
+          memo.set(position, result);
+          return result;
+        }
+      }
+      memo.set(position, null);
+      return null;
+    }
+    return parse(0);
+  }
+
 
   function voiceSequence(event, details, previous) {
     const choose = (ids) => {
@@ -180,13 +711,7 @@ const KaverzaAudio = (() => {
     }[event]();
     const names = [];
     const ids = [primary];
-    const addName = (name) => {
-      if (!name) return;
-      const id =
-        "name:" + name.trim().toLocaleLowerCase("ru-RU").normalize("NFC");
-      if (Object.hasOwn(clips, id)) ids.push(id);
-      else names.push(name);
-    };
+    const addName = (name) => { if (name) names.push(name); };
     if (event === "end") {
       for (const name of details.winners) addName(name);
     } else if (event === "card") {
@@ -221,17 +746,15 @@ const KaverzaAudio = (() => {
       loads = {},
       pendingCue = null,
       pendingVoice = null;
-    let voiceToken = 0,
-      nickWorker,
-      nickStatus = "idle",
-      nickRequest = 0;
+    let voiceToken = 0;
     let unlocked = false;
     const activeEffects = new Set(),
       activeVoice = new Set();
     const listeners = new Set();
     const lastPhrase = {};
-    let finishRecorded = null;
-    let voiceError = "";
+    let finishRecorded = null, voiceDeadline = null, voiceError = "";
+    let nickStatus = "idle", bankStatus = "idle", generationStatus = "idle";
+    let nickWorker, nickRequest = 0;
     const nickPending = new Map(),
       nickCache = new Map(),
       nickInFlight = new Map(),
@@ -240,12 +763,6 @@ const KaverzaAudio = (() => {
     const nickTimeout = 90000;
     const nickCooldown = 15000;
     let nickQueue = Promise.resolve();
-    function setNickStatus(value) {
-      if (nickStatus === value) return;
-      nickStatus = value;
-      listeners.forEach((callback) => callback());
-    }
-
     function resetNickWorker(worker) {
       // Ignore late errors from a worker replaced by a retry.
       if (nickWorker !== worker) return;
@@ -258,7 +775,7 @@ const KaverzaAudio = (() => {
       return new Promise((resolve) => {
         try {
           if (!nickWorker) {
-            const worker = new Worker("kaverza-nick-worker.js?v=2.0.4-names");
+            const worker = new Worker("kaverza-nick-worker.js?v=2.0.7-bg");
             nickWorker = worker;
             worker.onerror = (event) => {
               event.preventDefault?.();
@@ -332,80 +849,73 @@ const KaverzaAudio = (() => {
       // Serialize generation so a failed worker does not cancel other names.
       const pending = nickQueue
         .then(() => generateNick(name, key))
-        .finally(() => nickInFlight.delete(key));
+        .finally(() => {
+          nickInFlight.delete(key);
+          reportNickStatus();
+        });
       nickInFlight.set(key, pending);
       nickQueue = pending.catch(() => null);
       return pending;
     }
 
+    function reportNickStatus() {
+      const next = nickInFlight.size || bankStatus === "loading"
+        ? "loading"
+        : generationStatus === "error" || bankStatus === "error"
+          ? "error"
+          : generationStatus === "ready" || bankStatus === "ready" ? "ready" : "idle";
+      if (nickStatus === next) return;
+      nickStatus = next;
+      listeners.forEach((callback) => callback());
+    }
+
+    function setNickStatus(value) {
+      generationStatus = value;
+      reportNickStatus();
+    }
+
+    function setBankStatus(value) {
+      bankStatus = value;
+      reportNickStatus();
+    }
+
     function prepareNames(names) {
       if (!settings.enabled || !settings.voice || !settings.voiceVolume) return;
-      names.filter((name) => name && !recordedName(name)).forEach(getNick);
-    }
-
-    function nicknameBuffer(clip) {
-      const buffer = context.createBuffer(1, clip.samples.length, clip.sampleRate);
-      buffer.copyToChannel(clip.samples, 0);
-      return buffer;
-    }
-
-    function playRoster(names, token) {
-      const parts = [];
-      for (const name of names) {
-        const recorded = clips["name:" + nameKey(name)];
-        if (recorded) {
-          parts.push({ buffer: buffers.host, offset: recorded[0], duration: recorded[1] });
-        } else {
-          const clip = nickCache.get(nameKey(name));
-          if (!clip) return Promise.resolve(false);
-          const buffer = nicknameBuffer(clip);
-          parts.push({ buffer, offset: 0, duration: buffer.duration });
-        }
-      }
-      return new Promise((resolve) => {
-        finishRecorded = resolve;
-        let when = context.currentTime + 0.025;
-        parts.forEach((part, index) => {
-          playVoice(part.buffer, when, part.offset, part.duration,
-            index === parts.length - 1 ? () => {
-              if (token !== voiceToken) return;
-              finishRecorded = null;
-              resolve(true);
-            } : null);
-          when += part.duration + 0.08;
-        });
-        applyMix();
+      if (names.some((name) => nicknameTokens(name)?.some((part) => part.media === "nicknames")))
+        loadAudio("nicknames");
+      // Only unknown names use the generator. Nothing here is awaited by gameplay.
+      names.filter((name) => name && !nicknameTokens(name)).forEach((name) => {
+        getNick(name).catch(() => null);
       });
     }
 
-    async function prepareGameNames(names) {
-      if (!settings.enabled || !settings.voice || !settings.voiceVolume) return true;
-      stopVoice();
-      unlock();
-      const token = voiceToken;
-      voiceError = "";
-      setNickStatus("loading");
-      try {
-        const hostReady = loadAudio("host");
-        const generated = await Promise.all(names.filter((name) => !recordedName(name)).map(getNick));
-        await hostReady;
-        if (context && context.state !== "running") await context.resume();
-        const ready = Boolean(token === voiceToken && !document.hidden && buffers.host &&
-          generated.every(Boolean) && context?.state === "running");
-        if (!ready) {
-          voiceError = "local-voice-not-ready";
-          setNickStatus("error");
-          return false;
-        }
-        // The roster and every subsequent phrase use the original recorded/local voice.
-        const spoken = await playRoster(names, token);
-        setNickStatus(spoken ? "ready" : "error");
-        return spoken;
-      } catch (error) {
-        voiceError = String(error?.message || error);
-        setNickStatus("error");
-        return false;
+    function generatedNicknameParts(name) {
+      const clip = nickCache.get(nameKey(name));
+      if (!clip || !context) return null;
+      if (!clip.buffer) {
+        clip.buffer = context.createBuffer(1, clip.samples.length, clip.sampleRate);
+        clip.buffer.copyToChannel(clip.samples, 0);
       }
+      return [{ buffer: clip.buffer, clip: [0, clip.buffer.duration] }];
+    }
+
+    // Compatibility with cached game scripts: preparation never blocks a match.
+    function prepareGameNames(names) {
+      prepareNames(names);
+      return Promise.resolve(true);
+    }
+
+    function waitBriefly(promise, milliseconds) {
+      return new Promise((resolve) => {
+        const timer = setTimeout(() => resolve(false), milliseconds);
+        Promise.resolve(promise).then(() => {
+          clearTimeout(timer);
+          resolve(true);
+        }, () => {
+          clearTimeout(timer);
+          resolve(false);
+        });
+      });
     }
 
     const fallbackMusic =
@@ -418,7 +928,10 @@ const KaverzaAudio = (() => {
     function loadAudio(keyName) {
       if (!context || buffers[keyName]) return Promise.resolve(buffers[keyName]);
       if (loads[keyName]) return loads[keyName];
-      loads[keyName] = fetch(media[keyName])
+      if (keyName === "nicknames") setBankStatus("loading");
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 8000);
+      loads[keyName] = fetch(media[keyName], { signal: controller.signal })
         .then((response) => {
           if (!response.ok) throw Error("Audio HTTP " + response.status);
           return response.arrayBuffer();
@@ -426,14 +939,18 @@ const KaverzaAudio = (() => {
         .then((bytes) => context.decodeAudioData(bytes))
         .then((buffer) => {
           buffers[keyName] = buffer;
+          if (keyName === "nicknames") setBankStatus("ready");
           if (keyName === "music") refreshMusic();
           else {
             listeners.forEach((callback) => callback());
             flushPending();
           }
         })
-        .catch(() => {})
+        .catch(() => {
+          if (keyName === "nicknames") setBankStatus("error");
+        })
         .finally(() => {
+          clearTimeout(timeout);
           delete loads[keyName];
         });
       return loads[keyName];
@@ -620,12 +1137,14 @@ const KaverzaAudio = (() => {
     function stopVoice() {
       pendingVoice = null;
       voiceToken++;
+      clearTimeout(voiceDeadline);
+      voiceDeadline = null;
       const finish = finishRecorded;
       finishRecorded = null;
       finish?.(false);
       const sources = Array.from(activeVoice);
       activeVoice.clear();
-      for (const source of sources) source.stop();
+      for (const source of sources) { try { source.stop(); } catch {} }
       applyMix();
     }
 
@@ -644,68 +1163,50 @@ const KaverzaAudio = (() => {
       source.start(when, offset, duration);
     }
 
-    async function sayUnknownNames(names, token) {
-      if (!names.length) return true;
-      const generated = await Promise.all(names.map(getNick));
-      if (
-        voiceToken !== token ||
-        context?.state !== "running" ||
-        document.hidden
-      )
+    async function announce(event, details) {
+      if (!settings.enabled || !settings.voice || !settings.voiceVolume || document.hidden)
         return false;
-      if (generated.some((clip) => !clip)) return false;
-      let when = context.currentTime + 0.025;
-      return new Promise((resolve) => {
-      generated.forEach((clip, index) => {
-        const buffer = context.createBuffer(
-          1,
-          clip.samples.length,
-          clip.sampleRate,
-        );
-        buffer.copyToChannel(clip.samples, 0);
-        playVoice(buffer, when, 0, buffer.duration,
-          index === generated.length - 1 ? () => resolve(true) : null);
-        when += buffer.duration + 0.08;
-      });
-      applyMix();
-      });
-    }
-
-    function announce(event, details) {
-      if (
-        !settings.enabled ||
-        !settings.voice ||
-        !settings.voiceVolume ||
-        document.hidden
-      )
-        return Promise.resolve(false);
       stopVoice();
-      if (!context) return Promise.resolve(false);
-      if (context.state !== "running" || !buffers.host) {
-        pendingVoice = { event, details, at: performance.now() };
-        loadAudio("host");
-        return Promise.resolve(false);
-      }
+      unlock();
+      const token = voiceToken;
       const { ids, names } = voiceSequence(event, details, lastPhrase[event]);
       lastPhrase[event] = ids[0];
-      const token = voiceToken;
       prepareNames(names);
-      let when = context.currentTime + 0.025;
-      return new Promise((resolve) => {
-      finishRecorded = resolve;
-      ids.forEach((id, index) => {
-        const [offset, duration] = clips[id];
-        const after =
-          index === ids.length - 1 ? async () => {
-            const ok = await sayUnknownNames(names, token);
-            if (token !== voiceToken) return;
-            finishRecorded = null;
-            resolve(ok);
-          } : null;
-        playVoice(buffers.host, when, offset, duration, after);
-        when += duration;
+      const nicknameParts = names.map(nicknameTokens);
+      const needed = [loadAudio("host")];
+      if (nicknameParts.some((parts) => parts?.some((part) => part.media === "nicknames")))
+        needed.push(loadAudio("nicknames"));
+      // Only speech waits briefly for small recordings. Gameplay never waits.
+      await waitBriefly(Promise.all(needed), 1500);
+      if (token !== voiceToken || document.hidden || context?.state !== "running" || !buffers.host)
+        return false;
+      const parts = ids.map((id) => ({ media: "host", clip: clips[id] }));
+      names.forEach((name, index) => {
+        const nickname = nicknameParts[index] || generatedNicknameParts(name);
+        if (!nickname || nickname.some((part) => !part.buffer && !buffers[part.media])) return;
+        parts.push(...nickname);
       });
-      applyMix();
+      return new Promise((resolve) => {
+        finishRecorded = resolve;
+        let when = context.currentTime + 0.025;
+        let duration = 0;
+        parts.forEach((part, index) => {
+          const [offset, length] = part.clip;
+          playVoice(part.buffer || buffers[part.media], when, offset, length,
+            index === parts.length - 1 ? () => {
+              if (token !== voiceToken) return;
+              clearTimeout(voiceDeadline);
+              voiceDeadline = null;
+              finishRecorded = null;
+              resolve(true);
+            } : null);
+          when += length + 0.045;
+          duration += length + 0.045;
+        });
+        voiceDeadline = setTimeout(() => {
+          if (token === voiceToken) stopVoice();
+        }, duration * 1000 + 2000);
+        applyMix();
       });
     }
 
@@ -735,6 +1236,7 @@ const KaverzaAudio = (() => {
       resume,
       prepareNames,
       prepareGameNames,
+      nicknameSupported: (name) => Boolean(nicknameTokens(name) || nickCache.has(nameKey(name))),
       isSpeaking: () => Boolean(finishRecorded),
       voiceError: () => voiceError,
       usesDeviceVoice: () => false,
